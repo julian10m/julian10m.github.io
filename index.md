@@ -13,7 +13,7 @@ I am currently:
 
 > I feel a little bit like Clark Kent, but wouldn't you too?
 
-Before leaving, voilà my [CV](https://github.com/julian10m/julian10m.github.io/files/cv.pdf) :)
+Before leaving, voilà my [CV](https://github.com/julian10m/julian10m.github.io/tree/master/files/cv.pdf) :)
 
 ## Organized Event
 
