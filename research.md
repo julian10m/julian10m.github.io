@@ -8,7 +8,7 @@ published: true
 ## Verifiable Data Plane
 
 I am currently pursuing a Ph.D. in Computer Networks as a student of the University of Strasbourg, at the ICube Laboratory in France.
-The topic of my Ph.D. is “Verifiable Data Plane” and I am working under the supervision of [Prof. Cristel Pelsser](https://scholar.google.com/citations?hl=es&user=H8FD7qQAAAAJ) and [Pascal Mérindol](https://scholar.google.com/citations?user=RioxMC8AAAAJ&hl=es&oi=ao).
+The topic of my Ph.D. is “Verifiable Data Plane” and I am working under the supervision of [Cristel Pelsser](https://scholar.google.com/citations?hl=es&user=H8FD7qQAAAAJ) and [Pascal Mérindol](https://scholar.google.com/citations?user=RioxMC8AAAAJ&hl=es&oi=ao).
 
 The objective of the Ph.D. is to study new alternatives to cope with routing insecurity on the Internet. 
 In a nutshell, the goal is to propose architectures, algorithms and protocols that provide shield to the communications on the Internet, particularly at the data-plane.
