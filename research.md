@@ -27,7 +27,7 @@ In addition, the security method to be developed needs to be lightweight so as t
  Concerning my previous work, I made an internship on the field of Industrial Wireless Networks, on the topic ``Toward Reliable and Deterministic Networks in Industrial-IoT applications". The purpose of the internship was to obtain a network with a highly-reduced packet loss and a constant delay (no jitter). These type of networks are said to be deterministic, and envisioned to put up to the requirements of the Industry 4.0. We implemented a cross-layer protocol that improved on the performance of the currently used in 6TiSCH networks (RPL+TSCH). Our research lead to two papers being published:
 
 * [_"From Best Effort to Deterministic Packet Delivery for Wireless Industrial IoT Networks"_](https://ieeexplore.ieee.org/document/8412519)
- * In IEEE Transactions on Industrial Informatics 2018 (Impact Factor: 6.764),
+  * In IEEE Transactions on Industrial Informatics 2018 (Impact Factor: 6.764),
 * [_"Toward Deterministic Industrial Networks"_](https://hal.archives-ouvertes.fr/hal-01519185/document)
- * In AlgoTel-CoRes 2017 (French speaking conference where I presented the work).
+  * In AlgoTel-CoRes 2017 (French speaking conference where I presented the work).
 
