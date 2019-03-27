@@ -7,7 +7,7 @@ published: true
 
 I am currently: 
 
-* a _PhD student_ at the University of Strasbourg, France. 
+* a _PhD student_ at the [University of Strasbourg](https://www.unistra.fr), France. 
 * a _Researcher_ at the ICube Laboratory in the [*Networks* Team](http://icube-reseaux.unistra.fr/fr/index.php/Accueil).
 * an _Assistant Teacher_ in the engineering school [Telecom Physique Strasbourg](http://www.telecom-physique.fr/). 
 
