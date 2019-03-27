@@ -24,7 +24,7 @@ description: Welcome to my webpage!
 # List of links in the navigation bar
 navbar-links:
   About Me: "aboutme"
-  Research: "not yet"
+  Research: "research"
   Teaching: "teaching"
   Resources:
     - Github: "https://github.com/julian10m"
