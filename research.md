@@ -29,5 +29,5 @@ In addition, the security method to be developed needs to be lightweight so as t
 * [_"From Best Effort to Deterministic Packet Delivery for Wireless Industrial IoT Networks"_](https://ieeexplore.ieee.org/document/8412519)
   * In IEEE Transactions on Industrial Informatics 2018 (Impact Factor: 6.764),
 * [_"Toward Deterministic Industrial Networks"_](https://hal.archives-ouvertes.fr/hal-01519185/document)
-  * In AlgoTel-CoRes 2017 (French speaking conference where I presented the work).
+  * In AlgoTel-CoRes 2017 (French conference where I presented the work).
 
