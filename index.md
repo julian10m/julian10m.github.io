@@ -17,7 +17,7 @@ Before leaving, voilà my [CV](https://github.com/julian10m/julian10m.github.io/
 
 ## Organized Event
 
-With some collegues we organized a [_Seminar on Cryptocurrency - Blockchain Technology_](https://github.com/julian10m/julian10m.github.io/files/posters/cryptocurrency-blockchain.pdf) that took place on Tuesday 18th of September 2018.
+With some collegues we organized a [_Seminar on Cryptocurrency - Blockchain Technology_](https://github.com/julian10m/julian10m.github.io/tree/master/files/posters/cryptocurrency-blockchain.pdf) that took place on Tuesday 18th of September 2018.
 
 ## Posters presented
 
