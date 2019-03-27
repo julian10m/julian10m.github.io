@@ -11,5 +11,7 @@ I am currently:
 * a _Researcher_ at the ICube Laboratory in the [*Networks* Team](http://icube-reseaux.unistra.fr/fr/index.php/Accueil).
 * an _Assistant Teacher_ in the engineering school [Telecom Physique Strasbourg](http://www.telecom-physique.fr/). 
 
-> I feel a little bit like Clak Kent, wouldn't you too? 
+> I feel a little bit like Clark Kent, but wouldn't you too?
+
+Before leaving, voilà my [CV](https://github.com/julian10m/julian10m.github.io/) :)
 
