@@ -13,5 +13,13 @@ I am currently:
 
 > I feel a little bit like Clark Kent, but wouldn't you too?
 
-Before leaving, voilà my [CV](https://github.com/julian10m/julian10m.github.io/) :)
+Before leaving, voilà my [CV](https://github.com/julian10m/julian10m.github.io/files/cv.pdf) :)
+
+## Organized Event
+
+With some collegues we organized a [_Seminar on Cryptocurrency - Blockchain Technology_](https://github.com/julian10m/julian10m.github.io/files/posters/cryptocurrency-blockchain.pdf) that took place on Tuesday 18th of September 2018.
+
+## Posters presented
+
+> More on this coming soon...
 
