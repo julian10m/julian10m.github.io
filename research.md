@@ -5,8 +5,6 @@ subtitle: 'My publications and projects'
 published: true
 ---
 
-<div style="text-align: justify">
-
 ## Verifiable Data Plane
 
 I am currently pursuing a Ph.D. in Computer Networks as a student of the University of Strasbourg, at the ICube Laboratory in France.
@@ -32,5 +30,3 @@ In addition, the security method to be developed needs to be lightweight so as t
   * In IEEE Transactions on Industrial Informatics 2018 (Impact Factor: 6.764),
 * [_"Toward Deterministic Industrial Networks"_](https://hal.archives-ouvertes.fr/hal-01519185/document)
   * In AlgoTel-CoRes 2017 (French conference where I presented the work).
-
-</div>
