@@ -4,14 +4,14 @@ title: Teaching
 published: true
 ---
 
-## TCP/IP Networking
+## TCP/IP Computer Networking
 
 I am teaching this course with [Pascal Mérindol](http://www-r2.u-strasbg.fr/~merindol/).
 
-> Material coming soon 
+> Course Material I provided, coming soon... 
 
-## Algorithmique et Programmation C
+## Algorithms and Programming in C
 
 I am teaching this course with [Quentin Bramas](https://www.bramas.fr).
 
-My work consisted in helping students with their doubts when solving exercises. The content of the course can be found [here](https://bramas.github.io/teaching/).
+My work consists in helping students with their doubts when solving exercises. The content of the course can be found [here](https://bramas.github.io/teaching/).
