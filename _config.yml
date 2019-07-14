@@ -17,13 +17,13 @@ baseurl: ""
 title: Julian M. Del Fiore
 
 # Short description of your site
-description: Welcome to my webpage!
+description: Blog, research, projects and teaching material
 
 # --- Navigation bar options --- #
 
 # List of links in the navigation bar
 navbar-links:
-  About Me: "aboutme"
+  Blog: ""
   Research: "research"
   Teaching: "teaching"
   Resources:
@@ -96,15 +96,15 @@ social-network-links:
 
 # Select which share links to show in posts
 share-links-active:
- # twitter: true
+  twitter: true
   facebook: true
- # google: false
-  linkedin: true
+  google: true
+  linkedin: false
   
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-# url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "julian10m.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Web Statistics Section --- #
 
@@ -129,7 +129,7 @@ share-links-active:
 # --- Comments --- #
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-# disqus: ""
+disqus: "julian10m-github-io-bio"
 # If you want to use just-comments fill with the API Key
 #just-comments: "ABCD-EFGH-IJKL"
 
