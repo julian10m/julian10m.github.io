@@ -1,7 +1,8 @@
 ---
 layout: page
 title: Julian M. Del Fiore
-subtitle: 'My publications, projects and teaching materials'
+subtitle: Blog, research, projects and teaching material
+use-site-title: true
 published: true
 ---
 
