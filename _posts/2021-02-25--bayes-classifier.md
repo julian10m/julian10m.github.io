@@ -3,7 +3,7 @@ layout: post
 title: Classification relying on Bayes or Bayes classifiers
 ---
 
-The objective is to determine to which class $\hat{y}$ an unlabelled observation $x$ belongs to,  out of $K$ available. We assume that $x$ is composed of $n$ features/predictors, i.e., $x=(x_1,\ldots,x_n)$.
+The objective is to determine to which class \(\hat{y}\) an unlabelled observation \(x\) belongs to, out of \(K\) available. We assume that \(x\) is composed of \(n\) features/predictors, i.e., \(x=(x_1,\ldots,x_n)\).
 
 ## Bayes classifier
 The Bayes classifier assigns an observation $x$ to class $y_k$ when the likelihood of this being true is maximum. In other words, this is done when $P(y_k/x)$ is largest, i.e. $$\hat{y} = \underset{k\in\{1\ldots,K\}}{\operatorname{arg max}} P(y_k/x) $$ The problem with this classifier is that, in general, $P(y_k/x)$ is not known. Hence, this reduces the possibilities of actually using this classifier on practice.
