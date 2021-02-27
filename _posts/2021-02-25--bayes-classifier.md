@@ -40,6 +40,14 @@ $$\hat{y} = \underset{k\in\{1\ldots,K\}}{\operatorname{arg max}}P(y_k)\prod_{i=1
 
 In particular, the shape of the probability distributions $P(x_i/y_k)$ depends on the particular problem being solved, leading to different models and solutions.
 
+The assumption made by the NBC is strong and naive, but the classifier has still proven to be (i) efficient, since the training can be performed in one pass over the training set, and (ii) effective, since the accuracy it achieves in many applications is relatively good. 
+
+<center>
+    <p style="font-size:180%;font-family:Tahoma;">
+        <b>‘‘Correct estimation implies accurate prediction, but accurate prediction does not imply correct estimation. The NBC estimates badly, but often classifies well.’’</b><br> - Manning _et al_.
+    </p>
+</center>
+
 ### Bernoulli-NBC
 
 The features are boolean variables indicating the occurrence or not of an event, property, etc, i.e. $x_i \in \{0,1\}$. For each class $y_k$, the features distribute as Bernoulli variables, i.e., 
@@ -97,3 +105,6 @@ where:
    - $f_k= \sum_{i=1}^K f_{i,k}$, and;
    - $n$ is the total number of features.
  
+Some useful links:
+   - [_Introduction to Information Retrieval_](https://nlp.stanford.edu/IR-book/pdf/13bayes.pdf), Chapter 13 Text classification & Naive Bayes, Manning _et al_. 
+   -  [_Naive Bayes Classifier_](https://en.wikipedia.org/wiki/Naive_Bayes_classifier), Wikipedia.
