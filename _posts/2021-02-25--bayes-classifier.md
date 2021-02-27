@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: Classification relying on Bayes or Bayes classifiers
@@ -43,7 +42,7 @@ In particular, the shape of the probability distributions $P(x_i/y = y_k)$ depen
 
 ### Bernoulli-NBC
 
-The features are boolean variables indicating the occurrence or not of an event, property, etc, i.e. $x_i \in \{0,1\}$. For each class $y_k$, the features distribute as Bernoulli variables, i.e., 
+The features are boolean variables indicating the occurrence or not of an event, property, etc, i.e. $x_i \in {0,1}$. For each class $y_k$, the features distribute as Bernoulli variables, i.e., 
 
 $$P(x_i /y = y_k) =  
 \begin{cases}
@@ -77,7 +76,7 @@ $$\hat{p_{ik}} = \frac{1 + m_{i,k}}{2 + m_k}$$
 
 ### Multinomial-NBC
 
-Each feature represents the frequency or number of times that an event or property occurs, i.e $x_i \in \mathbb{R}_0$.  In these cases, rather than expressing the distribution of each feature given the class,  it is actually convenient to express their joint distribution, since it has a known form. Indeed, $x$ distributes as a multinomial variable
+Each feature represents the frequency or number of times that an event or property occurs, i.e $x_i \in \mathbb{N}_0$. In these cases, rather than expressing the distribution of each feature given the class,  it is actually convenient to express their joint distribution, since it has a known form. Indeed, $x$ distributes as a multinomial variable
 
 $$P(x /y = y_k) = \frac{\sum_{i=1}^n x_i}{\prod_{i=1}^n x_i!}\prod_{i=1}^n p^{x_i}_{ik}$$
 
