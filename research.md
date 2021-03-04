@@ -11,7 +11,7 @@ published: true
 
  - Esteban Carisimo, Julian M. Del Fiore, Diego Dujovne, Cristel Pelsser, and J. Ignacio Alvarez-Hamelin. 2020. _**A first look at the Latin American IXPs**_, in SIGCOMM Comput. Commun. Rev. 50, 1 (January 2020).
 
- - R. Koutsiamanis, G. Z. Papadopoulos, X. Fafoutis, Julian M. Del Fiore, P. Thubert and N. Montavont, _From Best Effort to Deterministic Packet Delivery for Wireless Industrial IoT Networks_, in IEEE Transactions on Industrial Informatics (IEEE TII), vol. 14, no. 10, pp. 4468-4480, Oct. 2018.
+ - R. Koutsiamanis, G. Z. Papadopoulos, X. Fafoutis, Julian M. Del Fiore, P. Thubert and N. Montavont, _**From Best Effort to Deterministic Packet Delivery for Wireless Industrial IoT Networks**_, in IEEE Transactions on Industrial Informatics (IEEE TII), vol. 14, no. 10, pp. 4468-4480, Oct. 2018.
 
 ### Publications in Conferences
  
