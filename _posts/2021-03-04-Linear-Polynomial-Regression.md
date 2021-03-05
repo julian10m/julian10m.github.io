@@ -1,7 +1,13 @@
+---
+layout: post
+title: Linear and Polynomial Regression
+---
+
+Linear and polynomial regression are supervised machine learning algorithms used to estimate the values of a continuous response/target variable $y$.
+
 ## Linear Regression
 
-Linear regression is a supervised machine learning algorithm used to estimate the values of a continuous response/target variable $y$.
-To obtain the estimate $\hat{y} of $y$, given a sample $x$ with $n$ features, the model simply proposes to linearly combine the $n$ components of $x$
+To obtain the estimate $\hat{y}$ of $y$, given a sample $x$ with $n$ features, the model simply proposes to linearly combine the $n$ components of $x$
 
 $$\hat{y} = w^\intercal x + b = w_1 x_1 + w_2 x_2 + \ldots + w_n x_n + b$$
 
@@ -37,8 +43,3 @@ In addition, usually interaction terms between the features $\forall i, j, \, x_
 
 Finally, despite the fact that we add interaction terms and of higher order, the model is still linear since all terms are linearly combined (e.g. think $x_i^j$ and $x_i x_j$ as new features $x_{ij}$ and $x_{ij}^\prime$, respectively).
 As a consequence, the optimal values of $w$ and $b$ are found in the same way as with Linear Regression, i.e., minimizing $J(w, b) = \mathit{MSE}(w, b)$ solving the normal equations or using gradient descent.
-
-
-
-
-
