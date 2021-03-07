@@ -30,7 +30,7 @@ Hence
 
 $$log\Bigg(\frac{\sigma(z)}{1 - \sigma(z)}\Bigg) = log\Big(\frac{1}{e^{-z}}\Big) = z$$
 
-Since $\hat{P}(y/x) = \sigma(z)~|~z = w^\intercal x + b$, then replacing we have
+Since $\hat{P}(y/x) = \sigma(z)~\|~z = w^\intercal x + b$, then replacing we have
 
 $$log\Bigg(\frac{\hat{P}(y/x)}{1 - \hat{P}(y/x)}\Bigg) = w^\intercal x + b$$
 
