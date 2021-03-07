@@ -3,7 +3,7 @@ layout: post
 title: Linear and Polynomial Regression
 ---
 
-Linear and polynomial regression are supervised machine learning algorithms used to estimate the values of a continuous response/target variable $y$.
+Linear and polynomial regression are supervised machine learning algorithms used, as their names indicate, to perform regression tasks, i.e., to estimate the values of a continuous response/target variable $y$.
 
 ## Linear Regression
 
