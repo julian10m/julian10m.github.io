@@ -34,7 +34,7 @@ Since $\hat{P}(y/x) = \sigma(z)~\|~z = w^\intercal x + b$, then replacing we hav
 
 $$log\Bigg(\frac{\hat{P}(y/x)}{1 - \hat{P}(y/x)}\Bigg) = w^\intercal x + b$$
 
-Therefore, until here, logistic regression is like applying linear regression, where $y$ would be the left term on the last equation, that is known as the log-odds or logit of $y/x$. Indeed, this is the reason why Logistic regression receives its name.
+Therefore, until here, logistic regression is like applying linear regression, where $\hat{y}$ would be the left term on the last equation, that is known as the log-odds or logit of $y/x$. Indeed, this is the reason why Logistic regression receives its name.
 
 As previously mentioned, however, Logistic regression is rather used for classification tasks. 
 For a sample $x$, knowing $\hat{P}(y/x)$  the classification rule is as follows
@@ -69,4 +69,5 @@ $$cost\Big(\hat{P}(y/x^{(i)}), y^{(i)}\Big) =
     - log(1 - \hat{P}(y/x^{(i)})),& \text{otherwise}
 \end{cases}
  $$
+
 where $\hat{P}(y/x^{(i)})$ is the estimated probability that the sample $x^{(i)}$ might belong to class $y=1$ and $y^{(i)}$ is the class to which $x^{(i)}$ actually belongs to. 
