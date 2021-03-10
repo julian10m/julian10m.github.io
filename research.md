@@ -13,11 +13,18 @@ published: true
 
  - R. Koutsiamanis, G. Z. Papadopoulos, X. Fafoutis, Julian M. Del Fiore, P. Thubert and N. Montavont, _**From Best Effort to Deterministic Packet Delivery for Wireless Industrial IoT Networks**_, in IEEE Transactions on Industrial Informatics (IEEE TII), vol. 14, no. 10, pp. 4468-4480, Oct. 2018.
 
-### Publications in Conferences
+## Publications in Conferences
  
  - Julian M. Del Fiore, Pascal Merindol, Valerio Persico, Cristel Pelsser and Antonio Pescape. _**Filtering the Noise to Reveal Inter-Domain Lies**_, in 2019 Network Traffic Measurement and Analysis Conference (TMA), pages 17--24, 2019, IEEE.
     
  - M. Kersalé, G. Z. Papadopoulos, Julian M. Del Fiore, P. Thubert, N. Montavont. _**Towards deterministic industrial networks**_, in Rencontres Francophones sur la Conception de Protocoles,l’Évaluation de Performance et l’Expérimentation des Réseaux de Communication (CoRes 2017), May 2017, Quiberon, France.
+
+## Posters
+ - Julian M. Del Fiore, Pascal Merindol, Valerio Persico, Cristel Pelsser and Antonio Pescape. [_**Routing Inconsistencies  at the FIB level**_](https://raw.githubusercontent.com/julian10m/julian10m.github.io/master/files/Posters/poster-tma-2019.pdf), in 2019 Network Traffic Measurement and Analysis Conference (TMA), IEEE. 
+    
+ - Esteban Carisimo, Julian M. Del Fiore, Diego Dujovne, Cristel Pelsser, J. Ignacio Alvarez-Hamelin, _**Country-level influence of IXPs in Latin America**_, in Latin American Student Workshop on Data Communication Networks (LANCOMM) 2019.
+    
+ - Julian M. Del Fiore, Pascal Merindol, Valerio Persico, Cristel Pelsser and Antonio Pescape. [_**A BGP-lying Tale: Stop Blamming the Mapping**_](https://raw.githubusercontent.com/julian10m/julian10m.github.io/master/files/Posters/poster-tma-2018.pdf), in 2018 Network Traffic Measurement and Analysis Conference (TMA), IEEE.   
 
 <!-- ### Verifiable Data Plane
 
