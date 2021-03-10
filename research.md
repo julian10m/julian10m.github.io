@@ -20,7 +20,7 @@ published: true
  - M. Kersalé, G. Z. Papadopoulos, Julian M. Del Fiore, P. Thubert, N. Montavont. _**Towards deterministic industrial networks**_, in Rencontres Francophones sur la Conception de Protocoles,l’Évaluation de Performance et l’Expérimentation des Réseaux de Communication (CoRes 2017), May 2017, Quiberon, France. [Slides](https://raw.githubusercontent.com/julian10m/julian10m.github.io/master/files/Presentations/slides-cores-2017.pdf), [Article](https://hal.archives-ouvertes.fr/hal-01519185/document).
 
 ## Posters
- - Julian M. Del Fiore, Pascal Merindol, Valerio Persico, Cristel Pelsser and Antonio Pescape. _**Routing Inconsistencies  at the FIB level**_, in 2019 Network Traffic Measurement and Analysis Conference (TMA), IEEE. [Poster]](https://raw.githubusercontent.com/julian10m/julian10m.github.io/master/files/Posters/poster-tma-2019.pdf).
+ - Julian M. Del Fiore, Pascal Merindol, Valerio Persico, Cristel Pelsser and Antonio Pescape. _**Routing Inconsistencies  at the FIB level**_, in 2019 Network Traffic Measurement and Analysis Conference (TMA), IEEE. [Poster](https://raw.githubusercontent.com/julian10m/julian10m.github.io/master/files/Posters/poster-tma-2019.pdf).
     
  - Esteban Carisimo, Julian M. Del Fiore, Diego Dujovne, Cristel Pelsser, J. Ignacio Alvarez-Hamelin, _**Country-level influence of IXPs in Latin America**_, in Latin American Student Workshop on Data Communication Networks (LANCOMM) 2019.
     
