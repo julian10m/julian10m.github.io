@@ -25,7 +25,7 @@ where:
  - $b$ is a called a bias or intercept, and;
  - $\sigma(z) = \frac{1}{1+e^{-z}}$ is the sigmoid function.
 
-The sigmoid function may take any real number as input, and will always output a value between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. In addition, note that
+The sigmoid function may take any real number as input, and will always output a value between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. In addition, note that
 
 $$1 - \sigma(z) = 1 -\frac{1}{1+e^{-z}}  = \frac{e^{-z}}{1+e^{-z}}$$
 
