@@ -18,7 +18,7 @@ This method tells us that the optimal value of the unknown constants $\theta$ is
 
 $$\hat{\theta} = \underset{\theta}{\operatorname{arg max}}P_{\mathcal{X}}(X, \theta)$$
 
-The question that MLE answers then can be put as "given that we have this dataset $X$, for which value of $\theta$ would it have been more likely to actually observe $X$?". When the parameters in the formula we proposed take the values of $\hat{\theta}(X)$, then odds of this event are maximized. 
+The question that MLE answers then can be put as "given that we have this dataset $X$, for which value of $\theta$ would it have been more likely to actually observe $X$?". When the parameters in the formula we proposed take the values of $\hat{\theta}$, then odds of this event are maximized. 
 
 To find $\hat{\theta}$, in the cases that $P_{\mathcal{X}}(X, \theta)$ is a differentiable function, we can simply look for 
 
