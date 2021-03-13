@@ -34,9 +34,9 @@ $$\nabla_{\theta} \frac{1}{m} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)
 
 where $l(\theta) = \frac{1}{m} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is referred to as the log-likelihood of $\theta$ according to the data.
 
-In multiple cases, a cost function $J(X, \theta)$ is defined as a negative version of the log-likelihood, which we then seek to minimize:
+In multiple cases, a cost function $J(\theta)$ is defined as a negative version of the log-likelihood, which we then seek to minimize:
 
-$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg min}}J(X, \theta)$$
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
 
 
 
