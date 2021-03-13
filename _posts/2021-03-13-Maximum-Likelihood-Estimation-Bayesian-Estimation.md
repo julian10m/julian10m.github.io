@@ -12,9 +12,9 @@ In general, however, estimating this probability function is not trivial. A comp
  - $\theta$ is considered a unknown vector of constants that we would like to determine. In these cases, the method of momentums, or the maximum likelihood estimation methods may be applied.
  - $\theta$ is a random variable. Under this assumption, usually bayesian estimation is used.
 
- ## Maximum Likelihood Estimation (MLE)
+## Maximum Likelihood Estimation (MLE)
 
- This method tells us that the optimal value of the unknown constants $\theta$ is the one that maximizes the joint probability $P_{\mathcal{X}}(X, \theta)$, i.e.,
+This method tells us that the optimal value of the unknown constants $\theta$ is the one that maximizes the joint probability $P_{\mathcal{X}}(X, \theta)$, i.e.,
 
 $$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}P_{\mathcal{X}}(X, \theta)$$
 
@@ -30,10 +30,13 @@ $$\nabla_{\theta} \prod_{i=1}^m P_x(x^{(i)}, \theta) = 0$$
 
 Since the logarithm is a monotonic increasing function, and adding a scaling factor does not have any impact on the values that equal zero, then the solutions to the last equation are the same that the ones for
 
-$$\nabla_{\theta} l(\theta) = \nabla_{\theta} \frac{1}{m} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg) = 0$$
+$$\nabla_{\theta} \frac{1}{m} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg) = 0$$
 
-where $l(\theta)$ is referred to as the log-likelihood of the data.
+where $l(\theta) = \frac{1}{m} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is referred to as the log-likelihood of the data.
 
+In multiple cases, a cost function $J(X, \theta)$ is defined as a negative version of the log-likelihood, which we then seek to minimize:
+
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg min}}J(X, \theta)$$
 
 
 
