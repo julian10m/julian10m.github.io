@@ -16,11 +16,11 @@ In general, however, estimating this probability function is not trivial. A comp
 
 This method tells us that the optimal value of the unknown constants $\theta$ is the one that maximizes the joint probability $P_{\mathcal{X}}(X, \theta)$, i.e.,
 
-$$\hat{\theta} = \underset{\theta}{\operatorname{arg max}}P_{\mathcal{X}}(X, \theta)$$
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}P_{\mathcal{X}}(X, \theta)$$
 
-The question that MLE answers then can be put as "given that we have this dataset $X$, for which value of $\theta$ would it have been more likely to actually observe $X$?". When the parameters in the formula we proposed take the values of $\hat{\theta}$, the odds of this event are maximized. 
+The question that MLE answers then can be put as "given that we have this dataset $X$, for which value of $\theta$ would it have been more likely to actually observe $X$?". When the parameters in the formula we proposed take the values of $\hat{\theta}(X)$, the odds of this event are maximized. 
 
-To find $\hat{\theta}$, in the cases that $P_{\mathcal{X}}(X, \theta)$ is a differentiable function, we can simply look for 
+To find $\hat{\theta}$(X), in the cases that $P_{\mathcal{X}}(X, \theta)$ is a differentiable function, we can simply look for 
 
 $$\nabla_{\theta}P_{\mathcal{X}}(X, \theta) = 0$$
 
@@ -32,11 +32,11 @@ Since the logarithm is a monotonic increasing function, then the solutions to th
 
 $$\nabla_{\theta} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg) = 0$$
 
-where $l(\theta) = \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is referred to as the log-likelihood of $\theta$ according to the data. 
+where $l(\theta; X) = \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is referred to as the log-likelihood of $\theta$ according to the data $X$. 
 
 Finally, a negative version of the log-likelihood may be described as a cost function $J(\theta)$ which we then seek to minimize, rather than maximize:
 
-$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}P_{\mathcal{X}}(X, \theta) = \underset{\theta}{\operatorname{arg min}} - P_{\mathcal{X}}(X, \theta) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}l(\theta; X) = \underset{\theta}{\operatorname{arg min}} - l(\theta; X) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
 
 
 
