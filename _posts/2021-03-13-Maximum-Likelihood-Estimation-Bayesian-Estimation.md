@@ -22,7 +22,7 @@ The question that MLE answers then can be put as "given that we have this datase
 
 To find $\hat{\theta}$(X), in the cases that $P_{\mathcal{X}}(X, \theta)$ is a differentiable function, we can simply look for 
 
-$$\nabla_{\theta}P_{\mathcal{X}}(X, \theta) = 0$$
+$$\nabla_{\theta}\;P_{\mathcal{X}}(X, \theta) = 0$$
 
 When the training samples are independent and identically distributed, $P_{\mathcal{X}}(X, \theta)$ is the product of the marginal distributions. For these cases, we can write 
 
@@ -36,7 +36,7 @@ where $l(\theta; X) = \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is ref
 
 Finally, a negative version of the log-likelihood may be described as a cost function $J(\theta)$ which we then seek to minimize, rather than maximize:
 
-$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}l(\theta; X) = \underset{\theta}{\operatorname{arg min}} - l(\theta; X) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}\;l(\theta; X) = \underset{\theta}{\operatorname{arg min}}\;- l(\theta; X) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
 
 
 
