@@ -3,27 +3,26 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and Softmax regression are supervised machine learning algorithms used to estimate the probability of an event, usually the probability a posteriori of $y$ given $x$, where $y$ is a qualitative or categorical target variable that may take $K$ possible values and $x$ is an observation composed of $n$ features/predictors, i.e., $x=(x_1,\ldots,x_n)$. In general, these algorithms are combined with a decision rule, and thus used for classification tasks.
 
-
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values and an observation $\mathbf{x}$ composed of $n$ features/predictors, i.e., $\mathbf{x}=(x_1,\ldots,x_n)^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. On top of this estimation, these classifiers apply a decision rule that allows them to classify each class, i.e., assign them an estimated class.
 ## Logistic Regression
 
 This method is used for binary classification, i.e., cases where $K=2$. However, by combining multiple logistic regression classifiers, it is possible to extend their use to multinomial cases, i.e., scenarios where $K>2$.  
 
 ### Binary Classification
 
-In these cases the target variable can only take two possibles values, e.g., "yes/no", "green/blue", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e., $y \in \left\{0, 1 \right\}$.  This way, $y=1$ may represent "yes",  "green" and "win", while $y=0$ the opposite/remaining labels. 
+In these cases the target variable can only take two possibles values, e.g., "yes/no", "green/blue", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e.,  $y \in \left\{0, 1\right\}$.  This way, $y=1$ may represent "yes",  "green" and "win", while $y=0$ the opposite/remaining labels. 
 
-To classify any sample $x$, we are interested in estimating $P(y/x)$. Indeed,  it can be proved that, to minimize the classification error,  $x$ needs to be assigned to the class that maximizes this probability.  In other words, if $P(y=1/x) > P(y=0/x)$, our guess $\hat{y}$ for $x$ would be $\hat{y} = 1$, and $\hat{y} = 0$ in the opposite case. In particular, logistic regression proposes 
+To classify any sample $x$, we are interested in estimating $P(y/\mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes this probability.  In other words, if $P(y=1/\mathbf{x}) > P(y=0/\mathbf{x})$, our guess $\hat{y}$ for $\mathbf{x}$ would be $\hat{y} = 1$, and $\hat{y} = 0$ in the opposite case. In particular, logistic regression proposes 
 
-$$\hat{P}(y/x) = \sigma(w^\intercal x + b)$$
+$$\hat{P}(y/\mathbf{x}) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
 
 where:
 
-- $\hat{P}(y/x)$ is the value estimated for $P(y/x)$;
- - $w = (w_1, \ldots, w_n)$ is a weighting vector of $n$ parameters;
+- $\hat{P}(y/\mathbf{x})$ is the value estimated for $P(y/\mathbf{x})$;
+ - $\mathbf{w} = (w_1, \ldots, w_n)^\intercal$ is a weighting vector of $n$ parameters;
  - $b$ is a called a bias or intercept, and;
- - $\sigma(z) = \frac{1}{1+e^{-z}}$ is the sigmoid function.
+ - $\sigma(z) = (1+e^{-z})^{-1}$ is the sigmoid function.
 
 The sigmoid function may take any real number as input, and will always output a value between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. In addition, note that
 
@@ -31,38 +30,51 @@ $$1 - \sigma(z) = 1 -\frac{1}{1+e^{-z}}  = \frac{e^{-z}}{1+e^{-z}}$$
 
 In particular, this means that
 
-$$\log\Bigg(\frac{\sigma(z)}{1 - \sigma(z)}\Bigg) = \log\Big(\frac{1}{e^{-z}}\Big) = z$$
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(\frac{1}{e^{-z}}\right) = z$$
 
 Since $\hat{P}(y/x) = \sigma(z)~\|~z = w^\intercal x + b$, then replacing we have
 
-$$\log\Bigg(\frac{\hat{P}(y/x)}{1 - \hat{P}(y/x)}\Bigg) = w^\intercal x + b$$
+$$\log\left(\frac{\hat{P}(y/\mathbf{x})}{1 - \hat{P}(y/\mathbf{x})}\right) = \mathbf{w}^\intercal \mathbf{x} + b$$
 
-where the term $\log(\frac{\hat{P}(y/x)}{1 - \hat{P}(y/x)})$ is known as the log-odds or logit of $y/x$. 
+where the left term is known as the log-odds or logit of $y/\mathbf{x}$. 
 
-The last equation resembles the one we previously saw for linear regression, where $\hat{y} =  w^\intercal x + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions,
-it is straightforward to conclude that logistic regression is actually like applying linear regression to the logits of $y/x$.  
+The last equation resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions,
+it is straightforward to conclude that logistic regression is actually like applying linear regression to the logits of $y/\mathbf{x}$.  
 
 Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems.  Indeed, logistic regressions additionally uses the following  classification rule
 
 $$\hat{y} =  
 \begin{cases}
-    1,& \text{if } \hat{P}(y/x) = \sigma(w^\intercal x + b) \geq 0.5\\
+    1,& \text{if } \hat{P}(y/x) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b) \geq 0.5\\
     0,& \text{otherwise}
 \end{cases}
  $$
 
-Since $\sigma(z) = 0.5 \iff z = 0$, it is trivial to see that we can re-write this condition as 
+Since $\sigma(z) = 0.5$ only when $z = 0$, it is trivial to see that we can re-write the last condition as 
 
  $$\hat{y} =  
 \begin{cases}
-    1,& \text{if } w^\intercal x + b \geq 0\\
+    1,& \text{if } \mathbf{w}^\intercal \mathbf{x} + b \geq 0\\
     0,& \text{otherwise}
 \end{cases}
  $$
 
-Analyzing the previous expression, we can see that there exists a decision boundary in $w^\intercal x + b = 0$, i.e., once $w$ and $b$ are fixed, if $x$ is such that the computation of $w^\intercal x + b$ is greater than $0$, then $\hat{y} = 1$, and  $\hat{y} = 0$ otherwise. In particular, the values of $x$ that satisfy the condition $w^\intercal x + b = 0$ stand on an (affine) hyperplane in the sub-space generated by $(x_1, \ldots, x_n)$, where $b$ is the quantity by which this hyperplane is shifted from the origin. For a sample $x$ we want to classify, $\hat{y} = 1$ if $x$ falls on a specific side of this hyperplane, and $\hat{y} = 0$ in case it falls on the opposite side.
+Analyzing the previous expression, we can see that there exists a decision boundary in $\mathbf{w}^\intercal \mathbf{x} + b = 0$, i.e., once $\mathbf{w}$ and $b$ are fixed, if $x$ is such that the computation of $\mathbf{w}^\intercal \mathbf{x} + b$ is greater than $0$, then $\hat{y} = 1$, and  $\hat{y} = 0$ otherwise. In particular, the values of $x$ that satisfy the condition $\mathbf{w}^\intercal \mathbf{x} + b = 0$ stand on an (affine) hyperplane in the sub-space generated by $\left\{x_1, \ldots, x_n\right\}$, where $b$ is the quantity by which this hyperplane is shifted from the origin. For a sample $x$ we want to classify, $\hat{y} = 1$ if $\mathbf{x}$ falls on a specific side of this hyperplane, and $\hat{y} = 0$ in case it falls on the opposite side.
 
-The optimal values for $w$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set of $m$ samples, without diving into the details, the following cost function needs to be minimized relying on the gradient descent algorithm
+The optimal values for $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labelled samples, modelling $y$ as a Bernoulli variable such that $p= p(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset $P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert X\right)$ equals
+
+$$\prod_{i=1}^m P(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}) = \prod_{i=1}^m p(\mathbf{x}^{(i)}, \mathbf{w}, b))^{y^{(i)}} \left(1 -p(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}$$
+
+Hence the log-likelihood $l(X, \mathbf{w}, b)$ equals
+
+$$\sum_{i=1}^m \left(y^{(i)} \log p(\mathbf{x}^{(i)}, \mathbf{w}, b) + (1 - y^{(i)})\log\left(1 -p(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)\right)$$
+
+Recalling we have modelled $p(\mathbf{x}, \mathbf{w}, b) = \hat{P}(y/\mathbf{x}) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
+
+$$\begin{align}
+J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
+&= dasda \\
+\end{align}$$
 
 $$J(w, b) = -\frac{1}{m}\sum_{i = 1}^m \Bigg(y^{(i)} \log\Big(\hat{P}(y/x^{(i)})\Big)+ (1 - y^{(i)}) \log\Big(1 - \hat{P}(y/x^{(i)}\Big)\Bigg)$$
 
@@ -80,3 +92,9 @@ The intuition behind the expression of $J(w, b)$ is that we want to penalize the
 ###  Multinomial Classification
 
 When $K>2$, multiple logistic regression classifiers need to be used. In particular, two different approaches exist to combine them: one-vs-one (OvO) or one-vs-the-rest (OvR), also called one-vs-all (OvA).
+
+
+
+
+<!-- = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\Big(\hat{P}(y/x^{(i)})\Big)+ (1 - y^{(i)}) \log\Big(1 - \hat{P}(y/x^{(i)}\Big)\Bigg)$$
+, without diving into the details, the following cost function needs to be minimized relying on the gradient descent algorithm -->
