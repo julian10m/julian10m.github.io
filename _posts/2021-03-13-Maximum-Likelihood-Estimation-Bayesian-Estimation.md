@@ -34,9 +34,9 @@ $$\nabla_{\theta} \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg) = 0$$
 
 where $l(\theta; X) = \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is referred to as the log-likelihood of $\theta$ according to the data $X$. 
 
-Finally, a negative version of the log-likelihood may be described as a cost function $J(\theta)$ which we then seek to minimize, rather than maximize:
+Finally, a negative version of the log-likelihood may be described as a cost function $J(\theta; X)$ which we then seek to minimize, rather than maximize:
 
-$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}\;l(\theta; X) = \underset{\theta}{\operatorname{arg min}}\big(- l(\theta; X)\big) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}\;l(\theta; X) = \underset{\theta}{\operatorname{arg min}}\big(- l(\theta; X)\big) = \underset{\theta}{\operatorname{arg min}}J(\theta; X)$$
 
 
 
