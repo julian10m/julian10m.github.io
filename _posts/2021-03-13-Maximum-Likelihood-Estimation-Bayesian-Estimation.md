@@ -36,7 +36,7 @@ where $l(\theta; X) = \sum_{i=1}^m \log \bigg(P_x(x^{(i)}, \theta)\bigg)$ is ref
 
 Finally, a negative version of the log-likelihood may be described as a cost function $J(\theta)$ which we then seek to minimize, rather than maximize:
 
-$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}\;l(\theta; X) = \underset{\theta}{\operatorname{arg min}}\;- l(\theta; X) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
+$$\hat{\theta}(X) = \underset{\theta}{\operatorname{arg max}}\;l(\theta; X) = \underset{\theta}{\operatorname{arg min}}\,- l(\theta; X) = \underset{\theta}{\operatorname{arg min}}J(\theta)$$
 
 
 
