@@ -78,15 +78,15 @@ Recalling we have modelled $p(\mathbf{x}, \mathbf{w}, b) = \hat{P}(y/\mathbf{x})
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
-& = = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\hat{P}(y/x^{(i)})\right)+ (1 - y^{(i)}) \log\left(1 - \hat{P}\left(y/x^{(i)}\right)\right)\right)
+& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\hat{P}(y/x^{(i)})\right)+ (1 - y^{(i)}) \log\left(1 - \hat{P}(y/x^{(i)})\right)\right)
 \end{align}
 $$
 
-There is no closed form to find the minimum of the cost function, therefore it needs to be minimized relying on the gradient descent algorithm.
+There is no closed form to find the minimum of this cost function, therefore it needs to be minimized relying on the gradient descent algorithm.
 
- Even though the overall formula looks intricate, it can be interpreted as simply averaging the result of a function $cost\left(\hat{P}(y \;\vert\; \mathbf{x}^{(i)}),  y^{(i)}\right)$ for the $m$ samples, where
+ Even though $J(X, \mathbf{w}, b)$ looks intricate, it can be interpreted as simply averaging the result of a function $cost\left(\hat{P}(y \;\vert\; \mathbf{x}^{(i)}),  y^{(i)}\right)$ for the $m$ samples, where
 
-$$cost\left(\hat{P}(y \;\vert\; x^{(i)}), y^{(i)}\right) = 
+$$cost\left(\hat{P}(y \;\vert\; \mathbf{x}^{(i)}), y^{(i)}\right) = 
 \begin{cases}
     - \log\left(\hat{P}(y  \;\vert\;  \mathbf{x}^{(i)}\right),& \text{if } y = 1\\
     - \log\left(1 - \hat{P}(y  \;\vert\;  \mathbf{x}^{(i)})\right),& \text{otherwise}
