@@ -12,7 +12,7 @@ This method is used for binary classification, i.e., cases where $K=2$. However,
 
 ### Binary Classification
 
-In these cases the target variable can only take two possibles values, e.g., "yes/no", "green/blue", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e., $y \in \left{0, 1 \right}$.  This way, $y=1$ may represent "yes",  "green" and "win", while $y=0$ the opposite/remaining labels. 
+In these cases the target variable can only take two possibles values, e.g., "yes/no", "green/blue", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e., $y \in \left\{0, 1 \right\}$.  This way, $y=1$ may represent "yes",  "green" and "win", while $y=0$ the opposite/remaining labels. 
 
 To classify any sample $x$, we are interested in estimating $P(y/x)$. Indeed,  it can be proved that, to minimize the classification error,  $x$ needs to be assigned to the class that maximizes this probability.  In other words, if $P(y=1/x) > P(y=0/x)$, our guess $\hat{y}$ for $x$ would be $\hat{y} = 1$, and $\hat{y} = 0$ in the opposite case. In particular, logistic regression proposes 
 
