@@ -81,9 +81,9 @@ J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
 \end{align}
 $$
 
-Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**.  A property of the cross-entropy loss function that makes it particularly attractive is that it is a convex function, meaning that it has a minimum, and this minimum is unique.
+Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**.  A property of this function that makes it particularly attractive is that it is a convex function, meaning that it has a minimum, and this minimum is unique.
 
-The function $J(X, \mathbf{w}, b)$ looks intricate and difficult to understand, however, we can find a very intuitive explanation further developing its expression. This can be done noticing that, for any index $i$, then $y^{(i)}$ can only evaluate to $1$ or $0$. Therefore, for each sample $(x^{(i)}, y^{(i)})$,  only one term out of the two possible contributes to the cost function. We can use this fact to compress the expression of $J(X, \mathbf{w}, b)$  as follows
+Despite the cost function $J(X, \mathbf{w}, b)$ looks intricate, by further developing its expression, we can find a very intuitive to understand it. For this, we need to note that, for any index $i$, then $y^{(i)}$ can only evaluate to $1$ or $0$. Therefore, for each sample $(x^{(i)}, y^{(i)})$,  only one term out of the two possible contributes to the cost function. We can use this fact to compress the expression of $J(X, \mathbf{w}, b)$  as follows
 
 $$J(X, \mathbf{w}, b) = \sum_{i=1}^m c\left(y^{(i)}, \hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)  $$ 
 where 
