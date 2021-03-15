@@ -81,7 +81,7 @@ J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
 \end{align}
 $$
 
-Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**.
+Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**.  A property of the cross-entropy loss function that makes it particularly attractive is that it is a convex function, meaning that it has a minimum, and this minimum is unique.
 
 The function $J(X, \mathbf{w}, b)$ looks intricate and difficult to understand, however, we can find a very intuitive explanation further developing its expression. This can be done noticing that, for any index $i$, then $y^{(i)}$ can only evaluate to $1$ or $0$. Therefore, for each sample $(x^{(i)}, y^{(i)})$,  only one term out of the two possible contributes to the cost function. We can use this fact to compress the expression of $J(X, \mathbf{w}, b)$  as follows
 
@@ -99,8 +99,7 @@ For example, when $y^{(i)} = 1$, then if $\hat{P}\left(y = 1  \;\vert\;  \mathbf
 
 Finally, it must be noted that, even if our classifier would have made correct classifications, i.e. estimated $\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)}) > 0.5$ in a case where $y^{(i)} = 1$, we are still increasing the cost function. In other words, the cost function does not penalize mistakes, but more generally the fact that the classifier makes "doubtful" classifications. In other words, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ for which $y^{(i)}=1$ and $y^{(j)}=0$, we would want our classifier not to hesitate, i.e.,  to end up computing $\hat{P}(y = 1 \;\vert\; \mathbf{x}^{(i)}) = 1$ and $\hat{P}(y =0 \;\vert\; \mathbf{x}^{(j)}) = 1$, respectively. The cross-entropy loss function tries to force this, always increasing $J(X, \mathbf{w}, b)$ when we find samples where the classifier was not completely "convinced" or "sure" of its choice.
 
-The optimal values of $\mathbf{w}$ and $b$ can be found minimizing the cost function $J(X, \mathbf{w}, b)$. In particular, $J(X, \mathbf{w}, b)$ is differentiable, hence we can try to find its minimum looking for the point where all the partial derivatives equal zero.
-It is simple to show that
+The optimal values of $\mathbf{w}$ and $b$ can be found minimizing the cost function $J(X, \mathbf{w}, b)$.  In particular, $J(X, \mathbf{w}, b)$ is differentiable, hence we can try to find its minimum looking for the point where all the partial derivatives become null. It is simple to show that
 
 $$\begin{align}
 \frac{\partial J(X, \mathbf{w}, b)}{\partial b} &= \frac{1}{m} \sum_{i=1}^m \left( \hat{P}\left(y = 1  \;\vert\;  \mathbf{x}^{(i)}\right) - y^{(i)}\right) \\
@@ -108,14 +107,9 @@ $$\begin{align}
 \end{align}
 $$
 
-Unfortunately, these equations are transcendental, meaning that there is no closed form to solve them. The only option left is to rely on numerical solutions, such as that provided by the the gradient descent algorithm. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, thus modifying the positioning of the hyperplane that serves as decision boundary.
-Hopefully, at the end of the process, the hyperplane will end up well located, i.e., for most training samples, the estimations and classifications of the algorithm on the training set will be reasonably good. 
+Unfortunately, setting this equations to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them.  To overcome this limitation, the only option left is to rely on numerical solutions, such as that provided by the gradient descent algorithm.  Note that since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary. Hopefully, at the end of the process, the hyperplane will end up well located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. 
 
 
 ###  Multinomial Classification
 
 When $K>2$, multiple logistic regression classifiers need to be used. In particular, two different approaches exist to combine them: one-vs-one (OvO) or one-vs-the-rest (OvR), also called one-vs-all (OvA).
-
-
-
-
