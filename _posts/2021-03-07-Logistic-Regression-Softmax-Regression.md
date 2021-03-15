@@ -3,25 +3,25 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values and an observation $\mathbf{x}$ composed of $n$ features/predictors, i.e., $\mathbf{x}=(x_1,\ldots,x_n)^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. On top of this estimation, these classifiers apply a decision rule that allows them to classify each class, i.e., assign them an estimated class.
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $n$ features/predictors, i.e., $\mathbf{x}=(x_1,\ldots,x_n)^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
 ## Logistic Regression
 
 This method is used for binary classification, i.e., cases where $K=2$. However, by combining multiple logistic regression classifiers, it is possible to extend their use to multinomial cases, i.e., scenarios where $K>2$.  
 
 ### Binary Classification
 
-In these cases the target variable can only take two possibles values, e.g., "yes/no", "green/blue", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e.,  $y \in \left\\{0, 1\right\\}$.  This way, $y=1$ may represent "yes",  "green" and "win", while $y=0$ the opposite/remaining labels. 
+In these cases the target variable can only take two possibles values, e.g., "yes/no", "fun/boring", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e.,  $y \in \left\\{0, 1\right\\}$.  This way, $y=1$ may represent "yes",  "fun" and "win", while $y=0$ be associated to "no", "boring" and "lose". The labels may also be assigned in the opposite order, this actually has no impact on the performance of the algorithm. However, as a rule of thumb, usually when the target variable expresses the presence or absence of a property, usually $y=1$ flags the occurrence.
 
-To classify any sample $x$, we are interested in estimating $P(y \;\vert\; \mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes this probability.  In other words, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, our guess $\hat{y}$ for $\mathbf{x}$ would be $\hat{y} = 1$, and $\hat{y} = 0$ in the opposite case. In particular, logistic regression proposes 
+To classify any sample $\mathbf{x}$, we assume a probabilistic model, and thus we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes the a posteriori probability.  In other words, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, our guess would be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In particular, logistic regression proposes 
 
-$$\hat{P}(y \;\vert\; \mathbf{x}) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
+$$\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right) = \sigma\left(\mathbf{w}^\intercal \mathbf{x} + b\right)$$
 
 where:
 
-- $\hat{P}(y \;\vert\; \mathbf{x})$ is the value estimated for $P(y \;\vert\; \mathbf{x})$;
+- $\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)$ is the value estimated for $P\left(y = 1 \;\vert\; \mathbf{x}\right)$;
  - $\mathbf{w} = (w_1, \ldots, w_n)^\intercal$ is a weighting vector of $n$ parameters;
  - $b$ is a called a bias or intercept, and;
- - $\sigma(z) = (1+e^{-z})^{-1}$ is the sigmoid function.
+ - $\sigma(z) = \left(1+e^{-z}\right)^{-1}$ is the sigmoid function.
 
 The sigmoid function may take any real number as input, and will always output a value between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. In addition, note that
 
@@ -31,20 +31,19 @@ In particular, this means that
 
 $$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(\frac{1}{e^{-z}}\right) = z$$
 
-Since $\hat{P}(y/x) = \sigma(z)~\|~z = w^\intercal x + b$, then replacing we have
+Since $\hat{P}(y  = 1 \;\vert\; \mathbf{x}) = \sigma(z)~\|~z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing we have
 
-$$\log\left(\frac{\hat{P}(y \;\vert\; \mathbf{x})}{1 - \hat{P}(y \;\vert\; \mathbf{x})}\right) = \mathbf{w}^\intercal \mathbf{x} + b$$
+$$\log\left(\frac{\hat{P}(y = 1 \;\vert\; \mathbf{x})}{1 - \hat{P}(y = 1 \;\vert\; \mathbf{x})}\right) = \mathbf{w}^\intercal \mathbf{x} + b$$
 
 where the left term is known as the log-odds or logit of $y \;\vert\; \mathbf{x}$. 
 
-The last equation resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions,
-it is straightforward to conclude that logistic regression is actually like applying linear regression to the logits of $y \;\vert\; \mathbf{x}$.  
+The last equation resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions, it is straightforward to conclude that logistic regression is actually like applying linear regression to the logits of $y \;\vert\; \mathbf{x}$.  
 
-Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems.  Indeed, logistic regressions additionally uses the following  classification rule
+Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems.  Indeed, logistic regression additionally uses the following  classification rule
 
 $$\hat{y} =  
 \begin{cases}
-    1,& \text{if } \hat{P}(y \;\vert\; x) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b) \geq 0.5\\
+    1,& \text{if } \hat{P}\left(y = 1\;\vert\; \mathbf{x}\right) \geq 0.5\\
     0,& \text{otherwise}
 \end{cases}
  $$
@@ -58,44 +57,60 @@ Since $\sigma(z) = 0.5$ only when $z = 0$, it is trivial to see that we can re-w
 \end{cases}
  $$
 
-Analyzing the previous expression, we can see that there exists a decision boundary in $\mathbf{w}^\intercal \mathbf{x} + b = 0$, i.e., once $\mathbf{w}$ and $b$ are fixed, if $x$ is such that the computation of $\mathbf{w}^\intercal \mathbf{x} + b$ is greater than $0$, then $\hat{y} = 1$, and  $\hat{y} = 0$ otherwise. In particular, the values of $x$ that satisfy the condition $\mathbf{w}^\intercal \mathbf{x} + b = 0$ stand on an (affine) hyperplane in the sub-space generated by $\left\\{x_1, \ldots, x_n\right\\}$, where $b$ is the quantity by which this hyperplane is shifted from the origin. For a sample $x$ we want to classify, $\hat{y} = 1$ if $\mathbf{x}$ falls on a specific side of this hyperplane, and $\hat{y} = 0$ in case it falls on the opposite side.
+Analyzing this expression, we can see that there exists a decision boundary in $\mathbf{w}^\intercal \mathbf{x} + b = 0$. The values of $\mathbf{x}$ that satisfy this condition form an (affine) hyperplane in the sub-space generated by $\left\\{x_1, \ldots, x_n\right\\}$, where $b$ is the quantity by which this hyperplane is shifted from the origin.  When $\mathbf{w}$ and $b$ are known, if $\mathbf{x}$ is such that the computation of $\mathbf{w}^\intercal \mathbf{x} + b$ is greater than $0$, then $\hat{y} = 1$, and  $\hat{y} = 0$ otherwise.
 
-The optimal values for $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labelled samples, modelling $y$ as a Bernoulli variable such that $p= p(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
+The optimal values for $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labelled samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= p(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
 
 $$\begin{align}
-P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert X\right) &= \prod_{i=1}^m P(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}) \\
+P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert X\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
 &= \prod_{i=1}^m p(\mathbf{x}^{(i)}, \mathbf{w}, b))^{y^{(i)}} \left(1 -p(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
 \end{align}
 $$
 
-where $p(\mathbf{x}^{(i)}, \mathbf{w}, b))$ is the estimated probability that the sample $x^{(i)}$ might belong to class $y=1$ and $y^{(i)}$ is the class to which $x^{(i)}$ actually belongs to.
+where $p(\mathbf{x}^{(i)}, \mathbf{w}, b))$ is the estimated probability that sample $\mathbf{x}^{(i)}$ might belong to class $y=1$ and $y^{(i)}$ is the class to which $\mathbf{x}^{(i)}$ actually belongs to.
 
-The log-likelihood can then be written as
+The log-likelihood, that we seek to maximize, can then be written as
 
 $$l(X, \mathbf{w}, b) = \sum_{i=1}^m \left(y^{(i)} \log p(\mathbf{x}^{(i)}, \mathbf{w}, b) + (1 - y^{(i)})\log\left(1 -p(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)\right)$$
 
-Recalling we have modelled $p(\mathbf{x}, \mathbf{w}, b) = \hat{P}(y/\mathbf{x}) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
+Recalling we have modelled $p(\mathbf{x}, \mathbf{w}, b) = \hat{P}(y = 1 \;\vert\; \mathbf{x}) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
-& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\hat{P}(y/x^{(i)})\right)+ (1 - y^{(i)}) \log\left(1 - \hat{P}(y/x^{(i)})\right)\right)
+& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)+ (1 - y^{(i)}) \log\left(1 - \hat{P}\left(y \;\vert\; \mathbf{x}^{(i)}\right)\right)\right)
 \end{align}
 $$
 
-There is no closed form to find the minimum of this cost function, therefore it needs to be minimized relying on the gradient descent algorithm.
+Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**.
 
- Even though $J(X, \mathbf{w}, b)$ looks intricate, it can be interpreted as simply averaging the result of a function $cost\left(\hat{P}(y \;\vert\; \mathbf{x}^{(i)}),  y^{(i)}\right)$ for the $m$ samples, where
+The function $J(X, \mathbf{w}, b)$ looks intricate and difficult to understand, however, we can find a very intuitive explanation further developing its expression. This can be done noticing that, for any index $i$, then $y^{(i)}$ can only evaluate to $1$ or $0$. Therefore, for each sample $(x^{(i)}, y^{(i)})$,  only one term out of the two possible contributes to the cost function. We can use this fact to compress the expression of $J(X, \mathbf{w}, b)$  as follows
 
-$$cost\left(\hat{P}(y \;\vert\; \mathbf{x}^{(i)}), y^{(i)}\right) = 
+$$J(X, \mathbf{w}, b) = \sum_{i=1}^m c\left(y^{(i)}, \hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)  $$ 
+where 
+
+$$c\left( y^{(i)}, \hat{P}(y = 1 \;\vert\; \mathbf{x}^{(i)})\right) = 
 \begin{cases}
-    - \log\left(\hat{P}(y  \;\vert\;  \mathbf{x}^{(i)}\right),& \text{if } y = 1\\
-    - \log\left(1 - \hat{P}(y  \;\vert\;  \mathbf{x}^{(i)})\right),& \text{otherwise}
+    - \log\left(\hat{P}\left(y = 1  \;\vert\;  \mathbf{x}^{(i)}\right)\right),& \text{if } y^{(i)} = 1\\
+    - \log\left(1 - \hat{P}\left(y = 1 \;\vert\;  \mathbf{x}^{(i)}\right)\right),& \text{otherwise}
 \end{cases}
  $$
 
-The intuition behind the expression of $J(X, \mathbf{w}, b)$ is that we want to penalize the values of $\mathbf{w}$ and $b$ not only for the mistakes that our classifier would introduce relying on them, but more generally for making doubtful classifications. In other words, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ for which $y^{(i)}=1$ and $y^{(j)}=0$, we would want our classifier not to hesitate, i.e.,  to end up computing $\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)}) = 1$ and $\hat{P}(y =0 \;\vert\; \mathbf{x}^{(j)}) = 1$, respectively. To try to force this, what we do is to increase $J(X, \mathbf{w}, b)$
- when we find samples where the classifier was not completely convinced of its choice. For $y^{(i)}$ and $y^{(j)}$ we increase $J(X, \mathbf{w}, b)$
- in an amount $\log\left( \hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)})\right)$ and $\log\left(1 - \hat{P}(y =1 \;\vert\; \mathbf{x}^{(j)})\right) = \log\left(\hat{P}(y =0 \;\vert\; \mathbf{x}^{(j)})\right)$. Another possibility would have been to increase in $J(X, \mathbf{w}, b)$ proportionally to the distance between the ideal and estimated values, i.e., $1 - \hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)})$ and $1 -\hat{P}(y =0 \;\vert\; \mathbf{x}^{(j)})$. However, the log-scale used in logistic regression allows to penalize more worse decisions, e.g., for $y^{(i)} = 1$, then $\log\left(\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)})\right)$ will be proportionally much larger the smaller $\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)})$ is. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hoping that at the end of the process, the hyperplane separating zeros from ones will be reasonably well located, i.e.,  for most training samples, the estimations and classifications the algorithm will be good enough.
+For example, when $y^{(i)} = 1$, then if $\hat{P}\left(y = 1  \;\vert\;  \mathbf{x}^{(i)}\right) = 1$, the cost contributed is 0. However, on the opposite extreme, if $\hat{P}\left(y = 1  \;\vert\;  \mathbf{x}^{(i)}\right) = 0$, then the cost would become infinite. For intermediate values, the logarithm in the expression leads to penalize more worse decisions, e.g., for $y^{(i)} = 1$, the smaller $\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)})$ is, the much proportionally larger $\log\left(\hat{P}\left(y =1 \;\vert\; \mathbf{x}^{(i)}\right)\right)$ will be.  In addition, analyzing the expression, we see that cost when $y^{(i)} = 1$ and when $y^{(i)} = 0$ are symmetrical, i.e., the same happens when $y^{(i)} = 0$, but rather penalizing more severely  the more that $\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)})$ is closer to $1$.
+
+Finally, it must be noted that, even if our classifier would have made correct classifications, i.e. estimated $\hat{P}(y =1 \;\vert\; \mathbf{x}^{(i)}) > 0.5$ in a case where $y^{(i)} = 1$, we are still increasing the cost function. In other words, the cost function does not penalize mistakes, but more generally the fact that the classifier makes "doubtful" classifications. In other words, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ for which $y^{(i)}=1$ and $y^{(j)}=0$, we would want our classifier not to hesitate, i.e.,  to end up computing $\hat{P}(y = 1 \;\vert\; \mathbf{x}^{(i)}) = 1$ and $\hat{P}(y =0 \;\vert\; \mathbf{x}^{(j)}) = 1$, respectively. The cross-entropy loss function tries to force this, always increasing $J(X, \mathbf{w}, b)$ when we find samples where the classifier was not completely "convinced" or "sure" of its choice.
+
+The optimal values of $\mathbf{w}$ and $b$ can be found minimizing the cost function $J(X, \mathbf{w}, b)$. In particular, $J(X, \mathbf{w}, b)$ is differentiable, hence we can try to find its minimum looking for the point where all the partial derivatives equal zero.
+It is simple to show that
+
+$$\begin{align}
+\frac{\partial J(X, \mathbf{w}, b)}{\partial b} &= \frac{1}{m} \sum_{i=1}^m \left( \hat{P}\left(y = 1  \;\vert\;  \mathbf{x}^{(i)}\right) - y^{(i)}\right) \\
+\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} &= \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left( \hat{P}\left(y = 1  \;\vert\;  \mathbf{x}^{(i)}\right) - y^{(i)}\right)
+\end{align}
+$$
+
+Unfortunately, these equations are transcendental, meaning that there is no closed form to solve them. The only option left is to rely on numerical solutions, such as that provided by the the gradient descent algorithm. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, thus modifying the positioning of the hyperplane that serves as decision boundary.
+Hopefully, at the end of the process, the hyperplane will end up well located, i.e., for most training samples, the estimations and classifications of the algorithm on the training set will be reasonably good. 
+
 
 ###  Multinomial Classification
 
