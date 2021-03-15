@@ -62,7 +62,7 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 The optimal values for $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labelled samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= p(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
 
 $$\begin{align}
-P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert X\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
+P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert x^{(1)}, \ldots, x^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
 &= \prod_{i=1}^m p(\mathbf{x}^{(i)}, \mathbf{w}, b))^{y^{(i)}} \left(1 -p(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
 \end{align}
 $$
@@ -85,7 +85,8 @@ Since this mathematical expression resembles the one used in information theory 
 
 Despite the cost function $J(X, \mathbf{w}, b)$ looks intricate, by further developing its expression, we can find a very intuitive to understand it. For this, we need to note that, for any index $i$, then $y^{(i)}$ can only evaluate to $1$ or $0$. Therefore, for each sample $(x^{(i)}, y^{(i)})$,  only one term out of the two possible contributes to the cost function. We can use this fact to compress the expression of $J(X, \mathbf{w}, b)$  as follows
 
-$$J(X, \mathbf{w}, b) = \sum_{i=1}^m c\left(y^{(i)}, \hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)  $$ 
+$$J(X, \mathbf{w}, b) = \sum_{i=1}^m c\left(y^{(i)}, \hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)$$
+ 
 where 
 
 $$c\left( y^{(i)}, \hat{P}(y = 1 \;\vert\; \mathbf{x}^{(i)})\right) = 
