@@ -86,7 +86,7 @@ Since this mathematical expression resembles the one used in information theory 
 Despite the cost function $J(X, \mathbf{w}, b)$ looks intricate, by further developing its expression, we can find a very intuitive to understand it. For this, we need to note that, for any index $i$, then $y^{(i)}$ can only evaluate to $1$ or $0$. Therefore, for each sample $(x^{(i)}, y^{(i)})$,  only one term out of the two possible contributes to the cost function. We can use this fact to compress the expression of $J(X, \mathbf{w}, b)$  as follows
 
 $$J(X, \mathbf{w}, b) = \sum_{i=1}^m c\left(y^{(i)}, \hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)$$
- 
+
 where 
 
 $$c\left( y^{(i)}, \hat{P}(y = 1 \;\vert\; \mathbf{x}^{(i)})\right) = 
@@ -110,6 +110,31 @@ $$
 
 Unfortunately, setting this equations to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them.  To overcome this limitation, the only option left is to rely on numerical solutions, such as that provided by the gradient descent algorithm.  Note that since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary. Hopefully, at the end of the process, the hyperplane will end up well located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. 
 
+To implement the gradient descent algorithm, it is convenient to have a vectorized version of the functions we have studied. Defining 
+
+$$X^\intercal = \begin{bmatrix}
+1 & 1 & \cdots & 1 \\
+\mid & \mid & & \mid \\
+\mathbf{x}^{(1)} & \mathbf{x}^{(2)} & \cdots & \mathbf{x}^{(m)}\\
+\mid  & \mid & & \mid \\
+\end{bmatrix}\quad
+\Theta  = \begin{bmatrix}
+b \\
+\mathbf{w} \\
+\end{bmatrix}\quad
+\mathbf{y}  = \begin{bmatrix}
+y^{(1)} \\
+y^{(2)} \\
+\vdots \\
+y^{(m)} \\
+\end{bmatrix}
+$$
+
+we can then write 
+
+$$J(X, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma(X \Theta)\right)+ (1 - \mathbf{y}^\intercal) \log\left(1 - \sigma(X \Theta)\right)\Big)$$
+
+$$\nabla J(X, \Theta) = \frac{1}{m} X^\intercal\left(\sigma(X \Theta) - \mathbf{y}\right)$$
 
 ###  Multinomial Classification
 
