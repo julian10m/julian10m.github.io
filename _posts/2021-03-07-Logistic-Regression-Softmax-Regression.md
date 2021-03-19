@@ -136,6 +136,30 @@ $$J(X, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma(X \Theta
 
 $$\nabla J(X, \Theta) = \frac{1}{m} X^\intercal\left(\sigma(X \Theta) - \mathbf{y}\right)$$
 
+
 ###  Multinomial Classification
 
-When $K>2$, multiple logistic regression classifiers need to be used. In particular, two different approaches exist to combine them: one-vs-one (OvO) or one-vs-the-rest (OvR), also called one-vs-all (OvA).
+A logistic regression classifier only works for binary classification problems. On the other hand, when $y$ may take more than two values, i.e., $K>2$, we can use multiple logistic regression classifiers. More specifically, the proposal is to divide and conquer: instead of trying to come up with an algorithm that directly assigns the correct label to a sample $\mathbf{x}$, the results of multiple logistic regression classifiers that solve simpler binary classification problems are aggregated and used to reach a conclusion. 
+
+In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume we have a training dataset $X$, composed of $m$ labeled samples, i.e., $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$. Moreover,  we can assume that, for each class $k \in \\{1, \ldots, K\\}$, the dataset contains $m_k$ samples of that class, such that $\sum_{j=1}^K m_j = m$.
+
+#### OvR/OvA
+
+In OvR/OvA, the multinomial classification problem is divided in $K$ binary estimation problems, and then one decision rule is applied. Each logistic regression classifier focuses on one specific label,  estimating the chances that this might be the correct one. To determine this, for any training sample $(\mathbf{x}^{(i)}, y^{(i)})$, the estimator concentrating in label $k$ re-labels the samples in a variable $z$ such that
+
+$$z^{(i)} =  
+\begin{cases}
+    1,& \text{if } y^{(i)} = k\\
+    0,& \text{otherwise}
+\end{cases}
+ $$
+
+This way, while the $m_k$ samples of class $k$ remain unaltered, the remaining $m - m_k$ samples belonging to the $K-1$ remaining labels are aggregated into a unique class. Each classifier is then trained on each of these re-labeled datasets. The probability $P(z^{(i)} = 1 \;\vert\; \mathbf{x}^{(i)})$ for the $k^{th}$estimator is not other than $P(y^{(i)} = k \;\vert\; \mathbf{x})$.
+
+To classify a new sample $\mathbf{x}^{(i)}$, once $P(y^{(i)} = k \;\vert\; \mathbf{x}^{(i)})$ is estimated for $k \in \\{1, \ldots, K\\}$, then $\mathbf{x}^{(i)}$ is assigned to label $k$ when the $k^{th}$ estimator outputs the largest value for $P(z^{(i)} = 1 \;\vert\; \mathbf{x}^{(i)})$. 
+
+#### OvO
+
+In this case, the multinomial classification task is divided in multiple binary classification problems, and the decision is reached by majority voting. Each logistic regression classifier compares two classes at a time, as if the remaining did not exist, e.g. the classifier focusing on labels $k_1$ and $k_2$ only uses their corresponding $m_{k_1}$ and $m_{k_2}$ samples, assigning $z^{(i)}=1$ to sample $\mathbf{x}^{(i)}$ when $y^{(i)} = k_1$, and $z^{(i)} = 0$ otherwise. In total, for $K$ labels, there are ${k \choose 2} = \frac{K(K-1)}{2}$ ways of combining them (there are $K$ labels, each of which can be linked to each of the $K-1$ remaining labels, but this would count twice each of the links, so we need to divide by 2), hence this is the number of logistic regression classifiers that are needed. 
+
+When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k \in \\{1, \ldots, K\\}$ that results most voted across all classifiers.
