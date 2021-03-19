@@ -46,7 +46,7 @@ $$\hat{y} = \underset{k\in\{1\ldots,K\}}{\operatorname{arg max}}P(y_k)\prod_{i=1
 
 In particular, the shape of the probability distributions $P(x_i/y_k)$ depends on the particular problem being solved, leading to different models and solutions.
 
-The assumption of independency among the features/predictors made by the NBC is strong and naive. Due to this, the NBC usually estimates badly, however it is still often able to classify well. The success of the NBC is some applications, e.g. text classification, is associated to the fact that this classifier is (i) efficient, since the training can be performed in one pass over the training set, and (ii) effective, since the accuracy it achieves is relatively good. 
+The assumption of independence among the features/predictors made by the NBC is strong and naive. Due to this, the NBC usually estimates badly, however it is still often able to classify well. The success of the NBC is some applications, e.g. text classification, is associated to the fact that this classifier is (i) efficient, since the training can be performed in one pass over the training set, and (ii) effective, since the accuracy it achieves is relatively good. 
 
 ### Bernoulli-NBC
 

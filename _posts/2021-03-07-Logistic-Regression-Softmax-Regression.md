@@ -4,6 +4,7 @@ title: Logistic and Softmax Regression
 ---
 
 Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $n$ features/predictors, i.e., $\mathbf{x}=(x_1,\ldots,x_n)^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
+
 ## Logistic Regression
 
 This method is used for binary classification, i.e., cases where $K=2$. However, by combining multiple logistic regression classifiers, it is possible to extend their use to multinomial cases, i.e., scenarios where $K>2$.  
@@ -163,3 +164,5 @@ To classify a new sample $\mathbf{x}^{(i)}$, once $P(y^{(i)} = k \;\vert\; \math
 In this case, the multinomial classification task is divided in multiple binary classification problems, and the decision is reached by majority voting. Each logistic regression classifier compares two classes at a time, as if the remaining did not exist, e.g. the classifier focusing on labels $k_1$ and $k_2$ only uses their corresponding $m_{k_1}$ and $m_{k_2}$ samples, assigning $z^{(i)}=1$ to sample $\mathbf{x}^{(i)}$ when $y^{(i)} = k_1$, and $z^{(i)} = 0$ otherwise. In total, for $K$ labels, there are ${k \choose 2} = \frac{K(K-1)}{2}$ ways of combining them (there are $K$ labels, each of which can be linked to each of the $K-1$ remaining labels, but this would count twice each of the links, so we need to divide by 2), hence this is the number of logistic regression classifiers that are needed. 
 
 When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k \in \\{1, \ldots, K\\}$ that results most voted across all classifiers.
+
+## Softmax Regression
