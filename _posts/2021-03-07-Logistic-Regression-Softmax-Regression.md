@@ -63,7 +63,7 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 The optimal values for $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labelled samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= p(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
 
 $$\begin{align}
-P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert x^{(1)}, \ldots, x^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
+P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
 &= \prod_{i=1}^m p(\mathbf{x}^{(i)}, \mathbf{w}, b))^{y^{(i)}} \left(1 -p(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
 \end{align}
 $$
@@ -78,7 +78,7 @@ Recalling we have modelled $p(\mathbf{x}, \mathbf{w}, b) = \hat{P}(y = 1 \;\vert
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
-& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)+ (1 - y^{(i)}) \log\left(1 - \hat{P}\left(y \;\vert\; \mathbf{x}^{(i)}\right)\right)\right)
+& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)+ (1 - y^{(i)}) \log\left(1 - \hat{P}\left(y = 1 \;\vert\; \mathbf{x}^{(i)}\right)\right)\right)
 \end{align}
 $$
 
