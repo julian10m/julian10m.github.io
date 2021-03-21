@@ -3,7 +3,7 @@ layout: post
 title: Linear and Quadratic Discriminant Analysis 
 ---
 
-Linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) are supervised machine learning algorithms used for multinomial classification tasks. For each class $k \in \\{1, \ldots, K\\}$, LDA assumes that features distribute as a Gaussian distribution $N(\boldsymbol{\mu_k}, \Sigma)$, while for QDA they are of the type $N(\boldsymbol{\mu_k}, \Sigma_k)$. In other words, with LDA, for each class, the features have their own mean values, but their variance and covariance is similar across all classes. On the other hand, QDA  assumes the same for the mean values, but allows to fit a covariance matrix per class. As a consequence, while LDA may only draw linear decision boundaries, QDA is able to produce quadratic ones.
+Linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) are supervised machine learning algorithms used for multinomial classification tasks. For each class $k \in \\{1, \ldots, K\\}$, LDA assumes that features follow a Gaussian distribution $N(\boldsymbol{\mu_k}, \Sigma)$, while for QDA they are of the type $N(\boldsymbol{\mu_k}, \Sigma_k)$. Relying on a training set, both LDA and QDA fit the mean value of each class. Moreover, while LDA fits a unique covariance matrix assumed to be shared by all classes, QDA  allows to fit one per class. As a consequence, while LDA may only draw linear decision boundaries, QDA is able to produce quadratic ones.
 
 ## Gaussian Distributions
 
