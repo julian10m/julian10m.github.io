@@ -3,7 +3,7 @@ layout: post
 title: Linear and Quadratic Discriminant Analysis 
 ---
 
-Linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) are supervised machine learning models used for multinomial classification tasks. These methods estimate $P(y \;\vert\; \mathbf{x})$ assuming that features distribute as a multivariate Gaussian distributions. More precisely, for each class $k \in \{1, \ldots, K\}$, LDA assumes that variables are $N(\boldsymbol{\mu_k}, \Sigma)$, while for QDA they are of the type  $N(\boldsymbol{\mu_k}, \Sigma_k)$. In other words, with LDA, for each class, the features have their own mean values, but their variance and covariance is similar across all classes. On the other hand, QDA  assumes the same for the mean values, but allows to fit a covariance matrix per class. As a consequence, while LDA may only draw linear decision boundaries, QDA is able to produce quadratic ones.
+Linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) are supervised machine learning models used for multinomial classification tasks. These methods estimate $P(y \;\vert\; \mathbf{x})$ assuming that features distribute as a multivariate Gaussian distributions. More precisely, for each class $k \in \{1, \ldots, K\}$, LDA assumes that variables are $N(\bm{\mu_k}, \Sigma)$, while for QDA they are of the type  $N(\boldsymbol{\mu_k}, \Sigma_k)$. In other words, with LDA, for each class, the features have their own mean values, but their variance and covariance is similar across all classes. On the other hand, QDA  assumes the same for the mean values, but allows to fit a covariance matrix per class. As a consequence, while LDA may only draw linear decision boundaries, QDA is able to produce quadratic ones.
 
 ## Gaussian Distributions
 
@@ -17,7 +17,7 @@ $$f_\mathfrak{X}(x \;\vert\; \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left
 
 where $\mu$ is the mean or expectation of $\mathfrak{X}$, i.e., $\mu = \mathbb{E}[\mathfrak{X}]$, and $\sigma^2$ is the variance of $\mathfrak{X}$ , i.e., $\sigma^2 =V[\mathfrak{X}]$.
 
-To characterize $x$, it is sufficient to determine $\mu$ and $\sigma$. To estimate their values (for $\sigma$ we actually focus on $\sigma^2$) with a training set of $m$ i.i.d. samples $X = \left\{x^{(1)},  \ldots, x^{(m)} \right\}$,  we can compute the log-likelihood 
+To characterize $x$, it is sufficient to determine $\mu$ and $\sigma$. To estimate their values (for $\sigma$ we actually focus on $\sigma^2$) with a training set of $m$ i.i.d. samples $X = \left\\{x^{(1)},  \ldots, x^{(m)} \right\\}$,  we can compute the log-likelihood 
 
 $$\begin{align}
 l(X, \mu, \sigma^2) &= \sum_{i=1}^m\log\left(f_\mathfrak{X} (x^{(i)}\vert\; \mu, \sigma)\right)\\
@@ -57,7 +57,7 @@ $$f_\mathfrak{X}(\mathbf{x} \;\vert\; \boldsymbol{\mu}, \Sigma) = \frac{1}{(2\pi
 
 where $\mathbf{x} \in \mathbb{R}^{n\times1}$ is a vector that may take any values, $\boldsymbol{\mu} \in \mathbb{R}^{n\times1}$ is mean or expectation of $\mathfrak{X}$, i.e., $E[\mathfrak{X}]=\boldsymbol{\mu}$, and $\Sigma \in \mathbb{R}^{n \times n}$ is the covariance matrix of $\mathfrak{X}$, i.e., $\Sigma = E[(\mathfrak{X}-\boldsymbol{\mu})(\mathfrak{X}-\boldsymbol{\mu})^\intercal]$.
 
-For a training set of $m$ i.i.d. samples $X = \left\{\mathbf{x}^{(1)},  \ldots, \mathbf{x}^{(m)} \right\}$,  following the same reasoning as for the univariate, it is straightforward to show that
+For a training set of $m$ i.i.d. samples $X = \left\\{\mathbf{x}^{(1)},  \ldots, \mathbf{x}^{(m)} \right\\}$,  following the same reasoning as for the univariate, it is straightforward to show that
 
 $$\begin{align}
 \hat{\boldsymbol{\mu}} &= \frac{1}{m}\sum_{i=1}^m \mathbf{x}^{(i)}\\
