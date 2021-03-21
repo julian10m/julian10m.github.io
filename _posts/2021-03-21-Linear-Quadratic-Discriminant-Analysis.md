@@ -7,7 +7,7 @@ Linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) are
 
 ## Gaussian Distributions
 
-To study LDA and QDA, it is convenient to first analyze how to characterize a random variable $\mathfrak{X}$ that has either a univariate or multivariate Gaussian distribution.
+Since LDA and QDA assume that features of each class follow Gaussian distributions, before diving into these algorithms, it is actually convenient to first understand how to characterize a random variable $\mathfrak{X}$ that has either a univariate or multivariate Gaussian distribution.
 
 ###  Case Univariate
 
