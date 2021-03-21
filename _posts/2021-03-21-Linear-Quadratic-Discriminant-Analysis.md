@@ -70,7 +70,7 @@ Then we can emulate the behavior of $\mathit{X}$ as that of random variable with
 
 ## Quadratic Discriminant Analysis
 
-For each class $k \in \\{1, \ldots, K\\}$, features follow a multivariate Gaussian distribution $N(\mu_k, \Sigma_k)$. Given a training dataset of $m$ labeled samples $X = \left\{(x^{(1)}, y^{(1)}) \ldots, (x^{(m)}, y^{(m)})\right\}$, the objective is to determine the mean value and covariance matrix of each class. 
+For each class $k \in \\{1, \ldots, K\\}$, features follow a multivariate Gaussian distribution $N(\mu_k, \Sigma_k)$. Given a training dataset of $m$ labeled samples $X = \left\\{(x^{(1)}, y^{(1)}) \ldots, (x^{(m)}, y^{(m)})\right\\}$, the objective is to determine the mean value and covariance matrix of each class. 
 
 Assuming that for each class $k$ there are $m_k$ i.i.d. samples, such that $m =\sum_{k=1}^K m_k$,  and that samples of each class only give information about the parameters of that particular class, then we can actually split the problem of estimating all the required parameters in $K$ problems, each aiming to estimate those parameters associated to a particular class.  To solve each of these problems, we can apply the same reasoning as we did before to characterize multivariate Gaussian distributions, i.e., we only need to compute
 
