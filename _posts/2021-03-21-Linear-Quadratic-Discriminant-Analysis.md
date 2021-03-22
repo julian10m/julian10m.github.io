@@ -22,7 +22,7 @@ To characterize $\mathit{x}$, according to the shape of $f_\mathit{X}(x \;\vert\
 
 $$\begin{align}
 l(X, \mu, \sigma^2) &= \sum_{i=1}^m\log\left(f_\mathit{X} (x^{(i)}\vert\; \mu, \sigma)\right)\\
-&= -\frac{m}{2}\log(2\pi) - \frac{m}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\exp{\left(\sum_{i=1}^m\left(x^{(i)}-\mu\right)^2\right)}
+&= -\frac{m}{2}\log(2\pi) - \frac{m}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^m\left(x^{(i)}-\mu\right)^2
 \end{align}
 $$
 
