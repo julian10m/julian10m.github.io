@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: Linear and Quadratic Discriminant Analysis 
