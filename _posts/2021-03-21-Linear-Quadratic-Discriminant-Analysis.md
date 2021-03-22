@@ -69,14 +69,14 @@ Then we can emulate the behavior of $\mathit{X}$ as that of random variable with
 
 ## Quadratic Discriminant Analysis
 
-For each class $k \in \\{1, \ldots, K\\}$, features are modeled as random variables $\mathit{X}_k \sim N(\boldsymbol{\mu_k}, \Sigma_k)$. The objective is to determine the mean values and covariance matrixes. For this, we assume we have a training dataset of $m$ labeled samples $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$, such that for each class $k$, there are $m_k$ i.i.d. samples, i.e., $m =\sum_{k=1}^K m_k$.
+For each class $k \in \\{1, \ldots, K\\}$, features are modeled as random variables $\mathit{X_k} \sim N(\boldsymbol{\mu_k}, \Sigma_k)$. The objective is to determine the mean values and covariance matrixes. For this, we assume we have a training dataset of $m$ labeled samples $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$, such that for each class $k$, there are $m_k$ i.i.d. samples, i.e., $m =\sum_{k=1}^K m_k$.
 
-To solve this problem, QDA assumes that the $m_k$ samples of any class $k$ only give information about the parameters of that particular class, that is $\boldsymbol{\mu_k}$ and $Sigma_k$. Relying on this hypothesis, it turns out that we can actually split the problem of estimating all the required parameters in $K$ problems, each aiming to estimate those parameters associated to a particular class. 
+To solve this problem, QDA assumes that the $m_k$ samples of any class $k$ only give information about the parameters of that particular class, that is $\boldsymbol{\mu_k}$ and $\Sigma_k$. Relying on this hypothesis, it turns out that we can actually split the problem of estimating all the required parameters in $K$ problems, each aiming to estimate those parameters associated to a particular class. 
 
 For each given $k$, we can 
 
 - fit the prior probability $P(y=k)$ to the proportion of samples of that class in the dataset, i.e., $P(y = k) = \frac{m_k}{m}$, or assume they are all equal equiprobable, i.e., $\forall k, \, P(y = k) = \frac{1}{m}$.
-- estimate the values of \boldsymbol{\mu_k}$ and $Sigma_k$ apply the same reasoning as we did to characterize multivariate Gaussian distributions, i.e., we only need to compute
+- estimate the values of $\boldsymbol{\mu_k}$ and $\Sigma_k$ apply the same reasoning as we did to characterize multivariate Gaussian distributions, i.e., we only need to compute
 
 $$\begin{align}
 \hat{\boldsymbol{\mu_k}} &= \frac{1}{m_k}\sum_{y^{(i)}=k}^m \mathbf{x}^{(i)}\\
@@ -84,7 +84,7 @@ $$\begin{align}
 \end{align}
 $$
 
-Finally, when classifying any new sample $\mathbf{x}$, we proceed to assign $\mathbf{x}$ to the class $k$ for which $f_{\mathit{X}_k}(\mathbf{x} \;\vert\; \boldsymbol{\mu_k}, \Sigma_k)P(y=k)$ is largest.
+Finally, when classifying any new sample $\mathbf{x}$, we proceed to assign $\mathbf{x}$ to the class $k$ for which $f_{\mathit{X_k}}(\mathbf{x} \;\vert\; \boldsymbol{\mu_k}, \Sigma_k)P(y=k)$ is largest.
 
 ## Linear Discriminant Analysis
 
