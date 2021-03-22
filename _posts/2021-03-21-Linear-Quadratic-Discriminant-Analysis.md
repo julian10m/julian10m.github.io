@@ -75,7 +75,7 @@ To solve this problem, QDA assumes that the $m_k$ samples of any class $k$ only 
 
 For each given $k$, we can 
 
-- fit the prior probability $P(y=k)$ to the proportion of samples of that class in the dataset, i.e., $P(y = k) = \frac{m_k}{m}$, or assume they are all equal equiprobable, i.e., $\forall k, \, P(y = k) = \frac{1}{m}$.
+- fit the prior probability $P(y=k)$ to the proportion of samples of that class in the dataset, i.e., $P(y = k) = \frac{m_k}{m}$, or assume they are all equiprobable, i.e., $\forall k, \, P(y = k) = \frac{1}{m}$.
 - estimate the values of $\boldsymbol{\mu_k}$ and $\Sigma_k$ apply the same reasoning as we did to characterize multivariate Gaussian distributions, i.e., we only need to compute
 
 $$\begin{align}
@@ -88,9 +88,9 @@ Finally, when classifying any new sample $\mathbf{x}$, we proceed to assign $\ma
 
 ## Linear Discriminant Analysis
 
-For each class $k$, features have a Gaussian distribution $N(\mu_k, \Sigma)$. Compared with QDA, less parameters need to be estimated, since $\Sigma$ is now modeled as being similar across all classes.
+For each class $k$, features are modeled as random variables $\mathit{X_k} \sim N(\mu_k, \Sigma)$. Compared with QDA, less parameters need to be estimated, since $\Sigma$ is now modeled as being the same across all classes.
 
- Considering the same dataset as for QDA, the mean values of each class may be calculated as in the previous method. On the other hand, to estimate $\Sigma$,  the complete dataset, i.e., the $m$ samples, can be used to estimate its value. In particular, $\hat{\Sigma}$ can be obtained as 
+Considering the same dataset as for QDA, the prior probabilities and mean values of each class may be calculated as in the previous method. On the other hand, to estimate $\Sigma$, the complete dataset can be used to estimate its value, i.e., the $m$ samples. In particular, $\hat{\Sigma}$ can be obtained combining the covariance matrices estimated in LDA for each class $k$, as
    
 $$\begin{align}
 \hat{\Sigma} &=  \frac{\sum_{k=1}^K (m_k -1)\hat{\Sigma}_k}{\sum_{k=1}^K (m_k - 1)}\\
@@ -99,3 +99,5 @@ $$\begin{align}
 $$
 
 which is known as the pooled covariance matrix.
+
+When classifying any new sample $\mathbf{x}$, we proceed to assign $\mathbf{x}$ to the class $k$ for which $f_{\mathit{X_k}}(\mathbf{x} \;\vert\; \boldsymbol{\mu_k}, \Sigma)P(y=k)$ is largest.
