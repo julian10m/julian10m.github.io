@@ -3,7 +3,8 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $n$ features/predictors, i.e., $\mathbf{x}=(x_1,\ldots,x_n)^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
+
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1,\ldots,x_N]^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
 
 ## Logistic Regression
 
@@ -11,53 +12,47 @@ This method is used for binary classification, i.e., cases where $K=2$. However,
 
 ### Binary Classification
 
-In these cases the target variable can only take two possibles values, e.g., "yes/no", "fun/boring", "win/lose", etc. Hence, $y$ is usually modeled as a variable that can take either 0 or  1 as values, i.e.,  $y \in \left\\{0, 1\right\\}$.  This way, $y=1$ may represent "yes",  "fun" and "win", while $y=0$ be associated to "no", "boring" and "lose". The labels may also be assigned in the opposite order, this actually has no impact on the performance of the algorithm. However, as a rule of thumb, usually when the target variable expresses the presence or absence of a property, usually $y=1$ flags the occurrence.
+The target variable can only take two possibles values, e.g., "nice/ugly", "fun/boring", "win/lose", "red/blue", "apple/orange", "woman/man".  We usually use 0 and  1 to numerically represent these values, i.e.,  $y \in \left\\{0, 1\right\\}$.  This way,  in each respective scenario, $y=1$ may represent "yes",  "fun" and "win", "red", "apple" or "woman",  while $y=0$ be associated to "no", "boring", "lose", "blue", "orange" or "man". We can also assign the labels in the opposite order, this actually has no impact on the performance of the algorithm. 
 
-To classify any sample $\mathbf{x}$, we assume a probabilistic model, and thus we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes the a posteriori probability.  In other words, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, our guess would be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In particular, logistic regression proposes 
+To classify any sample $\mathbf{x}$, we assume a probabilistic model, and thus we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes the probability a posteriori.  In other words, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, our guess would be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. 
 
-$$p_1\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right) = \sigma\left(\mathbf{w}^\intercal \mathbf{x} + b\right)$$
+In particular, logistic regression uses the sigmoid function to estimate the probabilities a posteriori. 
 
-$$\begin{equation}
-\int_{-\infty}^\infty e^{-\pi x^2}\,\mathrm{d}x=1\label{a}\tag{1}
-\end{equation}
-$$
+#### Sigmoid Function
 
+The sigmoid function $\sigma: \mathbb{R}\to (0, 1)$ is defined as 
 
-a ref to ref \ref{a}
+$$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}$$
 
-\begin{align} 
-a_1& =b_1+c_1\\ 
-a_2& =b_2+c_2-d_2+e_2 
-\end{align}
+As we can see, for any real number $z$, then $\sigma(z)$ always lays between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$.  The fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event.
 
+On the other hand, we can see that
 
-$$\begin{equation}
-\int_{-\infty}^\infty e^{-\pi x^2}\,\mathrm{d}x=1\label{b}\tag{4}
-\end{equation}
-$$
+$$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z}$$
 
-a ref to ref \ref{b}
+In particular, this allows us to show two properties of the sigmoid function. First, we have that
 
-where:
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z$$
 
-- $\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)$ is the value estimated for $P\left(y = 1 \;\vert\; \mathbf{x}\right)$;
- - $\mathbf{w} = (w_1, \ldots, w_n)^\intercal$ is a weighting vector of $n$ parameters;
- - $b$ is a called a bias or intercept, and;
- - $\sigma(z) = \left(1+e^{-z}\right)^{-1}$ is the sigmoid function.
+and second
 
-The sigmoid function may take any real number as input, and will always output a value between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. In addition, note that
+$$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^z}{(1 + e^z)^2} = \frac{e^z}{1 + e^z}\cdot\frac{1}{1 + e^z}$$
 
-$$1 - \sigma(z) = 1 -\frac{1}{1+e^{-z}}  = \frac{e^{-z}}{1+e^{-z}}$$
+$$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)$$
 
-In particular, this means that
+We will later use these results that we have proved.
 
-$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(\frac{1}{e^{-z}}\right) = z$$
+#### A model to estimate probabilities
 
-Since $\hat{P}(y  = 1 \;\vert\; \mathbf{x}) = \sigma(z)~\|~z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing we have
+Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. In particular, the value of $z$ for a sample $\mathbf{x}$ is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$, i.e.,
 
-$$\log\left(\frac{\hat{P}(y = 1 \;\vert\; \mathbf{x})}{1 - \hat{P}(y = 1 \;\vert\; \mathbf{x})}\right) = \mathbf{w}^\intercal \mathbf{x} + b$$
+$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
 
-where the left term is known as the log-odds or logit of $y \;\vert\; \mathbf{x}$. 
+Since $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \sigma(z)$ for $z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing in the  we have
+
+$$\log\left(\frac{\hat{p_1}(\mathbf{x}, \mathbf{w}, b)}{1 - \hat{p_1}(\mathbf{x}, \mathbf{w}, b)}\right) = \mathbf{w}^\intercal \mathbf{x} + b$$
+
+where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. 
 
 The last equation resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions, it is straightforward to conclude that logistic regression is actually like applying linear regression to the logits of $y \;\vert\; \mathbf{x}$.  
 
