@@ -22,7 +22,7 @@ dsadsa \label{sp}
 \end{equation}
 $$
 
-according to formula (\ref{eq1})
+according to formula (\ref{sp})
 
 where:
 
