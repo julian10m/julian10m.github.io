@@ -22,7 +22,9 @@ In particular, logistic regression uses the sigmoid function to estimate the pro
 
 The sigmoid function $\sigma: \mathbb{R}\to (0, 1)$ is defined as 
 
-$$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}$$
+$$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}\label{sigmoid}$$
+
+please print this!! \ref{sigmoid}
 
 As we can see, for any real number $z$, then $\sigma(z)$ always lays between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$.  The fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event.
 
