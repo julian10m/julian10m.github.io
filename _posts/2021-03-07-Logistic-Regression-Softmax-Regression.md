@@ -165,4 +165,30 @@ In this case, the multinomial classification task is divided in multiple binary 
 
 When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k \in \\{1, \ldots, K\\}$ that results most voted across all classifiers.
 
+
 ## Softmax Regression
+
+ While workarounds such as OvR/OvA or OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In particular, softmax regression replaces the sigmoid function used in logistic regression with the softmax function, a function that rather has both $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters, allowing it to estimate one probability per class instead of only one in total. 
+
+The softmax function is a vector function that, given a sample $\mathbf{x} \in \mathbb{R}^{N\times1}$, returns a vector $\mathbf{s} \in \mathbb{R}^{K\times1}$. In particular, for each component $s_k$, we have that
+
+$$s_k = \frac{e^{z_k}}{\sum_{l=1}^K e^{z_l}}$$
+
+where:
+- $0 \leq  s_k \leq 1$ and $\sum_{k=1} s_k = 1$,  making this function suitable to represent a probability distribution, and;
+- $z_k$ = $\mathbf{w_k}^\intercal \mathbf{x} + b_k$, where $\mathbf{w_k}$ is a weighting vector and $b_k$ is an intercept defined for the component $k$.
+
+The name softmax comes from the fact that this function works as a smoothed version of $\operatorname{argmax}_je^{z_j}$: since $\sum_{l=1}^K e^{z_l}$ can be roughly approximated by $\max_j e^{z_j}$, then the value at index $j$, namely $s_j$, will tend to be much higher than that of the remaining components, but not exactly $1$, as would be enforced by $\operatorname{argmax}\_je^{z_j}$.  While the $\operatorname{argmax}$ function  usually contains singular points, the advantage of the softmax function is that it is actually a differenciable function over all points. 
+
+In softmax regression, the output of a softmax function is used to represent the probability distribution of the categorical variable $y$. For this, we can define $s_k$ as the probability that $y$ may belong to class $k$, i.e. $\hat{p_k} = \hat{P}(y = k \;\vert\; \mathbf{x}) = s_k$. The objective then becomes tuning the $K$ weighting vectors and $K$ intercepts correctly, in order to achieve a good classification performance.
+
+To train our model,  $y$ needs to be one-hot encoded.  Indeed, rather than taking a value from $1$ to $K$, the output variable is represented as a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$ such that if $\mathbf{x}$ belongs to class $k$, then $y_k^{(i)} = 1$ and $\forall j \neq k, \,y_j^{(i)} = 0$.  In other words, the components of $\mathbb{y}$ are binary variables, in which only one is equal to $1$ and the remaining are $0$. This allows to straightforwardly compare the estimated probabilities delivered by the softmax function with the expected ones according to the value of $y$.
+
+Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \left\\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}) \ldots, (\mathbf{x}^{(m)}, \mathbf{y}^{(m)})\right\\}$, we can find the optimal values for $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $\\{b_1, b_2, \ldots, b_K\\}$ relying on the maximum likelihood estimation method. In particular, since each $y_k$ is a Bernoulli variable with parameter $p = \hat{p_k}$, following the same reasoning as for logistic regression, it is trivial to show that 
+
+$$J(X, \Theta) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K \left(y_k^{(i)} \log(\hat{p_k})+ (1 - y_k^{(i)}) \log\left(1 - \hat{p_k}\right)\right)
+$$
+
+where we define $\Theta$ as the union of all the parameters to ease the notation.
+
+As with logistic regression, the cost function $J(X, \Theta)$ needs to be minimized relying on an optimization algorithm such as gradient descent.
