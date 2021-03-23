@@ -18,11 +18,11 @@ To classify any sample $\mathbf{x}$, we assume a probabilistic model, and thus w
 $$p_1\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right) = \sigma\left(\mathbf{w}^\intercal \mathbf{x} + b\right)$$
 
 $$\begin{equation}
-dsadsa \label{sp}
+\int_{-\infty}^\infty e^{-\pi x^2}\,\mathrm{d}x=1\label{a}\tag{1}
 \end{equation}
 $$
 
-according to formula (\ref{sp})
+a ref to ref \ref{a}
 
 where:
 
