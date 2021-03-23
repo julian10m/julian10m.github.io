@@ -15,7 +15,14 @@ In these cases the target variable can only take two possibles values, e.g., "ye
 
 To classify any sample $\mathbf{x}$, we assume a probabilistic model, and thus we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes the a posteriori probability.  In other words, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, our guess would be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In particular, logistic regression proposes 
 
-$$\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right) = \sigma\left(\mathbf{w}^\intercal \mathbf{x} + b\right)$$
+$$p_1\hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right) = \sigma\left(\mathbf{w}^\intercal \mathbf{x} + b\right)$$
+
+$$\begin{equation}
+dsadsa \label{sp}
+\end{equation}
+$$
+
+according to formula (\ref{eq1})
 
 where:
 
