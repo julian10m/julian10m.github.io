@@ -13,17 +13,13 @@ This method is used for binary classification, i.e., cases where $K=2$. However,
 
 The target variable can only take two possibles values, e.g., "nice/ugly", "fun/boring", "win/lose", "red/blue", "apple/orange", "woman/man".  We usually use 0 and  1 to numerically represent these values, i.e.,  $y \in \left\\{0, 1\right\\}$.  This way,  in each respective scenario, $y=1$ may represent "yes",  "fun" and "win", "red", "apple" or "woman",  while $y=0$ be associated to "no", "boring", "lose", "blue", "orange" or "man". We can also assign the labels in the opposite order, this actually has no impact on the performance of the algorithm. 
 
-To classify any sample $\mathbf{x}$, we assume a probabilistic model, and thus we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$. Indeed,  it can be proved that, to minimize the classification error,  $\mathbf{x}$ needs to be assigned to the class that maximizes the probability a posteriori.  In other words, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, our guess would be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. 
-
-In particular, logistic regression uses the sigmoid function to estimate the probabilities a posteriori. 
-
 #### Sigmoid Function
 
-The sigmoid function $\sigma: \mathbb{R}\to (0, 1)$ is defined as 
+One one the main components of logistic regression is the sigmoid function $\sigma: \mathbb{R}\to (0, 1)$, defined as 
 
 $$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}\label{sigmoid}$$
 
-As we can see, for any real number $z$, then $\sigma(z)$ always lays between 0 and 1.  In particular,  for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$.  On the other hand, when $z$ takes large positive values,  $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$.  The fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event.
+According to Eq. (\ref{sigmoid}) $\sigma(z)$ always lays between 0 and 1. In particular, for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$. On the other hand, when $z$ takes large positive values, $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. 
 
 On the other hand, we can see that
 
@@ -39,9 +35,11 @@ $$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^
 
 $$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)\label{derivative}$$
 
-We will later use the properties of Eq. (\ref{logit}) and (\ref{derivative}) results that we have proved.
+We will later use Eq. (\ref{logit}) and (\ref{derivative}).
 
 #### A model to estimate probabilities
+
+To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$. According to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess shoud be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise.
 
 Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. In particular, for a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$, i.e.,
 
