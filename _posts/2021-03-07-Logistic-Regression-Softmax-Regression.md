@@ -19,23 +19,25 @@ One of the main components of logistic regression is the sigmoid function $\sigm
 
 $$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}\label{sigmoid}$$
 
-According to Eq. (\ref{sigmoid}) $\sigma(z)$ always lays between 0 and 1. In particular, for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$. On the other hand, when $z$ takes large positive values, $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. 
+According to Eq. (\ref{sigmoid}), $\sigma(z)$ always lays between 0 and 1. In particular, for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$. On the other hand, when $z$ takes large positive values, $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. 
 
 On the other hand, we can see that
 
+$$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^z}{(1 + e^z)^2} = \frac{e^z}{1 + e^z}\cdot\frac{1}{1 + e^z}$$
+
+is always positive, and thus $\sigma(z)$ is a monotonically increasing function. In addition, noticing that
+
 $$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z}$$
 
-In particular, this allows us to show two properties of the sigmoid function. First, we have that
-
-$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z\label{logit}$$
-
-and second
-
-$$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^z}{(1 + e^z)^2} = \frac{e^z}{1 + e^z}\cdot\frac{1}{1 + e^z}$$
+then we can write 
 
 $$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)\label{derivative}$$
 
-We will later use Eq. (\ref{logit}) and (\ref{derivative}).
+Moreover, it is simple to show that
+
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z\label{logit}$$
+
+We will later come back to Eq. (\ref{logit}) and (\ref{derivative}).
 
 #### A model to estimate probabilities
 
