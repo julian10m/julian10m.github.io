@@ -15,7 +15,7 @@ The target variable can only take two possibles values, e.g., "nice/ugly", "fun/
 
 #### Sigmoid Function
 
-One one the main components of logistic regression is the sigmoid function $\sigma: \mathbb{R}\to (0, 1)$, defined as 
+One of the main components of logistic regression is the sigmoid function $\sigma: \mathbb{R}\to (0, 1)$, defined as 
 
 $$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}\label{sigmoid}$$
 
