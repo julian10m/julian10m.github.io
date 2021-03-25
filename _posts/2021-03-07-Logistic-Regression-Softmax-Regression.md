@@ -229,7 +229,7 @@ Indeed, rather than taking a value from $1$ to $K$, the output variable is repre
 
 Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \left\\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}) \ldots, (\mathbf{x}^{(m)}, \mathbf{y}^{(m)})\right\\}$, we can find the optimal values for $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $\\{b_1, b_2, \ldots, b_K\\}$ relying on the maximum likelihood estimation method. In particular, $\mathbf{y}$ follows a generalized Bernoulli distribution 
 
-$$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(\hat{p_k}\right)^{y_k^{{(i)}}}$$
+$$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{w_k}, b_k)\right)^{y_k^{(i)}}$$
 
 Defining $\Theta$ as the union of all the searched parameters to ease the notation, and the cost function $J(X, \Theta)$ as the negativer mersion of the log-likelihood averaged over the $m$ samples of the dataset, then
 
