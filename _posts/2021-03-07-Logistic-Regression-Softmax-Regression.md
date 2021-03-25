@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: Logistic and Softmax Regression
@@ -85,8 +84,8 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 The optimal values for $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labeled i.i.d. samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= \hat{p_1}(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
 
 $$\begin{align}
-P\left(y^{(1)}, \ldots, y^{(m)} \Bigm\vert \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
-&= \prod_{i=1}^m \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b))^{y^{(i)}} \left(1 -\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
+P\left(y^{(1)}, \ldots, y^{(m)} \;\vert\; \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
+&= \prod_{i=1}^m \left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{y^{(i)}} \left(1 -\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
 \end{align}
 $$
 
@@ -207,13 +206,26 @@ The name softmax comes from the fact that this function works as a smoothed vers
 
 In softmax regression, the output of a softmax function is used to represent the probability distribution of the categorical variable $y$. For this, we can define $s_k$ as the probability that $y$ may belong to class $k$, i.e. $\hat{p_k} = \hat{P}(y = k \;\vert\; \mathbf{x}) = s_k$. The objective then becomes tuning the $K$ weighting vectors and $K$ intercepts correctly, in order to achieve a good classification performance.
 
-To train our model,  $y$ needs to be one-hot encoded.  Indeed, rather than taking a value from $1$ to $K$, the output variable is represented as a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$ such that if $\mathbf{x}$ belongs to class $k$, then $y_k^{(i)} = 1$ and $\forall j \neq k, \,y_j^{(i)} = 0$.  In other words, the components of $\mathbb{y}$ are binary variables, in which only one is equal to $1$ and the remaining are $0$. This allows to straightforwardly compare the estimated probabilities delivered by the softmax function with the expected ones according to the value of $y$.
+To train our model, $y$ needs to be one-hot encoded
 
-Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \left\\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}) \ldots, (\mathbf{x}^{(m)}, \mathbf{y}^{(m)})\right\\}$, we can find the optimal values for $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $\\{b_1, b_2, \ldots, b_K\\}$ relying on the maximum likelihood estimation method. In particular, since each $y_k$ is a Bernoulli variable with parameter $p = \hat{p_k}$, following the same reasoning as for logistic regression, it is trivial to show that 
-
-$$J(X, \Theta) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K \left(y_k^{(i)} \log(\hat{p_k})+ (1 - y_k^{(i)}) \log\left(1 - \hat{p_k}\right)\right)
+$$mathbf{y}  = \begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_k \\
+\end{bmatrix}
 $$
 
-where we define $\Theta$ as the union of all the parameters to ease the notation.
+Indeed, rather than taking a value from $1$ to $K$, the output variable is represented as a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$ such that if $\mathbf{x}$ belongs to class $k$, then $y_k^{(i)} = 1$ and $\forall j \neq k, \,y_j^{(i)} = 0$. In other words, the components of $\mathbb{y}$ are binary variables, in which only one is equal to $1$ and the remaining are $0$. This allows to straightforwardly compare the estimated probabilities delivered by the softmax function with the expected ones according to the value of $y$.
+
+Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \left\\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}) \ldots, (\mathbf{x}^{(m)}, \mathbf{y}^{(m)})\right\\}$, we can find the optimal values for $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $\\{b_1, b_2, \ldots, b_K\\}$ relying on the maximum likelihood estimation method. In particular, $\mathbf{y}$ follows a generalized Bernoulli distribution 
+
+$$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(\hat{p_k}\right)^{y_k^{{(i)}}}$$
+
+Defining $\Theta$ as the union of all the searched parameters to ease the notation, and the cost function $J(X, \Theta)$ as the negativer mersion of the log-likelihood averaged over the $m$ samples of the dataset, then
+
+$$J(X, \Theta) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{w_k}, b_k)\right)$$
+
+which again resembles the cross-entropy function.
 
 As with logistic regression, the cost function $J(X, \Theta)$ needs to be minimized relying on an optimization algorithm such as gradient descent.
