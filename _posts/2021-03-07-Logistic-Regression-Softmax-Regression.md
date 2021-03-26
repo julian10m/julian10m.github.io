@@ -3,6 +3,8 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
+<div align="center">
+
 Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1,\ldots,x_N]^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
 
 ## Logistic Regression
@@ -231,10 +233,12 @@ Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \le
 
 $$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{w_k}, b_k)\right)^{y_k^{(i)}}$$
 
-Defining $\Theta$ as the union of all the searched parameters to ease the notation, and the cost function $J(X, \Theta)$ as the negativer mersion of the log-likelihood averaged over the $m$ samples of the dataset, then
+Defining $\Theta$ as the union of all the searched parameters to ease the notation, and the cost function $J(X, \Theta)$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then
 
 $$J(X, \Theta) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{w_k}, b_k)\right)$$
 
 which again resembles the cross-entropy function.
 
 As with logistic regression, the cost function $J(X, \Theta)$ needs to be minimized relying on an optimization algorithm such as gradient descent.
+
+</div>
