@@ -80,21 +80,21 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 
 #### Cross-Entropy Loss Function
 
-The optimal values of $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labeled i.i.d. samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), (\mathbf{x}^{(2)}, y^{(2)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= \hat{p_1}(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
+The optimal values of $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labeled i.i.d. samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), (\mathbf{x}^{(2)}, y^{(2)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable with parameter $p(\mathbf{x})$, then the joint distribution for the dataset is
 
 $$\begin{align}
-P\left(y^{(1)}, y^{(2)}, \ldots, y^{(m)} \;\vert\; \mathbf{x}^{(1)}, x^{(2)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
-&= \prod_{i=1}^m \left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{y^{(i)}} \left(1 -\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
+P\left(y^{(1)}, y^{(2)}, \ldots, y^{(m)} \;\vert\; \mathbf{x}^{(1)}, \mathbf{x}^{(2)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
+&= \prod_{i=1}^m \left({p(\mathbf{x}^{(i)})\right)^{y^{(i)}} \left(1 - p(\mathbf{x}^{(i)})\right)^{(1-y^{(i)})}
 \end{align}
 $$
 
-where $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is the estimated probability that sample $\mathbf{x}^{(i)}$ might belong to class $y=1$ and $y^{(i)}$ is the class to which $\mathbf{x}^{(i)}$ actually belongs to.
+where $p(\mathbf{x}^{(i)})$ is the probability that sample $\mathbf{x}^{(i)}$ might belong to class $y=1$ and $y^{(i)}$ is the class to which $\mathbf{x}^{(i)}$ actually belongs to.
 
 The log-likelihood, that we seek to maximize, can then be written as
 
-$$l(X, \mathbf{w}, b) = \sum_{i=1}^m \left(y^{(i)} \log \left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right) + (1 - y^{(i)})\log\left(1 -\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)\right)$$
+$$l(X, \mathbf{w}, b) = \sum_{i=1}^m \left(y^{(i)} \log \left(p(\mathbf{x}^{(i)})\right) + (1 - y^{(i)})\log\left(1 - p(\mathbf{x}^{(i)})\right)\right)$$
 
-Recalling we have modelled $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = \sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
+Recalling we estimate $p(\mathbf{x}^{(i)})$ as $\hat{p}\_1(\mathbf{x}^{(i)}) = \sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
@@ -235,7 +235,7 @@ $$\mathrm{J}_\Psi = \begin{bmatrix}
 \frac{\partial \psi_K}{\partial z_1} & \frac{\partial \psi_K}{\partial z_2} & \cdots & \frac{\partial \psi_K}{\partial z_K} \\
 \end{bmatrix}$$
 
-Leveraging that the components of $\Psi$ result from similar functions, we can find all elements of $\mathrm{J}_\Psi$ calculating a generic partial derivative, e.g.  of $\psi_k$ with respect to $z_j$. Letting $\delta_{jk}$ denote the Kronecker delta, such that
+Leveraging that the components of $\Psi$ result from similar functions, we can find all elements of $\mathrm{J}\_\Psi$ calculating a generic partial derivative, e.g.  of $\psi_k$ with respect to $z_j$. Letting $\delta_{jk}$ denote the Kronecker delta, such that
 
 $$\delta_{jk} = 
 \begin{cases}
