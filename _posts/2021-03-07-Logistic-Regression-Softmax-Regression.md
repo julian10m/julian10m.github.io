@@ -3,7 +3,7 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1,\ldots,x_N]^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1, x_2\ldots,x_N]^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
 
 ## Logistic Regression
 
@@ -56,7 +56,6 @@ where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, 
 
 Eq. (\ref{logitDecisionBoundary}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions, it is straightforward to conclude that logistic regression applies linear regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.  
 
-
 #### Classification Rule and Decision Boundary
 
 Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems. Indeed, logistic regression additionally uses the following classification rule
@@ -81,10 +80,10 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 
 #### Cross-Entropy Loss Function
 
-The optimal values of $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labeled i.i.d. samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}) \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= \hat{p_1}(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
+The optimal values of $\mathbf{w}$ and $b$ can be estimated relying on the maximum likelihood estimation method. Given a training set $X$ of $m$ labeled i.i.d. samples, i.e. $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), (\mathbf{x}^{(2)}, y^{(2)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$ , modelling $y$ as a Bernoulli variable such that $p= \hat{p_1}(\mathbf{x}, \mathbf{w}, b)$, then the joint distribution for the dataset is
 
 $$\begin{align}
-P\left(y^{(1)}, \ldots, y^{(m)} \;\vert\; \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
+P\left(y^{(1)}, y^{(2)}, \ldots, y^{(m)} \;\vert\; \mathbf{x}^{(1)}, x^{(2)}, \ldots, \mathbf{x}^{(m)}\right) &= \prod_{i=1}^m P\left(y^{(i)}\;\vert\;\ \mathbf{x}^{(i)}\right) \\
 &= \prod_{i=1}^m \left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{y^{(i)}} \left(1 -\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)^{(1-y^{(i)})}
 \end{align}
 $$
@@ -95,11 +94,11 @@ The log-likelihood, that we seek to maximize, can then be written as
 
 $$l(X, \mathbf{w}, b) = \sum_{i=1}^m \left(y^{(i)} \log \left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right) + (1 - y^{(i)})\log\left(1 -\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)\right)$$
 
-Recalling we have modelled $\hat{p_1}(\mathbf{x}, \mathbf{w}, b) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
+Recalling we have modelled $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = \sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
-& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\sigma(\mathbf{w}^\intercal \mathbf{x} + b)\right)+ (1 - y^{(i)}) \log\left(1 - \sigma(\mathbf{w}^\intercal \mathbf{x} + b)\right)\right) \label{cost-function}
+& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)\right)+ (1 - y^{(i)}) \log\left(1 - \sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)\right)\right) \label{cost-function}
 \end{align}
 $$
 
@@ -128,11 +127,11 @@ In particular, minimizing the cross-entropy loss function tends to do this, thus
 
 #### Optimizing the parameters 
 
-To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), $J(X, \mathbf{w}, b)$ is differentiable, hence we find its minimum looking for the point where all the partial derivatives become null. It is simple to show, noticing that $\log(f(x)) = f'(x)/f(x)$ and considering the property of Eq. (\ref{derivative}), that
+To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is a composition of differentiable functions, and thus it is differentiable too. As a consequence, we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. Considering the property of Eq. (\ref{derivative}), and noticing that $\log(\sigma(z)) = \sigma'(z)/\sigma(z)$, it is simple to show that
 
 $$\begin{align}
-\frac{\partial J(X, \mathbf{w}, b)}{\partial b} &= \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x} + b) - y^{(i)}\right) \\
-\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} &= \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x} + b) - y^{(i)}\right)
+\frac{\partial J(X, \mathbf{w}, b)}{\partial b} &= \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \\
+\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} &= \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right)
 \end{align}
 $$
 
@@ -171,7 +170,7 @@ Note that the gradient descent algorithm represents only one option out of the m
 
 A logistic regression classifier only works for binary classification problems. On the other hand, when $y$ may take more than two values, i.e., $K>2$, we can use multiple logistic regression classifiers. More specifically, the proposal is to divide and conquer: instead of trying to come up with an algorithm that directly assigns the correct label to a sample $\mathbf{x}$, the results of multiple logistic regression classifiers that solve simpler binary classification problems are aggregated and used to reach a conclusion. 
 
-In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume we have a training dataset $X$, composed of $m$ labeled samples, i.e., $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$. Moreover,  we can assume that, for each class $k \in \\{1, \ldots, K\\}$, the dataset contains $m_k$ samples of that class, such that $m = \sum_{k=1}^K m_k$.
+In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume we have a training dataset $X$, composed of $m$ labeled samples, i.e., $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), (\mathbf{x}^{(2)}, y^{(2)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$. Moreover,  we can assume that, for each class $k \in \\{1, 2, \ldots, K\\}$, the dataset contains $m_k$ samples of that class, such that $m = \sum_{k=1}^K m_k$.
 
 #### OvR/OvA
 
@@ -188,7 +187,7 @@ $$z^{(i)} =
 
 This way, while the $m_k$ samples of class $k$ remain unaltered, the remaining $m - m_k$ samples belonging to the $K-1$ remaining labels are aggregated into a unique class. Each classifier is then trained on each of these re-labeled datasets.
 
-To classify a new sample $\mathbf{x}^{(i)}$, the probability $P(z^{(i)} = 1 \;\vert\; \mathbf{x}^{(i)})$ for the $k^{th}$estimator is not other than $P(y^{(i)} = k \;\vert\; \mathbf{x})$, thus once these values are computed, $\mathbf{x}^{(i)}$ is assigned to label $k$ when the $k^{th}$ estimator outputs the largest value.
+To classify a new sample $\mathbf{x}^{(i)}$, the probability $P(z^{(i)} = 1 \;\vert\; \mathbf{x}^{(i)})$ for the $k^{th}$estimator is not other than $P(y^{(i)} = k \;\vert\; \mathbf{x})$, thus once these values are computed, $\mathbf{x}^{(i)}$ is assigned label $k$ when the $k^{th}$ estimator outputs the largest value.
 
 #### OvO
 
@@ -196,28 +195,103 @@ The multinomial classification task is divided in multiple binary classification
 
 Each logistic regression classifier compares two classes at a time, as if the remaining did not exist, e.g. the classifier focusing on labels $k_1$ and $k_2$ only uses their corresponding $m_{k_1}$ and $m_{k_2}$ samples, assigning $z^{(i)}=1$ to sample $\mathbf{x}^{(i)}$ when $y^{(i)} = k_1$, and $z^{(i)} = 0$ otherwise. In total, for $K$ labels, there are ${k \choose 2} = \frac{K(K-1)}{2}$ ways of combining them (there are $K$ labels, each of which can be linked to each of the $K-1$ remaining labels, but this would count twice each of the links, so we need to divide by 2), hence this is the number of logistic regression classifiers that are needed. 
 
-When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k \in \\{1, \ldots, K\\}$ that results most voted across all classifiers.
+When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k$ that results most voted across all classifiers.
+
 
 
 ## Softmax Regression
 
- While workarounds such as OvR/OvA or OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In particular, softmax regression replaces the sigmoid function used in logistic regression with the softmax function, a function that rather has both $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters, allowing it to estimate one probability per class instead of only one in total. 
+ While workarounds such as OvR/OvA or OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose.  In particular, softmax regression takes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters. Different to the previous methods, the parameters are jointly and concurrently optimized to estimate one probability per class.
 
-The softmax function is a vector function that, given a sample $\mathbf{x} \in \mathbb{R}^{N\times1}$, returns a vector $\mathbf{s} \in \mathbb{R}^{K\times1}$. In particular, for each component $s_k$, we have that
+### Softmax Function
 
-$$s_k = \frac{e^{z_k}}{\sum_{l=1}^K e^{z_l}}$$
+To apply softmax regression, we replace the sigmoid function used in logistic regression with the softmax function, i.e. with a 
+vector function $\Psi: \mathbb{R}^K \to \mathbb{R}^{K}$ defined as 
 
-where:
-- $0 \leq  s_k \leq 1$ and $\sum_{k=1} s_k = 1$,  making this function suitable to represent a probability distribution, and;
-- $z_k$ = $\mathbf{w_k}^\intercal \mathbf{x} + b_k$, where $\mathbf{w_k}$ is a weighting vector and $b_k$ is an intercept defined for the component $k$.
+$$\Psi(z_1, z_2, \ldots, z_K) = \begin{bmatrix}
+\psi_1(z_1, z_2, \ldots, z_K) \\
+\psi_2(z_1, z_2, \ldots, z_K) \\
+\vdots \\
+\psi_K(z_1, z_2, \ldots, z_K) \\
+\end{bmatrix}$$
+
+where each $\psi_j:  \mathbb{R}^K \to \mathbb{R}$ is a scalar function 
+
+$$\psi_k(z_1, z_2, \ldots, z_K) = \frac{e^{z_k}}{\sum_{l=1}^K e^{z_l}}$$ 
+
+According to their definition, we can see that $0 \leq  \psi_k(z_1, z_2, \ldots, z_K) \leq 1$ for all components. In addition, their addition equals $1$, i.e., $\sum_{k=1}^K \psi_k = 1$.
 
 The name softmax comes from the fact that this function works as a smoothed version of $\operatorname{argmax}\_je^{z_j}$: since $\sum_{l=1}^K e^{z_l}$ can be roughly approximated by $\max_j e^{z_j}$, then the value at index $j$, namely $s_j$, will tend to be much higher than that of the remaining components, but not exactly $1$, as would be enforced by $\operatorname{argmax}\_je^{z_j}$.  While the $\operatorname{argmax}$ function  usually contains singular points, the advantage of the softmax function is that it is actually a differentiable function over all points. 
 
-In softmax regression, the output of a softmax function is used to represent the probability distribution of the categorical variable $y$. For this, we can define $s_k$ as the probability that $y$ may belong to class $k$, i.e. $\hat{p_k} = \hat{P}(y = k \;\vert\; \mathbf{x}) = s_k$. The objective then becomes tuning the $K$ weighting vectors and $K$ intercepts correctly, in order to achieve a good classification performance.
+### Partial derivatives
 
-To train our model, $y$ needs to be one-hot encoded
+Since $\Psi(z_1, z_2, \ldots, z_K)$ is a vector function, rather than a unique derivative, it has multiple. The Jacobian matrix gathers all partial derivatives
 
-$$mathbf{y}  = \begin{bmatrix}
+$$\mathrm{J}_\Psi = \begin{bmatrix}
+\frac{\partial \psi_1}{\partial z_1}& \frac{\partial \psi_1}{\partial z_2} & \cdots & \frac{\partial \psi_1}{\partial z_K} 
+\\[1.5ex]
+\frac{\partial \psi_2}{\partial z_1} & \frac{\partial \psi_2}{\partial z_2} & \cdots & \frac{\partial \psi_2}{\partial z_K} \\[1.5ex] 
+\vdots & \vdots & \ddots & \vdots \\[1.5ex]
+\frac{\partial \psi_K}{\partial z_1} & \frac{\partial \psi_K}{\partial z_2} & \cdots & \frac{\partial \psi_K}{\partial z_K} \\
+\end{bmatrix}$$
+
+Leveraging that the components of $\Psi$ result from similar functions, we can find all elements of $\mathrm{J}_\Psi$ calculating a generic partial derivative, e.g.  of $\psi_k$ with respect to $z_j$. Letting $\delta_{jk}$ denote the Kronecker delta, such that
+
+$$\delta_{jk} = 
+\begin{cases}
+    1, & \text{if } j = k\\
+    0, & \text{otherwise}
+\end{cases}
+ $$
+
+then we can write
+
+$$\frac{\partial \psi_k}{\partial z_j} = \frac{e^{z_k} \delta_{jk} \sum_{l=1}^K e^{z_l} - e^{z_k} e^{z_j}}
+{\left(\sum_{l=1}^K e^{z_l}\right)^2} = \frac{e^{z_k}}
+{\sum_{l=1}^K e^{z_l}} \cdot \frac{\delta_{jk} \sum_{l=1}^K e^{z_l} - e^{z_j}}
+{\sum_{l=1}^K e^{z_l}} $$
+
+$$\Longrightarrow \frac{\partial \psi_k}{\partial z_j} = \psi_k (\delta_{jk} - \psi_j) \label{derivativeSoftmax}$$
+
+We will later use Eq. (\ref{derivativeSoftmax}) to minimize the loss function, which we yet need to define.
+
+### Estimating the probability distribution
+
+In softmax regression, the output of a softmax function is used to represent the probability distribution of the categorical variable $y$. For this, we can define $\psi_k$ as the probability that $y$ may belong to class $k$, i.e. $\hat{p_k}(\mathbf{x}) = \hat{P}(y = k \;\vert\; \mathbf{x}) =  \psi_k(z_1, z_2, \ldots, z_K)$.
+
+In addition, we define the input components of the softmax function  as  $z_k$ = $\mathbf{w_k}^\intercal \mathbf{x} + b_k$, where $\mathbf{x}$ is a sample, $\mathbf{w_k}$ is a weighting vector and $b_k$ is an intercept. To ease the notation, since now we should write $\psi_k(\mathbf{w_1}^\intercal \mathbf{x} + b_1, \mathbf{w_2}^\intercal \mathbf{x} + b_2, \ldots, \mathbf{w_K}^\intercal \mathbf{x} + b_K)$, we define 
+
+$$\mathbf{W} = 
+\begin{bmatrix}
+\mid & \mid & & \mid \\
+\mathbf{w_1} & \mathbf{w_2} & \cdots & \mathbf{w_K}\\
+\mid  & \mid & & \mid \\
+\end{bmatrix}\quad 
+\mathbf{b} =
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_k \\
+\end{bmatrix}
+$$
+
+and re-define 
+
+$$\Psi(\mathbf{x}, \mathbf{W}, \mathbf{b}) = 
+\begin{bmatrix}
+\psi_1(\mathbf{W}, \mathbf{b}) \\
+\psi_2(\mathbf{W}, \mathbf{b}) \\
+\vdots \\
+\psi_K(\mathbf{W}, \mathbf{b})\\
+\end{bmatrix}
+$$
+
+The objective of softmax regression then becomes correctly tuning, in order to achieve a good classification performance, the $K$ weighting vectors and $K$ intercepts composing $\mathbf{W}$ and $\mathbf{b}$, respectively. 
+
+Finally, rather than taking a value from $1$ to $K$, we represent the output variable a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$ 
+
+$$\mathbf{y}  = \begin{bmatrix}
 y_1 \\
 y_2 \\
 \vdots \\
@@ -225,15 +299,17 @@ y_k \\
 \end{bmatrix}
 $$
 
-Indeed, rather than taking a value from $1$ to $K$, the output variable is represented as a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$ such that if $\mathbf{x}$ belongs to class $k$, then $y_k^{(i)} = 1$ and $\forall j \neq k, \,y_j^{(i)} = 0$. In other words, the components of $\mathbb{y}$ are binary variables, in which only one is equal to $1$ and the remaining are $0$. This allows to straightforwardly compare the estimated probabilities delivered by the softmax function with the expected ones according to the value of $y$.
+such that if sample $\mathbf{x}^{(i)}$ belongs to class $k$, i.e., $y^{(i)} = k$, then $y_k^{(i)} = 1$ and $\forall j \neq k, \,y_j^{(i)} = 0$. In other words, the components of $\mathbf{y}$ are binary variables, and for each sample, all components are null, except the one whose index coincides with the class of the sample.  In general, we say that $y$ is now **one-hot encoded**, and this allows to straightforwardly compare the estimated probabilities delivered by $\Psi(\mathbf{x}, \mathbf{W}, \mathbf{b})$ with the expected ones according to the value of $y$.
 
-Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \left\\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}) \ldots, (\mathbf{x}^{(m)}, \mathbf{y}^{(m)})\right\\}$, we can find the optimal values for $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $\\{b_1, b_2, \ldots, b_K\\}$ relying on the maximum likelihood estimation method. In particular, $\mathbf{y}$ follows a generalized Bernoulli distribution 
+### Generalizing the cross-entropy loss function
 
-$$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{w_k}, b_k)\right)^{y_k^{(i)}}$$
+Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \left\\{(\mathbf{x}^{(1)}, \mathbf{y}^{(1)}), \mathbf{x}^{(2)}, \mathbf{y}^{(2)}), \ldots, (\mathbf{x}^{(m)}, \mathbf{y}^{(m)})\right\\}$, we can find the optimal values for $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $\\{b_1, b_2, \ldots, b_K\\}$ relying on the maximum likelihood estimation method. In particular, each $\mathbf{y}^{(i)}$ follows a generalized Bernoulli distribution 
 
-Defining $\Theta$ as the union of all the searched parameters to ease the notation, and the cost function $J(X, \Theta)$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then
+$$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(p_k(\mathbf{x}^{(i)})\right)^{y_k^{(i)}}$$
 
-$$J(X, \Theta) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{w_k}, b_k)\right)$$
+Recalling that we are estimating $p_k(\mathbf{x}^{(i)})$ as $\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b}) = \psi_k(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b})$,  and considering the cost function $J(X, \mathbf{W}, \mathbf{b})$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then we have
+
+$$J(X, \mathbf{W}, \mathbf{b}) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\psi_k(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b})\right)$$
 
 which again resembles the cross-entropy function.
 
