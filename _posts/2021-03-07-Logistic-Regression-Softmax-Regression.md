@@ -59,7 +59,7 @@ $$\sigma(z)= \frac{1 - \sigma(z)}{\sigma'(z)}\label{derivative1}$$
 
 $$1 - \sigma(z) = \frac{\sigma(z)}{\sigma'(z)}\label{derivative2}$$
 
-We will later come back to Eq. (\ref{derivative1}),  (\ref{derivative2}) and (\ref{logit}).
+We will later come back to Eq. (\ref{logit}), (\ref{derivative1}) and (\ref{derivative2}).
 
 #### A model to estimate probabilities
 
@@ -234,11 +234,9 @@ A logistic regression classifier only works for binary classification problems. 
 
 In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume that the training dataset $X$ of $m$ i.i.d. labeled samples contains, for each class $k \in \\{1, 2, \ldots, K\\}$, $m_k$ samples of that class,
 
-$$m_k = \sum_{i = 1}^m \mathbb{1}\_{y^{(i)} = k}$$
+$$m_k = \sum_{i = 1}^m \mathbb{1}_{y^{(i)} = k}$$
 
- such that 
-
- $$m = \sum_{k=1}^K m_k$$
+such that $m = \sum_{k=1}^K m_k$.
 
 #### OvR/OvA
 
