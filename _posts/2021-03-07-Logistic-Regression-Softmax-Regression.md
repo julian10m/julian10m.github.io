@@ -247,7 +247,7 @@ where we see that we only keep the $m_{k_1}$ and $m_{k_2}$ samples of class $k_1
 In total, for a classification problem with $K$ labels, we need ${k \choose 2} = \frac{K(K-1)}{2}$ logistic regression classifiers.
 This number represents the possible ways of combining two labels. The reasoning is as follows. If there are $K$ labels, then we can link each to the remaining $K-1$ labels. But if we count all the possible ways of linking labels for each label, then the $K(K-1)$ combinations are actually counting every linking possibility twice, so we need to divide by 2. Therefore, the number of classifiers needed is $\frac{K(K-1)}{2}$, as previously mentioned.
 
-When classifying a new sample $\mathbf{x}^{(i)}$, then we need to perform $K(K-1)/2$ classifications, and ultimately we assign $\mathbf{x}^{(i)}$ to the class that results the most voted across all classifiers.
+When classifying a new sample $\mathbf{x}^{(i)}$, first we need to perform the $K(K-1)/2$ classifications, and ultimately assign $\mathbf{x}^{(i)}$ to the class that results most voted across all classifiers.
 
 ## Softmax Regression
 
