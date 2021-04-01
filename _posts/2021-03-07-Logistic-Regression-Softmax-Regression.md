@@ -238,7 +238,7 @@ $$z^{(i)} =
 \begin{cases}
     1, & \text{if } y^{(i)} = k_1 \\
     0, & \text{if } y^{(i)} = k_2 \\
-    Discard, & \text{otherwise}
+    \text{Discard}, & \text{otherwise}
 \end{cases}
  $$
 
@@ -251,11 +251,11 @@ When classifying a new sample $\mathbf{x}^{(i)}$, first we need to perform the $
 
 ## Softmax Regression
 
- While workarounds such as OvR/OvA or OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In particular, softmax regression takes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters. Different to the previous methods, the parameters are jointly and concurrently optimized to estimate one probability per class.
+ While workarounds such as OvR/OvA and OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In particular, softmax regression takes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and $K$ intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters. To estimate one probability per class, different to the previous methods, we tune the complete set of parameters jointly.
 
 ### Softmax Function
 
-To apply softmax regression, we replace the sigmoid function used in logistic regression with the softmax function, i.e. with a 
+To apply softmax regression, we generalize the sigmoid function $\sigma(z)$ used in logistic regression with the softmax function, i.e. with a 
 vector function $\Psi: \mathbb{R}^K \to (0, 1)^K$ defined as 
 
 $$\Psi(z_1, z_2, \ldots, z_K) = \begin{bmatrix}
@@ -274,7 +274,33 @@ According to their definition, we can see that
 - $0 <  \psi_k(z_1, z_2, \ldots, z_K) < 1$ for all components, and;
 - $\sum_{k=1}^K \psi_k = 1$
 
-The name softmax comes from the fact that this function works as a smoothed version of $\operatorname{argmax}\_je^{z_j}$: since $\sum_{l=1}^K e^{z_l}$ can be roughly approximated by $\max_j e^{z_j}$, then the value at index $j$, namely $s_j$, will tend to be much higher than that of the remaining components, but not exactly $1$, as would be enforced by $\operatorname{argmax}\_je^{z_j}$.  While the $\operatorname{argmax}$ function  usually contains singular points, the advantage of the softmax function is that it is actually a differentiable function over all points. 
+In addition, note that
+
+$$\Psi(0, z) = \begin{bmatrix}
+\frac{1}{1 + e^z} \\[1.5ex]
+\frac{e^z}{1 + e^z} 
+\end{bmatrix}$$
+
+such that the first component equals $1 - \sigma(z)$ and the remaining one $\sigma(z)$.
+
+
+The name softmax function for $\Psi(z_1, z_2, \ldots, z_K)$ comes from the fact that this function is related to the $\operatorname{argmax}(z_1, z_2, \ldots, z_K)$ and $\operatorname{max}(z_1, z_2, \ldots, z_K)$ functions. While the first returns the index $j$ for which $z_j$ is maximum, the second one returns $z_j$ itself. 
+
+A smooth approximation to the $\operatorname{max}$ function is the LogSumExp function 
+
+$$\operatorname{LSE}(z_1, z_2, \ldots, z_K) = \log\left(\sum_{k=1}^K e^{z_k}\right)$$
+
+ For example, $\operatorname{max}(0, z)$ can be approximated with $\operatorname{LSE}(0, z) = \log\left(1 + e^z\right)$.
+
+Taking the derivative of $\operatorname{LSE}(z_1, z_2, \ldots, z_K)$ with respect to $z_l$, it is trivial to see that
+
+$$\frac{\partial\operatorname{LSE}(z_1, z_2, \ldots, z_K)}{\partial z_l} = 
+ \psi_l(z_1, z_2, \ldots, z_K)$$
+
+and that then $\Psi(z_1, z_2, \ldots, z_K)$ is the gradient of $\operatorname{LSE}(z_1, z_2, \ldots, z_K)$.
+
+On the other hand, note that $\sum_{l=1}^K e^{z_l}$ can be roughly approximated by $\max_j e^{z_j}$. The $\operatorname{argmax}$ function would enforce the component $j$ to be equal to $1$, and the remaining to $0$. On the other hand, the softmax function will produce an output such that $\forall k \neq j$, the value of $\psi_k(z_1, z_2, \dots, z_K)$ will tend to be low, but not exactly $0$,  and at index $j$,  $\psi_j(z_1, z_2, \dots, z_K)$ will tend to be higher, though not exactly $1$.
+Hence, in this sense, the softmax function smoothly approaches  the $\operatorname{argmax}$ function. The advantage of using this approximation is that the softmax function avoids the singular points that the $\operatorname{argmax}$ function includes. This is particularly beneficial in optimization tasks, since it allows to avoid both non-converging and diverging solutions.
 
 #### Partial derivatives
 
