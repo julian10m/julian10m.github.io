@@ -21,17 +21,28 @@ $$\sigma(z)= \frac{e^z}{1+e^z} = (1 + e^{-z})^{-1}\label{sigmoid}$$
 
 According to Eq. (\ref{sigmoid}), $\sigma(z)$ always lays between 0 and 1. In particular, for large negative values of $z$, the term $e^{-z}$ becomes a large positive number, and thus $\sigma(z)$ tends to $0$. On the other hand, when $z$ takes large positive values, $e^{-z}$ approaches $0$, and thus $\sigma(z)$ is close to $1$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. 
 
-On the other hand, we can see that
+In addition, we have
+
+$$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z} = \sigma(-z)$$
+
+which means that $1 - \sigma(z)$ is a mirrored copy of $\sigma(z)$
+
+<center>
+<img src="/files/Figures/Logistic-Softmax-Regression/sigmoid_and_derivative.pdf" alt="sigmoid and its derivative">
+
+<br>
+<em>Sigmoid function and its derivative.</em>
+</center>
+
+Moreover, we can see that
 
 $$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^z}{(1 + e^z)^2} = \frac{e^z}{1 + e^z}\cdot\frac{1}{1 + e^z}$$
 
-is always positive, and thus $\sigma(z)$ is a monotonically increasing function. In addition, noticing that
+$$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right) \label{derivative}$$
 
-$$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z}$$
+The derivative of $sigma(z)$ is always positive, hence $\sigma(z)$ is a monotonically increasing function. The maximum of $\sigma'(z)$ is placed in $z=0$ and equals 0.25. On the other hand, as the module of $z$ increases, $\sigma'(z)$ approaches zero.
 
-$$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)$$
-
-Consequently, we can write
+Note that according to Eq. (\ref{derivative}), we can write
 
 $$\sigma(z)= \frac{1 - \sigma(z)}{\sigma'(z)}\label{derivative1}$$
 
