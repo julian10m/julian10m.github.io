@@ -28,6 +28,7 @@ $$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^
 is always positive, and thus $\sigma(z)$ is a monotonically increasing function. In addition, noticing that
 
 $$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z}$$
+
 $$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)$$
 
 Consequently, we can write
@@ -38,7 +39,7 @@ $$1 - \sigma(z) = \frac{\sigma(z)}{\sigma'(z)}\label{derivative2}$$
 
 Finally, it is simple to show that
 
-$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z$$
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z \label{logit}$$
 
 We will later come back to Eq. (\ref{derivative1}),  (\ref{derivative2}) and (\ref{logit}).
 
@@ -48,7 +49,7 @@ To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are inte
 
 Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. In particular, for a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$, i.e.,
 
-$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}$$
+$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b} = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
 
 Since $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \sigma(z)$, and we are evaluating this expression at $z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing in Eq. (\ref{logit}) we have
 
@@ -97,7 +98,7 @@ The log-likelihood, that we seek to maximize, can then be written as
 
 $$l(X, \mathbf{w}, b) = \sum_{i=1}^m \left(y^{(i)} \log \left(p(\mathbf{x}^{(i)})\right) + (1 - y^{(i)})\log\left(1 - p(\mathbf{x}^{(i)})\right)\right)$$
 
-Recalling we estimate $p(\mathbf{x}^{(i)})$ as $\hat{p}\_1(\mathbf{x}^{(i)}, \mathbf{w}, b) = \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
+Recalling we estimate $p(\mathbf{x}^{(i)})$ as $\hat{p}\_1(\mathbf{x}^{(i)}, \mathbf{w}, b) = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
@@ -105,7 +106,7 @@ J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
 \end{align}
 $$
 
-Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**. An important, and convenient, characteristic of this function that it is convex, i.e., it has a minimum, and this minimum is unique and thus absolute.
+Since this mathematical expression resembles the one used in information theory to obtain the "cross-entropy" between two probability distributions, then this cost function is usually referred to as the **cross-entropy loss function**. An important, and convenient, characteristic of this function is that it is convex, i.e., it has a unique minimum, which is thus an absolute minimum of the function.
 
 #### Interpreting the Loss Function
 
@@ -124,15 +125,16 @@ $$c\left( y^{(i)}, \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right) =
 
 For example, when $y^{(i)} = 1$, if $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$, then the cost contributed by sample $(\mathbf{x}^{(i)}, y^{(i)})$ is 0. However, on the opposite extreme, if $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, then the cost would become infinite. For intermediate values, the logarithm in the expression leads to penalize more the "worse" decisions, e.g., for $y^{(i)} = 1$, the smaller $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is, the much larger $\log\left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)$ will be.  In addition, analyzing the expression, we see that the cost for $y^{(i)} = 0$ is a mirrored copy of that of $y^{(i)} = 1$: the curve is similar, but rather penalizing more severely the more that $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is closer to $1$.
 
-Finally, it must be noted that, even if our classifier would have made correct classifications, i.e. estimated $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) > 0.5$ in a case where $y^{(i)} = 1$, we are still increasing the cost function. In other words, the cost function does not penalize mistakes, but more generally the fact that the classifier makes "doubtful" classifications. In other words, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ for which $y^{(i)}=1$ and $y^{(j)}=0$, we would want our classifier not to hesitate, i.e., to end up computing $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$ and $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, respectively.
+Finally, it must be noted that, even if our classifier would have made correct classifications, e.g. estimated $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) > 0.5$ in a case where $y^{(i)} = 1$, we are still increasing the cost function in a quantity $$c\left( y^{(i)}, \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)$. Indeed, the cost function does not penalize classification mistakes, but more generally the fact that the classifier makes "doubtful" classifications. 
+In other words, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ for which $y^{(i)}=1$ and $y^{(j)}=0$, we would want our classifier not to hesitate, i.e., to end up computing $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$ and $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, respectively.
 This means that for all samples where the classifier was not completely "convinced" or "sure" of its choice, we should increase $J(X, \mathbf{w}, b)$.
-In particular, minimizing the cross-entropy loss function tends to do this, thus generating estimations that resemble as closely as possible the "ideal" distribution.
+In particular, minimizing the cross-entropy loss function tends to do this, thus generating estimations that resemble as closely as possible the real values of $y$ for all samples.
 
 #### Optimizing the parameters 
 
-To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is a composition of differentiable functions, and thus it is differentiable too. As a consequence, we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. 
+To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is differentiable, since it is a composition of differentiable functions. Hence, we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. 
 
-To begin, we can first find the derivative of $J(X, \mathbf{w}, b)$ with respect to component $w_j$ of $\mathbf{w}$. Noting that in Eq. (\ref{cost-fuction}), $y^{(i)}$ does not depend on $w_j$, then we only need to find the derivatives of $\log\left(\left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$ and $\log\left(1 - \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$. 
+To begin, we can first focus on the derivative of $J(X, \mathbf{w}, b)$ with respect to a component $w_j$ of $\mathbf{w}$. Noting that in Eq. (\ref{cost-function}), $y^{(i)}$ does not depend on $w_j$, then we only need to find the derivatives of $\log\left(\left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$ and $\log\left(1 - \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$. 
 
 To derive these calculations, first note that
 
@@ -146,21 +148,28 @@ $$\frac{\partial \log(\sigma(z))}{\partial z} = \frac{\sigma'(z)}{\sigma(z)}$$
 
 $$\frac{\partial \log(1 - \sigma(z))}{\partial z} = -\frac{\sigma'(z)}{1 - \sigma(z)}$$
 
-It is simple to show, relying on Eq. (\ref{derivative1}) and (\ref{derivative2}) that
+we can use the results of Eq. (\ref{derivative1}) and (\ref{derivative2}) to solve each of these calculations.
 
-$$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right)
+Applying some algebra, it is simple to show that
+
+$$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdw-LR}
 $$
 
 Proceeding in a similar way, considering that $\frac{\partial z}{\partial b} = 1$, we can also find that
 
-$$\frac{\partial J(X, \mathbf{w}, b)}{\partial b} = \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) 
+$$\frac{\partial J(X, \mathbf{w}, b)}{\partial b} = \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdb-LR}
 $$
 
-Unfortunately, setting these equations to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions, such as that provided by the gradient descent algorithm.  Note that since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary for the classification problem. Hopefully, at the end of the process, the hyperplane will end up "well" located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. 
+Unfortunately, setting Eq. (\ref{dJdw-LR}) and (\label{dJdb-LR}) to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions, e.g. the gradient descent algorithm.
+
+
+#### Gradient Descent Algorithm 
+
+When applying the gradient descent algorithm in a logistic regression problem, note that since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary for the classification problem. Hopefully, at the end of the process, the hyperplane will end up "well" located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. 
 
 To implement the gradient descent algorithm, it is convenient to have a vectorized version of the functions we have studied. Defining 
 
-$$X^\intercal = \begin{bmatrix}
+$$\mathbf{X}^\intercal = \begin{bmatrix}
 1 & 1 & \cdots & 1 \\
 \mid & \mid & & \mid \\
 \mathbf{x}^{(1)} & \mathbf{x}^{(2)} & \cdots & \mathbf{x}^{(m)}\\
@@ -180,17 +189,23 @@ $$
 
 we can then write 
 
-$$J(X, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma(X \Theta)\right)+ (1 - \mathbf{y}^\intercal) \log\left(1 - \sigma(X \Theta)\right)\Big)$$
+$$J(\mathbf{X}, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma(\mathbf{X} \Theta)\right)+ (1 - \mathbf{y})^\intercal \log\left(1 - \sigma(X \Theta)\right)\Big)$$
 
-$$\nabla J(X, \Theta) = \frac{1}{m} X^\intercal\left(\sigma(X \Theta) - \mathbf{y}\right)$$
+$$\nabla J(\mathbf{X}, \Theta) = \frac{1}{m} X^\intercal\left(\sigma(\mathbf{X} \Theta) - \mathbf{y}\right)$$
 
-Note that the gradient descent algorithm represents only one option out of the multiple optimization algorithms that can be used.
+Note that the gradient descent algorithm represents only one option out of the multiple optimization algorithms that can be used to obtain a numerical solution.
 
 ###  Multinomial Classification
 
-A logistic regression classifier only works for binary classification problems. On the other hand, when $y$ may take more than two values, i.e., $K>2$, we can use multiple logistic regression classifiers. More specifically, the proposal is to divide and conquer: instead of trying to come up with an algorithm that directly assigns the correct label to a sample $\mathbf{x}$, the results of multiple logistic regression classifiers that solve simpler binary classification problems are aggregated and used to reach a conclusion. 
+A logistic regression classifier only works for binary classification problems. When $y$ may take more than two values, i.e., $K>2$, however, we can still use logistic regression by relying in multiple classifiers of this type. More specifically, the proposal in these cases is to divide and conquer: instead of trying to come up with an algorithm that directly assigns the correct label to a sample $\mathbf{x}$, the results of multiple logistic regression classifiers that solve simpler binary classification problems are aggregated and used to reach a conclusion. 
 
-In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume we have a training dataset $X$, composed of $m$ labeled samples, i.e., $X = \left\\{(\mathbf{x}^{(1)}, y^{(1)}), (\mathbf{x}^{(2)}, y^{(2)}), \ldots, (\mathbf{x}^{(m)}, y^{(m)})\right\\}$. Moreover,  we can assume that, for each class $k \in \\{1, 2, \ldots, K\\}$, the dataset contains $m_k$ samples of that class, such that $m = \sum_{k=1}^K m_k$.
+In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume that the training dataset $X$ of $m$ i.i.d. labeled samples contains, for each class $k \in \\{1, 2, \ldots, K\\}$, $m_k$ samples of that class,
+
+$$m_k = \sum_{i = 1}^m $\mathbb{1}\_{y^{(i)} = k}$$
+
+ such that 
+
+ $$m = \sum_{k=1}^K m_k$$.
 
 #### OvR/OvA
 
@@ -205,17 +220,35 @@ $$z^{(i)} =
 \end{cases}
  $$
 
-This way, while the $m_k$ samples of class $k$ remain unaltered, the remaining $m - m_k$ samples belonging to the $K-1$ remaining labels are aggregated into a unique class. Each classifier is then trained on each of these re-labeled datasets.
+While the $m_k$ samples of class $k$ remain unaltered, the $m - m_k$ samples belonging to the remaining $K-1$ labels are aggregated into a unique class. 
 
-To classify a new sample $\mathbf{x}^{(i)}$, the probability $P(z^{(i)} = 1 \;\vert\; \mathbf{x}^{(i)})$ for the $k^{th}$estimator is not other than $P(y^{(i)} = k \;\vert\; \mathbf{x})$, thus once these values are computed, $\mathbf{x}^{(i)}$ is assigned label $k$ when the $k^{th}$ estimator outputs the largest value.
+Each classifier is then trained on each of these re-labeled datasets.
+In particular, the probability $P(z^{(i)} = 1 \;\vert\; \mathbf{x}^{(i)})$ for the $k^{th}$estimator is not other than $P(y^{(i)} = k \;\vert\; \mathbf{x})$.
+
+
+To classify a new sample $\mathbf{x}^{(i)}$, first we compute the $K$ estimations and then we assign $\mathbf{x}^{(i)}$ the label associated with the estimator that outputs the greatest value, e.g. label $k$ if the $k^{th}$ estimator outputs the largest value.
 
 #### OvO
 
 The multinomial classification task is divided in multiple binary classification problems, and the decision is reached by majority voting. 
 
-Each logistic regression classifier compares two classes at a time, as if the remaining did not exist, e.g. the classifier focusing on labels $k_1$ and $k_2$ only uses their corresponding $m_{k_1}$ and $m_{k_2}$ samples, assigning $z^{(i)}=1$ to sample $\mathbf{x}^{(i)}$ when $y^{(i)} = k_1$, and $z^{(i)} = 0$ otherwise. In total, for $K$ labels, there are ${k \choose 2} = \frac{K(K-1)}{2}$ ways of combining them (there are $K$ labels, each of which can be linked to each of the $K-1$ remaining labels, but this would count twice each of the links, so we need to divide by 2), hence this is the number of logistic regression classifiers that are needed. 
+Each logistic regression classifier compares two classes $k_1$ and $k_2$ at a time, as if the remaining did not exist. The following re-labeling is applied
 
-When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k$ that results most voted across all classifiers.
+$$z^{(i)} = 
+\begin{cases}
+    1, & \text{if } y^{(i)} = k_1\\
+    0, & \text{if } y^{(i)} = k_2\\
+    \text{Discard}, & \text{otherwise}
+\end{cases}
+ $$
+
+where we see that we only keep the $m_{k_1}$ and $m_{k_2}$ samples of class $k_1$ and $k_2$, one identified with label $z^{(i)} = 1$ and the other one with $z^{(i)} = 0$.
+
+In total, for a classification problem with $K$ labels, we need ${k \choose 2} = \frac{K(K-1)}{2}$ logistic regression classifiers.
+This number represents the possible ways of combining two labels.
+The reasoning is that there are $K$ labels, each of which can be linked to each of the $K-1$ remaining labels. But if we count all the possible ways of linking labels for each label, then we count every link twice, so we need to divide by 2. 
+
+When classifying a new sample $\mathbf{x}^{(i)}$, then we need to perform $K(K-1)/2$ classifications, and ultimately we assign $\mathbf{x}^{(i)}$ to the class that results the most voted across all classifiers.
 
 ## Softmax Regression
 
