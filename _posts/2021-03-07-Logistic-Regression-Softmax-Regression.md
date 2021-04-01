@@ -28,26 +28,29 @@ $$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^
 is always positive, and thus $\sigma(z)$ is a monotonically increasing function. In addition, noticing that
 
 $$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z}$$
+$$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)$$
 
-then we can write 
+Consequently, we can write
 
-$$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right)\label{derivative}$$
+$$\sigma(z)= \frac{1 - \sigma(z)}{\sigma'(z)}\label{derivative1}$$
+
+$$1 - \sigma(z) = \frac{\sigma(z)}{\sigma'(z)}\label{derivative2}$$
 
 Finally, it is simple to show that
 
-$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z\label{logit}$$
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = \log\left(e^z\right) = z$$
 
-We will later come back to Eq. (\ref{derivative}) and (\ref{logit}).
+We will later come back to Eq. (\ref{derivative1}),  (\ref{derivative2}) and (\ref{logit}).
 
 #### A model to estimate probabilities
 
-To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + $P(y = 0 \;\vert\; \mathbf{x}) = 1$, then we actually only need to estimate one of these probabilities.
+To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, then any of them can be written as a function of the other one, and thus we actually only need to estimate one of these probabilities.
 
 Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. In particular, for a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$, i.e.,
 
-$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
+$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}$$
 
-Since $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \sigma(z)$ evaluated at $z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing in Eq. (\ref{logit}) we have
+Since $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \sigma(z)$, and we are evaluating this expression at $z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing in Eq. (\ref{logit}) we have
 
 $$\log\left(\frac{\hat{p_1}(\mathbf{x}, \mathbf{w}, b)}{1 - \hat{p_1}(\mathbf{x}, \mathbf{w}, b)}\right) = \mathbf{w}^\intercal \mathbf{x} + b \label{logitDecisionBoundary}$$
 
@@ -88,17 +91,17 @@ P\left(y^{(1)}, y^{(2)}, \ldots, y^{(m)} \;\vert\; \mathbf{x}^{(1)}, \mathbf{x}^
 \end{align}
 $$
 
-where $p(\mathbf{x}^{(i)})$ is the probability that sample $\mathbf{x}^{(i)}$ might belong to class $y=1$ and $y^{(i)}$ is the class to which $\mathbf{x}^{(i)}$ actually belongs to.
+where $p(\mathbf{x}^{(i)})$ is the probability that sample $\mathbf{x}^{(i)}$ might belong to class $1$ and $y^{(i)}$ is the class to which $\mathbf{x}^{(i)}$ actually belongs to.
 
 The log-likelihood, that we seek to maximize, can then be written as
 
 $$l(X, \mathbf{w}, b) = \sum_{i=1}^m \left(y^{(i)} \log \left(p(\mathbf{x}^{(i)})\right) + (1 - y^{(i)})\log\left(1 - p(\mathbf{x}^{(i)})\right)\right)$$
 
-Recalling we estimate $p(\mathbf{x}^{(i)})$ as $\hat{p}\_1(\mathbf{x}^{(i)}, \mathbf{w}, b) = \sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
+Recalling we estimate $p(\mathbf{x}^{(i)})$ as $\hat{p}\_1(\mathbf{x}^{(i)}, \mathbf{w}, b) = \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}$, and defining the cost function $J(X, \mathbf{w}, b)$ as the negative version of the log-likelihood averaged over the $m$ samples composing the dataset, then
 
 $$\begin{align}
 J(X, \mathbf{w}, b) &=  - \frac{1}{m}l(X, w, b) \\
-& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)\right)+ (1 - y^{(i)}) \log\left(1 - \sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b)\right)\right) \label{cost-function}
+& = -\frac{1}{m}\sum_{i = 1}^m \left(y^{(i)} \log\left(\sigma(\mathbf{w}^\intercal \mathbf{x} + b)\right)+ (1 - y^{(i)}) \log\left(1 - \sigma(\mathbf{w}^\intercal \mathbf{x} + b)\right)\right) \label{cost-function}
 \end{align}
 $$
 
@@ -127,12 +130,30 @@ In particular, minimizing the cross-entropy loss function tends to do this, thus
 
 #### Optimizing the parameters 
 
-To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is a composition of differentiable functions, and thus it is differentiable too. As a consequence, we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. Considering the property of Eq. (\ref{derivative}), and noticing that $\log(\sigma(z)) = \sigma'(z)/\sigma(z)$, it is simple to show that
+To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is a composition of differentiable functions, and thus it is differentiable too. As a consequence, we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. 
 
-$$\begin{align}
-\frac{\partial J(X, \mathbf{w}, b)}{\partial b} &= \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \\
-\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} &= \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right)
-\end{align}
+To begin, we can first find the derivative of $J(X, \mathbf{w}, b)$ with respect to component $w_j$ of $\mathbf{w}$. Noting that in Eq. (\ref{cost-fuction}), $y^{(i)}$ does not depend on $w_j$, then we only need to find the derivatives of $\log\left(\left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$ and $\log\left(1 - \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$. 
+
+To derive these calculations, first note that
+
+$$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{\partial J(X, \mathbf{w}, b)}{\partial z} \frac{\partial z}{\partial w_j}$$
+
+where it is trivial to see that $\frac{\partial z}{\partial w_j} = x_j^{(i)}$, and hence we only need to find $\frac{\partial J(X, \mathbf{w}, b)}{\partial z}$.
+
+Since 
+
+$$\frac{\partial \log(\sigma(z))}{\partial z} = \frac{\sigma'(z)}{\sigma(z)}$$
+
+$$\frac{\partial \log(1 - \sigma(z))}{\partial z} = -\frac{\sigma'(z)}{1 - \sigma(z)}$$
+
+It is simple to show, relying on Eq. (\ref{derivative1}) and (\ref{derivative2}) that
+
+$$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right)
+$$
+
+Proceeding in a similar way, considering that $\frac{\partial z}{\partial b} = 1$, we can also find that
+
+$$\frac{\partial J(X, \mathbf{w}, b)}{\partial b} = \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) 
 $$
 
 Unfortunately, setting these equations to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions, such as that provided by the gradient descent algorithm.  Note that since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary for the classification problem. Hopefully, at the end of the process, the hyperplane will end up "well" located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. 
@@ -162,7 +183,6 @@ we can then write
 $$J(X, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma(X \Theta)\right)+ (1 - \mathbf{y}^\intercal) \log\left(1 - \sigma(X \Theta)\right)\Big)$$
 
 $$\nabla J(X, \Theta) = \frac{1}{m} X^\intercal\left(\sigma(X \Theta) - \mathbf{y}\right)$$
-
 
 Note that the gradient descent algorithm represents only one option out of the multiple optimization algorithms that can be used.
 
@@ -197,16 +217,14 @@ Each logistic regression classifier compares two classes at a time, as if the re
 
 When classifying a new sample $\mathbf{x}^{(i)}$, then $K(K-1)/2$ classifications are performed, and ultimately $\mathbf{x}^{(i)}$ is assigned to the class $k$ that results most voted across all classifiers.
 
-
-
 ## Softmax Regression
 
- While workarounds such as OvR/OvA or OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose.  In particular, softmax regression takes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters. Different to the previous methods, the parameters are jointly and concurrently optimized to estimate one probability per class.
+ While workarounds such as OvR/OvA or OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In particular, softmax regression takes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ as parameters. Different to the previous methods, the parameters are jointly and concurrently optimized to estimate one probability per class.
 
 ### Softmax Function
 
 To apply softmax regression, we replace the sigmoid function used in logistic regression with the softmax function, i.e. with a 
-vector function $\Psi: \mathbb{R}^K \to \mathbb{R}^{K}$ defined as 
+vector function $\Psi: \mathbb{R}^K \to (0, 1)^K$ defined as 
 
 $$\Psi(z_1, z_2, \ldots, z_K) = \begin{bmatrix}
 \psi_1(z_1, z_2, \ldots, z_K) \\
@@ -215,15 +233,18 @@ $$\Psi(z_1, z_2, \ldots, z_K) = \begin{bmatrix}
 \psi_K(z_1, z_2, \ldots, z_K) \\
 \end{bmatrix}$$
 
-where each $\psi_j:  \mathbb{R}^K \to \mathbb{R}$ is a scalar function 
+where each $\psi_j:  \mathbb{R}^K \to (0, 1)$ is a scalar function 
 
 $$\psi_k(z_1, z_2, \ldots, z_K) = \frac{e^{z_k}}{\sum_{l=1}^K e^{z_l}}$$ 
 
-According to their definition, we can see that $0 \leq  \psi_k(z_1, z_2, \ldots, z_K) \leq 1$ for all components. In addition, their addition equals $1$, i.e., $\sum_{k=1}^K \psi_k = 1$.
+According to their definition, we can see that 
+
+- $0 <  \psi_k(z_1, z_2, \ldots, z_K) < 1$ for all components, and;
+- $\sum_{k=1}^K \psi_k = 1$
 
 The name softmax comes from the fact that this function works as a smoothed version of $\operatorname{argmax}\_je^{z_j}$: since $\sum_{l=1}^K e^{z_l}$ can be roughly approximated by $\max_j e^{z_j}$, then the value at index $j$, namely $s_j$, will tend to be much higher than that of the remaining components, but not exactly $1$, as would be enforced by $\operatorname{argmax}\_je^{z_j}$.  While the $\operatorname{argmax}$ function  usually contains singular points, the advantage of the softmax function is that it is actually a differentiable function over all points. 
 
-### Partial derivatives
+#### Partial derivatives
 
 Since $\Psi(z_1, z_2, \ldots, z_K)$ is a vector function, rather than a unique derivative, it has multiple. The Jacobian matrix gathers all partial derivatives
 
@@ -259,9 +280,16 @@ We will later use Eq. (\ref{derivativeSoftmax}) to minimize the loss function, w
 
 In softmax regression, the output of a softmax function is used to represent the probability distribution of the categorical variable $y$. For this, we can define $\psi_k$ as the probability that $y$ may belong to class $k$, i.e. $\hat{p_k}(\mathbf{x}) = \hat{P}(y = k \;\vert\; \mathbf{x}) =  \psi_k(z_1, z_2, \ldots, z_K)$.
 
-In addition, we define the input components of the softmax function  as  $z_k$ = $\mathbf{w_k}^\intercal \mathbf{x} + b_k$, where $\mathbf{x}$ is a sample, $\mathbf{w_k}$ is a weighting vector and $b_k$ is an intercept. To ease the notation, since now we should write $\psi_k(\mathbf{w_1}^\intercal \mathbf{x} + b_1, \mathbf{w_2}^\intercal \mathbf{x} + b_2, \ldots, \mathbf{w_K}^\intercal \mathbf{x} + b_K)$, we define 
+In addition, we define the input components of the softmax function  as  $z_k$ = $\mathbf{w_k}^\intercal \mathbf{x} + b_k$, where $\mathbf{x}$ is a sample, $\mathbf{w_k}$ is a weighting vector and $b_k$ is an intercept. To ease the notation, since we should now write $\psi_k(\mathbf{w_1}^\intercal \mathbf{x} + b_1, \mathbf{w_2}^\intercal \mathbf{x} + b_2, \ldots, \mathbf{w_K}^\intercal \mathbf{x} + b_K)$, we define 
 
-$$\mathbf{W} = 
+$$\mathbf{z} =
+\begin{bmatrix}
+z_1 \\
+z_2 \\
+\vdots \\
+z_K \\
+\end{bmatrix}\quad
+\mathbf{W} = 
 \begin{bmatrix}
 \mid & \mid & & \mid \\
 \mathbf{w_1} & \mathbf{w_2} & \cdots & \mathbf{w_K}\\
@@ -272,34 +300,35 @@ $$\mathbf{W} =
 b_1 \\
 b_2 \\
 \vdots \\
-b_k \\
+b_K \\
 \end{bmatrix}
 $$
 
-and re-define 
+and express the same as $\left. \psi_k(\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}$.
 
-$$\Psi(\mathbf{x}, \mathbf{W}, \mathbf{b}) = 
-\begin{bmatrix}
-\psi_1(\mathbf{W}, \mathbf{b}) \\
-\psi_2(\mathbf{W}, \mathbf{b}) \\
-\vdots \\
-\psi_K(\mathbf{W}, \mathbf{b})\\
-\end{bmatrix}
-$$
+The objective of softmax regression then becomes correctly tuning the $K$ weighting vectors and $K$ intercepts composing $\mathbf{W}$ and $\mathbf{b}$, respectively, 
+in order to achieve a "good" classification performance.
 
-The objective of softmax regression then becomes correctly tuning, in order to achieve a good classification performance, the $K$ weighting vectors and $K$ intercepts composing $\mathbf{W}$ and $\mathbf{b}$, respectively. 
-
-Finally, rather than taking a value from $1$ to $K$, we represent the output variable a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$ 
+Finally, rather than taking a value from $1$ to $K$, we represent the output variable as a vector $\mathbf{y} \in \mathbb{R}^{K \times 1}$
 
 $$\mathbf{y}  = \begin{bmatrix}
 y_1 \\
 y_2 \\
 \vdots \\
-y_k \\
+y_K \\
 \end{bmatrix}
 $$
 
-such that if sample $\mathbf{x}^{(i)}$ belongs to class $k$, i.e., $y^{(i)} = k$, then $y_k^{(i)} = 1$ and $\forall j \neq k, \,y_j^{(i)} = 0$. In other words, the components of $\mathbf{y}$ are binary variables, and for each sample, all components are null, except the one whose index coincides with the class of the sample.  In general, we say that $y$ is now **one-hot encoded**, and this allows to straightforwardly compare the estimated probabilities delivered by $\Psi(\mathbf{x}, \mathbf{W}, \mathbf{b})$ with the expected ones according to the value of $y$.
+such that for a sample $\mathbf{x}^{(i)}$, we have
+
+$$y_k = 
+\begin{cases}
+    1, & \text{if } y^{(i)} = k\\
+    0, & \text{otherwise}
+\end{cases}
+ $$
+
+In other words, the components of $\mathbf{y}$ are binary variables, and for each sample, all components are null, except the one whose index coincides with the class of the sample.  In general, we say that $y$ is now **one-hot encoded**, and this allows to straightforwardly compare the estimated probabilities delivered by $\left.\Psi (\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}$ with the expected ones according to the value of $y$.
 
 ### Generalizing the cross-entropy loss function
 
@@ -307,10 +336,12 @@ Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \le
 
 $$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(p_k(\mathbf{x}^{(i)})\right)^{y_k^{(i)}}$$
 
-Recalling that we are estimating $p_k(\mathbf{x}^{(i)})$ as $\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b}) = \psi_k(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b})$,  and considering the cost function $J(X, \mathbf{W}, \mathbf{b})$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then we have
+Recalling that we are estimating $p_k(\mathbf{x}^{(i)})$ as $\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b}) = \left. \psi_k(\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}$,  and considering the cost function $J(X, \mathbf{W}, \mathbf{b})$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then we have
 
-$$J(X, \mathbf{W}, \mathbf{b}) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\psi_k(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b})\right)$$
+$$J(X, \mathbf{W}, \mathbf{b}) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\left. \psi_k(\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}\right)$$
 
-which again resembles the cross-entropy function.
+which again resembles the cross-entropy function, this time between $\mathbf{y}$ and $\left. \Psi(\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}$.
 
-As with logistic regression, the cost function $J(X, \Theta)$ needs to be minimized relying on an optimization algorithm such as gradient descent.
+As we previously saw with logistic regression, this
+
+the cost function $J(X, \mathbf{W}, \mathbf{b})$ needs to be minimized relying on an optimization algorithm such as gradient descent.
