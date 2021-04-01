@@ -3,15 +3,15 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1, x_2\ldots,x_N]^\intercal$, these algorithms estimate the probability a posterior of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1, x_2\ldots,x_N]^\intercal$, these algorithms estimate the probability a posteriori of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
 
 ## Logistic Regression
 
-This method is used for binary classification, i.e., cases where $K=2$. However, by combining multiple logistic regression classifiers, it is possible to extend their use to multinomial cases, i.e., scenarios where $K>2$.  
+This method is used in binary classification tasks, i.e., cases where $K=2$. However, by combining multiple logistic regression classifiers, it is possible to extend their use to multinomial cases, i.e., scenarios where $K>2$.  
 
 ### Binary Classification
 
-The target variable can only take two possibles values, e.g., "nice/ugly", "fun/boring", "win/lose", "red/blue", "apple/orange", "woman/man".  We usually use 0 and  1 to numerically represent these values, i.e.,  $y \in \left\\{0, 1\right\\}$.  This way,  in each respective scenario, $y=1$ may represent "yes",  "fun" and "win", "red", "apple" or "woman",  while $y=0$ be associated to "no", "boring", "lose", "blue", "orange" or "man". We can also assign the labels in the opposite order, this actually has no impact on the performance of the algorithm. 
+The target variable can only take two possibles values, e.g., "yes/no", "win/lose", "apple/orange", "woman/man".  We usually use 0 and 1 to numerically represent these values, i.e., $y \in \left\\{0, 1\right\\}$.  This way, in each respective scenario, $y=1$ may represent "yes", "win", "apple" or "woman",  while $y=0$ be associated to "no", "lose", "orange" or "man". We can also assign the labels in the opposite order, this actually has no impact on the performance of logistic regression.
 
 #### Sigmoid Function
 
@@ -19,41 +19,45 @@ One of the main components of logistic regression is the sigmoid function $\sigm
 
 $$\sigma(z)= \frac{e^z}{1+e^z}\label{sigmoid}$$
 
-According to Eq. (\ref{sigmoid}), $\sigma(z)$ always lays between 0 and 1. In particular, for large values of $z$, the term $e^z$ becomes a large positive number, and $\sigma(z)$ tends to $1$. On the other hand, when $z$ takes large negative values, $e^z$ approaches $0$, and thus $\sigma(z)$ is close to $0$. For $z=0$, since $e^0 = 1$, then $\sigma(0) = 1/2$. 
+According to Eq. (\ref{sigmoid}), $\sigma(z)$ always lays between 0 and 1. In particular, since $e^0 = 1$, then $\sigma(0) = 1/2$. For large values of $z$, the term $e^z$ becomes a large positive number, and $\sigma(z)$ tends to $1$. On the other hand, when $z$ takes large negative values, $e^z$ approaches $0$, and thus $\sigma(z)$ is close to $0$. 
 
 In addition, we have
 
-$$1 - \sigma(z) = \frac{1}{1+e^z}$$
+$$1 - \sigma(z) = \frac{1}{1+e^z} = \sigma(-z)$$
 
-It is simple to show that $1 - \sigma(z)$ is a mirrored copy of $\sigma(z)$, i.e. 
-
-$$\sigma(-z) = 1 - \sigma(z)$$
+which means that $1 - \sigma(z)$ is a mirrored copy of $\sigma(z)$.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/sigmoid_and_derivative.png" alt="Plot of Sigmoid function and its derivative">
-<!-- <embed src="/files/Figures/Logistic-Softmax-Regression/sigmoid_and_derivative.pdf" alt="sigmoid and its derivative" width="500" height="375"> -->
+<img src="/files/Figures/Logistic-Softmax-Regression/sigmoid.png" alt="Plot of sigmoid function">
 
 <br>
-<em>Sigmoid function and its derivative.</em>
+<em>Sigmoid function.</em>
 </center>
 
-Moreover, we can see that
+At the same time, it is trivial to show that 
+
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = z \label{logit}$$
+
+Finally, we can see that
 
 $$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^z}{(1 + e^z)^2} = \frac{e^z}{1 + e^z}\cdot\frac{1}{1 + e^z}$$
 
 $$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right) \label{derivative}$$
 
-Singe $\sigma'(z)$ is always positive, $\sigma(z)$ is a monotonically increasing function. While the maximum of $\sigma'(z)$ is placed in $z=0$, as the module of $z$ increases, $\sigma'(z)$ approaches zero.
+Singe $\sigma'(z)$ is always positive, $\sigma(z)$ is a monotonically increasing function. While the maximum of $\sigma'(z)$ is placed in $z=0$, as the module of $z$ increases, $\sigma'(z)$ approaches zero in a symmetrical way since $\sigma'(z) = \sigma'(-z)$, i.e. $\sigma'(z)$ is an even function.
+
+<center>
+<img src="/files/Figures/Logistic-Softmax-Regression/derivative_sigmoid.png" alt="Plot of derivative of sigmoid function">
+
+<br>
+<em>Derivative of sigmoid function.</em>
+</center>
 
 According to Eq. (\ref{derivative}), we can write
 
 $$\sigma(z)= \frac{1 - \sigma(z)}{\sigma'(z)}\label{derivative1}$$
 
 $$1 - \sigma(z) = \frac{\sigma(z)}{\sigma'(z)}\label{derivative2}$$
-
-Finally, it is trivial to show that
-
-$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = z \label{logit}$$
 
 We will later come back to Eq. (\ref{derivative1}),  (\ref{derivative2}) and (\ref{logit}).
 
