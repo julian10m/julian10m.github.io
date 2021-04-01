@@ -189,7 +189,7 @@ Proceeding in a similar way, considering that $\frac{\partial z}{\partial b} = 1
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial b} = \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdb-LR}
 $$
 
-Unfortunately, setting Eq. (\ref{dJdw-LR}) and (\label{dJdb-LR}) to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions, e.g. the gradient descent algorithm.
+Unfortunately, setting Eq. (\ref{dJdw-LR}) and (\ref{dJdb-LR}) to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions, e.g. the gradient descent algorithm.
 
 
 #### Gradient Descent Algorithm 
