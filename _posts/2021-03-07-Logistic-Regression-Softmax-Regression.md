@@ -236,17 +236,16 @@ Each logistic regression classifier compares two classes $k_1$ and $k_2$ at a ti
 
 $$z^{(i)} = 
 \begin{cases}
-    1, & \text{if } y^{(i)} = k_1\\
-    0, & \text{if } y^{(i)} = k_2\\
-    \text{Discard}, & \text{otherwise}
+    1, & \text{if } y^{(i)} = k_1 \\
+    0, & \text{if } y^{(i)} = k_2 \\
+    Discard, & \text{otherwise}
 \end{cases}
  $$
 
-where we see that we only keep the $m_{k_1}$ and $m_{k_2}$ samples of class $k_1$ and $k_2$, one identified with label $z^{(i)} = 1$ and the other one with $z^{(i)} = 0$.
+where we see that we only keep the $m_{k_1}$ and $m_{k_2}$ samples of class $k_1$ and $k_2$, identifying one with label $z^{(i)} = 1$ and the other one with $z^{(i)} = 0$.
 
 In total, for a classification problem with $K$ labels, we need ${k \choose 2} = \frac{K(K-1)}{2}$ logistic regression classifiers.
-This number represents the possible ways of combining two labels.
-The reasoning is that there are $K$ labels, each of which can be linked to each of the $K-1$ remaining labels. But if we count all the possible ways of linking labels for each label, then we count every link twice, so we need to divide by 2. 
+This number represents the possible ways of combining two labels. The reasoning is as follows. If there are $K$ labels, then we can link each to the remaining $K-1$ labels. But if we count all the possible ways of linking labels for each label, then the $K(K-1)$ combinations are actually counting every linking possibility twice, so we need to divide by 2. Therefore, the number of classifiers needed is $\frac{K(K-1)}{2}$, as previously mentioned.
 
 When classifying a new sample $\mathbf{x}^{(i)}$, then we need to perform $K(K-1)/2$ classifications, and ultimately we assign $\mathbf{x}^{(i)}$ to the class that results the most voted across all classifiers.
 
