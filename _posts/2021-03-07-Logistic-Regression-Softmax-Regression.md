@@ -125,7 +125,7 @@ $$c\left( y^{(i)}, \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right) =
 
 For example, when $y^{(i)} = 1$, if $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$, then the cost contributed by sample $(\mathbf{x}^{(i)}, y^{(i)})$ is 0. However, on the opposite extreme, if $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, then the cost would become infinite. For intermediate values, the logarithm in the expression leads to penalize more the "worse" decisions, e.g., for $y^{(i)} = 1$, the smaller $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is, the much larger $\log\left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)$ will be.  In addition, analyzing the expression, we see that the cost for $y^{(i)} = 0$ is a mirrored copy of that of $y^{(i)} = 1$: the curve is similar, but rather penalizing more severely the more that $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is closer to $1$.
 
-Finally, it must be noted that, even if our classifier would have made correct classifications, e.g. estimated $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) > 0.5$ in a case where $y^{(i)} = 1$, we are still increasing the cost function in a quantity $$c\left( y^{(i)}, \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)$. Indeed, the cost function does not penalize classification mistakes, but more generally the fact that the classifier makes "doubtful" classifications. 
+Finally, it must be noted that, even if our classifier would have made correct classifications, e.g. estimated $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) > 0.5$ in a case where $y^{(i)} = 1$, we are still increasing the cost function in a quantity $c\left( y^{(i)}, \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)$. Indeed, the cost function does not penalize classification mistakes, but more generally the fact that the classifier makes "doubtful" classifications. 
 In other words, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ for which $y^{(i)}=1$ and $y^{(j)}=0$, we would want our classifier not to hesitate, i.e., to end up computing $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$ and $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, respectively.
 This means that for all samples where the classifier was not completely "convinced" or "sure" of its choice, we should increase $J(X, \mathbf{w}, b)$.
 In particular, minimizing the cross-entropy loss function tends to do this, thus generating estimations that resemble as closely as possible the real values of $y$ for all samples.
@@ -201,11 +201,11 @@ A logistic regression classifier only works for binary classification problems. 
 
 In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume that the training dataset $X$ of $m$ i.i.d. labeled samples contains, for each class $k \in \\{1, 2, \ldots, K\\}$, $m_k$ samples of that class,
 
-$$m_k = \sum_{i = 1}^m $\mathbb{1}\_{y^{(i)} = k}$$
+$$m_k = \sum_{i = 1}^m \mathbb{1}\_{y^{(i)} = k}$$
 
  such that 
 
- $$m = \sum_{k=1}^K m_k$$.
+ $$m = \sum_{k=1}^K m_k$$
 
 #### OvR/OvA
 
