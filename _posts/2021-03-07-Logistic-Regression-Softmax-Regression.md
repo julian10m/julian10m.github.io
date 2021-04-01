@@ -28,13 +28,12 @@ $$1 - \sigma(z) = 1 -\frac{e^z}{1+e^{-z}}  = \frac{1}{1+e^z} = \sigma(-z)$$
 which means that $1 - \sigma(z)$ is a mirrored copy of $\sigma(z)$
 
 <center>
-<embed src="/files/Figures/Logistic-Softmax-Regression/sigmoid_and_derivative.pdf" alt="sigmoid and its derivative" width="500" height="375">
+<img src="/files/Figures/Logistic-Softmax-Regression/sigmoid_and_derivative.png" alt="Plot of Sigmoid function and its derivative">
+<!-- <embed src="/files/Figures/Logistic-Softmax-Regression/sigmoid_and_derivative.pdf" alt="sigmoid and its derivative" width="500" height="375"> -->
+
 <br>
 <em>Sigmoid function and its derivative.</em>
 </center>
-
-
-
 
 Moreover, we can see that
 
