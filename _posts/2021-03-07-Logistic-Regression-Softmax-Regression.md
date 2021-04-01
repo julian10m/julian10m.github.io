@@ -234,7 +234,7 @@ A logistic regression classifier only works for binary classification problems. 
 
 In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume that the training dataset $X$ of $m$ i.i.d. labeled samples contains, for each class $k \in \\{1, 2, \ldots, K\\}$, $m_k$ samples of that class,
 
-$$m_k = \sum_{i = 1}^m \mathbb{1}_{y^{(i)} = k}$$
+$$m_k = \sum_{i = 1}^m \left[y^{(i)} = k\right]$$
 
 such that $m = \sum_{k=1}^K m_k$.
 
