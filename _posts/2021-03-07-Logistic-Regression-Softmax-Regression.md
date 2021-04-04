@@ -36,7 +36,7 @@ which means that $1 - \sigma(z)$ is a mirrored copy of $\sigma(z)$.
 
 At the same time, it is trivial to show that 
 
-$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = z \label{logit}$$
+$$\log\left(\frac{\sigma(z)}{1 - \sigma(z)}\right) = z \label{logitSigma}$$
 
 Finally, we can see that
 
@@ -44,7 +44,7 @@ $$\sigma'(z)=\frac{\mathrm{d}\sigma(z)}{\mathrm{d}z} = \frac{e^z(1+e^z) - e^z e^
 
 $$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right) \label{derivative}$$
 
-Singe $\sigma'(z)$ is always positive, $\sigma(z)$ is a monotonically increasing function. While the maximum of $\sigma'(z)$ is placed in $z=0$, as the module of $z$ increases, $\sigma'(z)$ approaches zero in a symmetrical way since $\sigma'(z) = \sigma'(-z)$, i.e. $\sigma'(z)$ is an even function.
+Since $\sigma(z)$ and $1- \sigma(z)$ are always positive, so is $\sigma'(z)$, and thus $\sigma(z)$ is a monotonically increasing function. While the maximum of $\sigma'(z)$ is placed in $z=0$, as the module of $z$ increases, $\sigma'(z)$ approaches zero in a symmetrical way since $\sigma'(z) = \sigma'(-z)$, i.e. $\sigma'(z)$ is an even function.
 
 <center>
 <img src="/files/Figures/Logistic-Softmax-Regression/derivative_sigmoid.png" alt="Plot of derivative of sigmoid function">
@@ -59,45 +59,29 @@ $$\sigma(z)= \frac{1 - \sigma(z)}{\sigma'(z)}\label{derivative1}$$
 
 $$1 - \sigma(z) = \frac{\sigma(z)}{\sigma'(z)}\label{derivative2}$$
 
-We will later come back to Eq. (\ref{logit}), (\ref{derivative1}) and (\ref{derivative2}).
+We will later come back to Eq. (\ref{logitSigma}), (\ref{derivative1}) and (\ref{derivative2}).
 
 #### A model to estimate probabilities
 
 To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, then any of them can be written as a function of the other one, and thus we actually only need to estimate one of these probabilities.
 
-Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. In particular, for a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$, i.e.,
-
-$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b} = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
-
-Since $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \sigma(z)$, and we are evaluating this expression at $z = \mathbf{w}^\intercal \mathbf{x} + b$, then replacing in Eq. (\ref{logit}) we have
-
-$$\log\left(\frac{\hat{p_1}(\mathbf{x}, \mathbf{w}, b)}{1 - \hat{p_1}(\mathbf{x}, \mathbf{w}, b)}\right) = \mathbf{w}^\intercal \mathbf{x} + b \label{logitDecisionBoundary}$$
-
-where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. 
-
-
-Eq. (\ref{logitDecisionBoundary}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$.  This gives us a hint of from where the logistic regression name comes: comparing both expressions, it is straightforward to conclude that logistic regression applies linear regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.  
-
-#### Classification Rule and Decision Boundary
-
-Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems. Indeed, logistic regression additionally uses the following classification rule
+Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. The model is such that the independent variable $z$ takes values that depend on those of the features $\mathbf{x})$, we can write $z = f(\mathbf{x})$. In particular, logistic regression uses the following classification rule
 
 $$\hat{y} =  
 \begin{cases}
-    1,& \text{if } \hat{p_1}(\mathbf{x}, \mathbf{w}, b) \geq 0.5\\
+    1,& \text{if } \sigma(z) \geq 0.5\\
     0,& \text{otherwise}
 \end{cases}
  $$
 
-Since $\sigma(z) = 0.5$ only when $z = 0$, it is trivial to see that we can re-write the last condition as 
+Since $\sigma(z) = 0.5$ only when $z = 0$, then we can re-write the last condition as 
 
  $$\hat{y} =  
 \begin{cases}
-    1,& \text{if } \mathbf{w}^\intercal \mathbf{x} + b \geq 0\\
+    1,& \text{if } z \geq 0\\
     0,& \text{otherwise}
-\end{cases}
+\end{cases} \label{ZDecisionBoundary}
  $$
-
 
  <center>
 <img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_0.5.png" alt="Plot of decision regions and boundary">
@@ -106,7 +90,39 @@ Since $\sigma(z) = 0.5$ only when $z = 0$, it is trivial to see that we can re-w
 <em>Decision regions and boundary.</em>
 </center>
 
-Analyzing this expression, we can see that there exists a decision boundary in $\mathbf{w}^\intercal \mathbf{x} + b = 0$. The values of $\mathbf{x}$ that satisfy this condition form an (affine) hyperplane in the sub-space generated by $\left\\{x_1, x_2, \ldots, x_n\right\\}$, where $b$ is the quantity by which this hyperplane is shifted from the origin. When $\mathbf{w}$ and $b$ are known, if $\mathbf{x}$ is such that the computation of $\mathbf{w}^\intercal \mathbf{x} + b$ is greater than $0$, then $\hat{y} = 1$, and  $\hat{y} = 0$ otherwise.
+In order to be able to use our model, however, we still need to define how $z$ depends on $\mathbf{x}$, i.e. the shape of $f(\mathbf{x})$.
+
+#### Defining parameters to adjust the estimations
+
+For a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$
+
+$$f(\mathbf{x}) = \mathbf{w}^\intercal \mathbf{x} + b $$
+
+and hence we can write
+
+$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b} = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
+
+In Eq. (\ref{logitSigma}), replacing $\sigma(z)$ and $z$ respectively by $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$ and $\mathbf{w}^\intercal \mathbf{x} + b$, then we have
+
+$$\log\left(\frac{\hat{p_1}(\mathbf{x}, \mathbf{w}, b)}{1 - \hat{p_1}(\mathbf{x}, \mathbf{w}, b)}\right) = \mathbf{w}^\intercal \mathbf{x} + b \label{logitProba}$$
+
+where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. This means that the sigmoid function takes a logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$ as input, and outputs the estimated probability $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
+
+In addition, Eq. (\ref{logitProba}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$. This gives us a hint of from where the logistic regression name comes: we are applying a regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
+
+#### Classification Rule and Decision Boundary
+
+Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems.
+We can update the classification rule in Eq. (\ref{ZDecisionBoundary}) by
+
+ $$\hat{y} =  
+\begin{cases}
+    1,& \text{if } \mathbf{w}^\intercal \mathbf{x} + b \geq 0\\
+    0,& \text{otherwise}
+\end{cases}
+ $$
+
+Analyzing this expression, we can see that there exists a decision boundary in $\mathbf{w}^\intercal \mathbf{x} + b = 0$. The values of $\mathbf{x}$ that satisfy this condition form an (affine) hyperplane in the sub-space generated by $\left\\{x_1, x_2, \ldots, x_n\right\\}$, where $b$ is the quantity by which this hyperplane is shifted from the origin. When $\mathbf{w}$ and $b$ are known, if $\mathbf{x}$ is such that the computation of $\mathbf{w}^\intercal \mathbf{x} + b$ is greater than $0$, then $\hat{y} = 1$, and $\hat{y} = 0$ otherwise.
 
 #### Cross-Entropy Loss Function
 
@@ -230,7 +246,7 @@ Note that the gradient descent algorithm represents only one option out of the m
 
 A logistic regression classifier only works for binary classification problems. When $y$ may take more than two values, i.e., $K>2$, however, we can still use logistic regression by relying in multiple classifiers of this type. More specifically, the proposal in these cases is to divide and conquer: instead of trying to come up with an algorithm that directly assigns the correct label to a sample $\mathbf{x}$, the results of multiple logistic regression classifiers that solve simpler binary classification problems are aggregated and used to reach a conclusion. 
 
-In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume that the training dataset $X$ of $m$ i.i.d. labeled samples contains, for each class $k \in \\{1, 2, \ldots, K\\}$, $m_k$ samples of that class,
+In particular, two different approaches exist to combine multiple classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO). In the following, we assume that the training dataset $X$ of $m$ i.i.d. labeled samples contains, $m_k$ samples for each class $k$,
 
 $$m_k = \sum_{i = 1}^m \left[y^{(i)} = k\right]$$
 
