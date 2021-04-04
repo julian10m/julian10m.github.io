@@ -65,7 +65,7 @@ We will later come back to Eq. (\ref{logitSigma}), (\ref{derivative1}) and (\ref
 
 To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, then any of them can be written as a function of the other one, and thus we actually only need to estimate one of these probabilities.
 
-Logistic regression proposes using a sigmoid function to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. The model is such that the independent variable $z$ takes values that depend on those of the features $\mathbf{x})$, we can write $z = f(\mathbf{x})$. In particular, logistic regression uses the following classification rule
+Logistic regression proposes using a sigmoid function $\sigma(z)$ to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$, where the independent variable $z$ takes values that depend on those of the features $\mathbf{x}$, i.e., we can write $z = f(\mathbf{x})$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. Moreover, logistic regression uses the following classification rule
 
 $$\hat{y} =  
 \begin{cases}
@@ -90,7 +90,7 @@ Since $\sigma(z) = 0.5$ only when $z = 0$, then we can re-write the last conditi
 <em>Decision regions and boundary.</em>
 </center>
 
-In order to be able to use our model, however, we still need to define how $z$ depends on $\mathbf{x}$, i.e. the shape of $f(\mathbf{x})$.
+In order to be able to use our model, however, we still need to define how $z$ depends on $\mathbf{x}$, i.e., the shape of $f(\mathbf{x})$.
 
 #### Defining parameters to adjust the estimations
 
@@ -100,7 +100,12 @@ $$f(\mathbf{x}) = \mathbf{w}^\intercal \mathbf{x} + b $$
 
 and hence we can write
 
-$$\hat{p_1}(\mathbf{x}, \mathbf{w}, b)= \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)= \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b} = \sigma(\mathbf{w}^\intercal \mathbf{x} + b)$$
+$$
+    \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)=
+    \hat{p_1}(\mathbf{x}, \mathbf{w}, b) =
+    \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b} =
+    \sigma(\mathbf{w}^\intercal \mathbf{x} + b)
+$$
 
 In Eq. (\ref{logitSigma}), replacing $\sigma(z)$ and $z$ respectively by $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$ and $\mathbf{w}^\intercal \mathbf{x} + b$, then we have
 
