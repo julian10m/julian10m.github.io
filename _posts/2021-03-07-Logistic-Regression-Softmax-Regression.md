@@ -3,7 +3,7 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1, x_2\ldots,x_N]^\intercal$, these algorithms estimate the probability a posteriori of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1, x_2,\ldots,x_N]^\intercal$, these algorithms estimate the probability a posteriori of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
 
 ## Logistic Regression
 
@@ -19,7 +19,7 @@ One of the main components of logistic regression is the sigmoid function $\sigm
 
 $$\sigma(z)= \frac{e^z}{1+e^z}\label{sigmoid}$$
 
-According to Eq. (\ref{sigmoid}), $\sigma(z)$ always lays between 0 and 1. In particular, since $e^0 = 1$, then $\sigma(0) = 1/2$. For large values of $z$, the term $e^z$ becomes a large positive number, and $\sigma(z)$ tends to $1$. On the other hand, when $z$ takes large negative values, $e^z$ approaches $0$, and thus $\sigma(z)$ is close to $0$. 
+According to Eq. (\ref{sigmoid}), $\sigma(z)$ always lays between 0 and 1. In particular, since $e^0 = 1$, then $\sigma(0) = 1/2$. For large values of $z$, the term $e^z$ becomes a large positive number, and $\sigma(z)$ tends to $1$. On the other hand, when $z$ takes large negative values, $e^z$ approaches $0$, and thus $\sigma(z)$ is close to $0$. The fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event.
 
 In addition, we have
 
@@ -65,7 +65,7 @@ We will later come back to Eq. (\ref{logitSigma}), (\ref{derivative1}) and (\ref
 
 To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, then any of them can be written as a function of the other one, and thus we actually only need to estimate one of these probabilities.
 
-Logistic regression proposes using a sigmoid function $\sigma(z)$ to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$, where the independent variable $z$ takes values that depend on those of the features $\mathbf{x}$, i.e., we can write $z = f(\mathbf{x})$. Indeed, the fact that the image of the sigmoid function is constrained to the interval $(0, 1)$ allows to use this function to express the probability of an event. Moreover, logistic regression uses the following classification rule
+Logistic regression proposes using a sigmoid function $\sigma(z)$ to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$, where $z$ varies according to the values that the features $\mathbf{x}$ take, i.e., we can write $z = f(\mathbf{x})$. Moreover, logistic regression uses the following classification rule
 
 $$\hat{y} =  
 \begin{cases}
@@ -74,7 +74,7 @@ $$\hat{y} =
 \end{cases}
  $$
 
-Since $\sigma(z) = 0.5$ only when $z = 0$, then we can re-write the last condition as 
+Since $\sigma(z)$ equals $0.5$ only when $z$ is null, then we can re-write the last condition as 
 
  $$\hat{y} =  
 \begin{cases}
@@ -84,21 +84,21 @@ Since $\sigma(z) = 0.5$ only when $z = 0$, then we can re-write the last conditi
  $$
 
  <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_0.5.png" alt="Plot of decision regions and boundary">
+<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_zspace.png" alt="Plot of decision regions and boundary as a function of z">
 
 <br>
-<em>Decision regions and boundary.</em>
+<em>Decision regions and boundary as a function of z.</em>
 </center>
 
-In order to be able to use our model, however, we still need to define how $z$ depends on $\mathbf{x}$, i.e., the shape of $f(\mathbf{x})$.
+We now have an estimator and a decision rule;however, in order to be able to use our model, we still need to define how $z$ depends on $\mathbf{x}$, i.e., the shape of $f(\mathbf{x})$.
 
 #### Defining parameters to adjust the estimations
 
-For a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector of $N$ parameters $\mathbf{w} = [w_1, \ldots, w_N]^\intercal$ plus a a bias or intercept $b$
+For a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector $\mathbf{w} = [w_1, w_2,\ldots,w_N]^\intercal$ such that $\forall j, \, w_j \ in mathbb{R}$ plus a bias or intercept $b \in \mathbb{R}$
 
-$$f(\mathbf{x}) = \mathbf{w}^\intercal \mathbf{x} + b $$
+$$z = f(\mathbf{x}) = \mathbf{w}^\intercal \mathbf{x} + b $$
 
-and hence we can write
+We can thus write
 
 $$
     \hat{P}\left(y = 1 \;\vert\; \mathbf{x}\right)=
@@ -107,13 +107,13 @@ $$
     \sigma(\mathbf{w}^\intercal \mathbf{x} + b)
 $$
 
-In Eq. (\ref{logitSigma}), replacing $\sigma(z)$ and $z$ respectively by $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$ and $\mathbf{w}^\intercal \mathbf{x} + b$, then we have
+Replacing $\sigma(z)$ and $z$ respectively by $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$ and $\mathbf{w}^\intercal \mathbf{x} + b$ in Eq. (\ref{logitSigma}), then we have
 
 $$\log\left(\frac{\hat{p_1}(\mathbf{x}, \mathbf{w}, b)}{1 - \hat{p_1}(\mathbf{x}, \mathbf{w}, b)}\right) = \mathbf{w}^\intercal \mathbf{x} + b \label{logitProba}$$
 
-where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. This means that the sigmoid function takes a logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$ as input, and outputs the estimated probability $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
+where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. This means that the sigmoid function takes logits as input, and outputs estimated probabilities.
 
-In addition, Eq. (\ref{logitProba}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$. This gives us a hint of from where the logistic regression name comes: we are applying a regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
+In addition, Eq. (\ref{logitProba}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$. This gives us a hint of from where the name logistic regression comes from: we are applying a regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
 
 #### Classification Rule and Decision Boundary
 
@@ -128,6 +128,14 @@ We can update the classification rule in Eq. (\ref{ZDecisionBoundary}) by
  $$
 
 Analyzing this expression, we can see that there exists a decision boundary in $\mathbf{w}^\intercal \mathbf{x} + b = 0$. The values of $\mathbf{x}$ that satisfy this condition form an (affine) hyperplane in the sub-space generated by $\left\\{x_1, x_2, \ldots, x_n\right\\}$, where $b$ is the quantity by which this hyperplane is shifted from the origin. When $\mathbf{w}$ and $b$ are known, if $\mathbf{x}$ is such that the computation of $\mathbf{w}^\intercal \mathbf{x} + b$ is greater than $0$, then $\hat{y} = 1$, and $\hat{y} = 0$ otherwise.
+
+
+ <center>
+<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_zspace.png" alt="Plot of decision regions and boundary as a function of x">
+
+<br>
+<em>Decision regions and boundary for different values of $w$ and $b$ as function of $x$ in a 1-dimensional case.</em>
+</center>
 
 #### Cross-Entropy Loss Function
 
