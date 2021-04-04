@@ -131,11 +131,20 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 
 
  <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace.png" alt="Plot of decision regions and boundary as a function of x">
+<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace.png" alt="Plot of decision regions and boundary as a function of x in a 1-dimensional case">
 
 <br>
 <em>Decision regions and boundary for different values of $w$ and $b$ as function of $x$ in a 1-dimensional case.</em>
 </center>
+
+ <center>
+<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace_3d.png" alt="Plot of decision regions and boundary as a function of x in a 2-dimensional case">
+
+<br>
+<em>Decision regions and boundary for different as function of $x$ in a 2-dimensional case.</em>
+</center>
+
+
 
 #### Cross-Entropy Loss Function
 
