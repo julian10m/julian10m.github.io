@@ -63,9 +63,9 @@ We will later come back to Eq. (\ref{logitSigma}), (\ref{derivative1}) and (\ref
 
 #### A model to estimate probabilities
 
-To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, then any of them can be written as a function of the other one, and thus we actually only need to estimate one of these probabilities.
+To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, we only need to estimate one of these probabilities as the remaining one can be expressed as a function of the first.
 
-Logistic regression proposes using a sigmoid function $\sigma(z)$ to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$, where $z$ varies according to the values that the features $\mathbf{x}$ take, i.e., we can write $z = f(\mathbf{x})$. Moreover, logistic regression uses the following classification rule
+Logistic regression proposes using a sigmoid function $\sigma(z)$ to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$ and the following classification rule
 
 $$\hat{y} =  
 \begin{cases}
@@ -90,13 +90,13 @@ Since $\sigma(z)$ equals $0.5$ only when $z$ is null, then we can re-write the l
 <em>Decision regions and boundary as a function of z.</em>
 </center>
 
-We now have an estimator and a decision rule;however, in order to be able to use our model, we still need to define how $z$ depends on $\mathbf{x}$, i.e., the shape of $f(\mathbf{x})$.
+So far, we have an estimator and a classification rule, yet, we still miss a definition for $z$. A priori, the guess is that the features we have chosen are meaningful for the classification task, and thus that the variable $z$ should depend on them.
 
 #### Defining parameters to adjust the estimations
 
-For a sample $\mathbf{x}$, the input to the sigmoid function is determined as the product between $\mathbf{x}$ and a weighting vector $\mathbf{w} = [w_1, w_2,\ldots,w_N]^\intercal$ such that $\forall j, \, w_j \ in mathbb{R}$ plus a bias or intercept $b \in \mathbb{R}$
+For a sample $\mathbf{x}$, the value that $z$ takes is determined as the product between $\mathbf{x}$ and a weighting vector $\mathbf{w} \in \mathbb{R}^N$ plus a bias or intercept $b \in \mathbb{R}$
 
-$$z = f(\mathbf{x}) = \mathbf{w}^\intercal \mathbf{x} + b $$
+$$z = \mathbf{w}^\intercal \mathbf{x} + b $$
 
 We can thus write
 
@@ -111,14 +111,14 @@ Replacing $\sigma(z)$ and $z$ respectively by $\hat{p_1}(\mathbf{x}, \mathbf{w},
 
 $$\log\left(\frac{\hat{p_1}(\mathbf{x}, \mathbf{w}, b)}{1 - \hat{p_1}(\mathbf{x}, \mathbf{w}, b)}\right) = \mathbf{w}^\intercal \mathbf{x} + b \label{logitProba}$$
 
-where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. This means that the sigmoid function takes logits as input, and outputs estimated probabilities.
+where the left term is known as the log-odds or logit of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$. Hence, this means that the sigmoid function translates logits into probabilities.
 
-In addition, Eq. (\ref{logitProba}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$. This gives us a hint of from where the name logistic regression comes from: we are applying a regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
+Eq. (\ref{logitProba}) resembles the one we previously saw for linear regression, where $\hat{y} =  \mathbf{w}^\intercal \mathbf{x} + b$. This gives us a hint of from where the name logistic regression comes from: we are applying a regression to the logits of $\hat{p_1}(\mathbf{x}, \mathbf{w}, b)$.
 
 #### Classification Rule and Decision Boundary
 
 Despite the close relationship between linear and logistic regression, the first is used for regression tasks, but the latter in classification problems.
-We can update the classification rule in Eq. (\ref{ZDecisionBoundary}) by
+Considering how $z$ is calculated, we can update the classification rule in Eq. (\ref{ZDecisionBoundary})
 
  $$\hat{y} =  
 \begin{cases}
@@ -141,7 +141,7 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 <img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace_3d.png" alt="Plot of decision regions and boundary as a function of x in a 2-dimensional case">
 
 <br>
-<em>Decision regions and boundary for different as function of $x$ in a 2-dimensional case.</em>
+<em>Decision regions and boundary as function of $x$ in 2-dimensional cases.</em>
 </center>
 
 
