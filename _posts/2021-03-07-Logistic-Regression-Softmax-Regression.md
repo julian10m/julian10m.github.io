@@ -215,25 +215,21 @@ When the true distributions of $y=1 \;\vert\; \mathbf{x}$ and $y=0 \;\vert\; \ma
 
 #### Optimizing the parameters 
 
-To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is differentiable, since it is a composition of differentiable functions. Hence, we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. 
+To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is a composition of differentiable functions, and thus is differentiable itself. This means that we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. 
 
-To begin, we can first focus on the derivative of $J(X, \mathbf{w}, b)$ with respect to a component $w_j$ of $\mathbf{w}$. Noting that in Eq. (\ref{cost-function}), $y^{(i)}$ does not depend on $w_j$, then we only need to find the derivatives of $\log\left(\left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$ and $\log\left(1 - \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$. 
+To begin, we can first focus on the derivative of $J(X, \mathbf{w}, b)$ with respect to component $w_j$ of $\mathbf{w}$. Noting that in Eq. (\ref{cost-function}), $y^{(i)}$ does not depend on $w_j$, then we only need to find the derivatives of $\log\left(\left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$ and $\log\left(1 - \left. \sigma(z) \right\rvert_{z = \mathbf{w}^\intercal \mathbf{x} + b}\right)$. 
 
 To derive these calculations, first note that
 
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{\partial J(X, \mathbf{w}, b)}{\partial z} \frac{\partial z}{\partial w_j}$$
 
-where it is trivial to see that $\frac{\partial z}{\partial w_j} = x_j^{(i)}$, and hence we only need to find $\frac{\partial J(X, \mathbf{w}, b)}{\partial z}$.
-
-Since 
+where it is trivial to see that $\frac{\partial z}{\partial w_j} = x_j^{(i)}$, and hence we only need to find $\frac{\partial J(X, \mathbf{w}, b)}{\partial z}$. In particular, since 
 
 $$\frac{\partial \log(\sigma(z))}{\partial z} = \frac{\sigma'(z)}{\sigma(z)}$$
 
 $$\frac{\partial \log(1 - \sigma(z))}{\partial z} = -\frac{\sigma'(z)}{1 - \sigma(z)}$$
 
-we can use the results of Eq. (\ref{derivative1}) and (\ref{derivative2}) to solve each of these calculations.
-
-Applying some algebra, it is simple to show that
+we can use the results of Eq. (\ref{derivative1}) and (\ref{derivative2}) to solve each of these calculations. By further applying some algebra, it is simple to show that
 
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdw-LR}
 $$
