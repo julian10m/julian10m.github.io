@@ -3,7 +3,7 @@ layout: post
 title: Logistic and Softmax Regression
 ---
 
-Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, i.e., $\mathbf{x}=[x_1, x_2,\ldots,x_N]^\intercal$, these algorithms estimate the probability a posteriori of $y$ given $\mathbf{x}$. Based on this estimation, these classifiers apply a decision rule that allows them to classify each sample, i.e., assign them an estimated class.
+Logistic and softmax regression are supervised machine learning algorithms used for classification tasks. Given a categorical target variable $y$ that may take $K$ possible values, and an observation $\mathbf{x}$ composed of $N$ features/predictors, these algorithms estimate the probability a posteriori of $y$ given $\mathbf{x}$. A classification rule follows each estimation, thus allowing to to classify each sample, i.e., assign them an estimated class.
 
 ## Logistic Regression
 
@@ -63,7 +63,16 @@ We will later come back to Eq. (\ref{logitSigma}), (\ref{derivative1}) and (\ref
 
 #### A model to estimate probabilities
 
-To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, if $P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})$, then our guess should be $\hat{y} = 1$, and $\hat{y} = 0$ otherwise. In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, we only need to estimate one of these probabilities as the remaining one can be expressed as a function of the first.
+To classify any sample $\mathbf{x}$, assuming a probabilistic model, we are interested in estimating $P(y = 1 \;\vert\; \mathbf{x})$ and $P(y = 0 \;\vert\; \mathbf{x})$. To minimize the classification error, according to Bayesian decision theory, our classifications should be
+
+$$\hat{y} = 
+\begin{cases}
+    1,& \text{if } P(y=1 \;\vert\; \mathbf{x}) > P(y=0 \;\vert\; \mathbf{x})\\
+    0,& \text{otherwise}
+\end{cases}
+$$
+
+In practice, since $P(y = 1 \;\vert\; \mathbf{x}) + P(y = 0 \;\vert\; \mathbf{x}) = 1$, we only need to estimate one of these probabilities as the remaining one can be expressed as a function of the first.
 
 Logistic regression proposes using a sigmoid function $\sigma(z)$ to estimate $P\left(y = 1 \;\vert\; \mathbf{x}\right)$ and the following classification rule
 
