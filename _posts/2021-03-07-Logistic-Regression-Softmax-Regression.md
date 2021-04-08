@@ -213,7 +213,7 @@ In particular, using the cross-entropy loss function as the cost function tends 
 
 When the true distributions of $y=1 \;\vert\; \mathbf{x}$ and $y=0 \;\vert\; \mathbf{x}$ are clearly distinguishable, we would want our classifier not to hesitate. This means that, for all samples $\mathbf{x}^{(i)}$ and $\mathbf{x}^{(j)}$ in our training set for which $y^{(i)}=1$ and $y^{(j)}=0$ we would like to end up computing $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$ and $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, respectively. On the other hand, when the true distributions overlap, our hope is that we will find values of $\mathbf{w}$ and $b$ such that the estimations will be confident for most training samples. However, for those samples close to the decision boundary, we expect to see that our classifier is less confident. Moreover, it is likely that improving the estimation on these samples actually requires contradictory changes on the values of $\mathbf{w}$ and $b$, i.e., improving the estimation on one, makes worse the other. Hence, the best values that $\mathbf{w}$ and $b$ may take are those which better balance this trade-off.
 
-#### Optimizing the parameters 
+#### Optimizing the parameters
 
 To find the optimal value of $\mathbf{w}$ and $b$, we need to minimize the cost function $J(X, \mathbf{w}, b)$. Analyzing Eq. (\ref{cost-function}), we can see that $J(X, \mathbf{w}, b)$ is a composition of differentiable functions, and thus is differentiable itself. This means that we can find the minimum of $J(X, \mathbf{w}, b)$ looking for the point where all the partial derivatives become null. 
 
@@ -239,14 +239,7 @@ Proceeding in a similar way, considering that $\frac{\partial z}{\partial b} = 1
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial b} = \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdb-LR}
 $$
 
-Unfortunately, setting Eq. (\ref{dJdw-LR}) and (\ref{dJdb-LR}) to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions, e.g. the gradient descent algorithm.
-
-
-#### Gradient Descent Algorithm 
-
-When applying the gradient descent algorithm in a logistic regression problem, note that since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured. During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary for the classification problem. Hopefully, at the end of the process, the hyperplane will end up "well" located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. 
-
-To implement the gradient descent algorithm, it is convenient to have a vectorized version of the functions we have studied. Defining 
+Eq. (\ref{dJdw-LR}) and (\ref{dJdb-LR}) can be conveniently expressed in a vectorized way, relying on matrix notation. Defining 
 
 $$\mathbf{X}^\intercal = \begin{bmatrix}
 1 & 1 & \cdots & 1 \\
@@ -272,7 +265,45 @@ $$J(\mathbf{X}, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma
 
 $$\nabla J(\mathbf{X}, \Theta) = \frac{1}{m} X^\intercal\left(\sigma(\mathbf{X} \Theta) - \mathbf{y}\right)$$
 
-Note that the gradient descent algorithm represents only one option out of the multiple optimization algorithms that can be used to obtain a numerical solution.
+Unfortunately, setting these equations to zero results into what are called transcendental equations, i.e., equations for which there is no closed form to solve them. To overcome this limitation, the only option left is to rely on numerical solutions e.g. the gradient descent algorithm. Regardless of the optimization algorithm that is chosen, since $J(X, \mathbf{w}, b)$ is convex, converging towards the only, and thus optimal, minimum is ensured provided that multiple iterations are performed. 
+
+During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary for the classification problem. Hopefully, at the end of the process, the hyperplane will end up "well" located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. An example can be seen below.
+
+<center>
+<img src="/files/Figures/Logistic-Softmax-Regression/logistic_regression_convergence_steps.png" alt="Plot showing how the decision boundaries during the training process.">
+
+<br>
+<em>Update of decision regions during the training process. The values of $\mathbf{w}$ and $b$ change as the optimization algorithm is run. As a consequence, for different number of iterations, different decision boundaries are found. Towards the beginning, the changes are visually larger, contrasting with the end of the process, where the boundary does not change much. The optimal decision boundary serves as reference, and is only known since the data was synthetically generated.</em>
+</center>
+
+A complementary view, that highlighting the changes for larger number of iterations is shown below
+
+<center>
+<img src="/files/Figures/Logistic-Softmax-Regression/logistic_regression_convergence_all_in_one.png" alt="Illustration emphasizing that the decision boundary changes even when the number of iterations is already large.">
+
+<br>
+<em>Decision boundary as a function of the number of iterations. We can see that despite the changes towards the end of the training process seem negligible, the algorithm is still able to better approach the optimal decision boundary.</em>
+</center>
+
+Finally, the figure below shows the 3D sigmoid-function resulting at the end of the decision process, overlaying the samples such that the z-axis represents the corresponding label for each of them.
+
+<center>
+<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace_3d.png" alt="Plot showing the resulting 3D sigmoid function.">
+
+<br>
+<em>Fitted 3D sigmoid-like function.</em>
+</center>
+
+#### Logistic Regression in Action
+
+We have analyzed logistic regression in detail; now it is time to see how it usually works. Given multiple training sets $\\{X_1, X_2, \ldots, X_q\\}$, assuming the all represent different problems, the image below shows the decision boundaries that logistic regression finds for each of them.
+
+<center>
+<img src="/files/Figures/Logistic-Softmax-Regression/logistic_regression_multiple cases.png" alt="Plot showing how the decision boundaries during the training process.">
+
+<br>
+<em>Logistic regression applied to representative training sets for different classification problems.</em>
+</center>
 
 ###  Multinomial Classification
 
