@@ -293,11 +293,28 @@ Finally, the figure below shows the 3D sigmoid-function resulting at the end of 
 
 ## Logistic Regression in Action
 
-We have analyzed logistic regression in detail; now it is time to see how it performs given training sets of different problems. The image below shows the decision boundaries that logistic regression finds for each case.
+We have analyzed logistic regression in detail; now it is time to see how it performs on different examples. Given training sets of different problems, the image below shows the decision boundaries that logistic regression finds for each case. As we can see, the performance for each problem is rather reasonable.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/logistic_regression_multiple cases.png" alt="Plot showing how the decision boundaries during the training process.">
+<img src="/files/Figures/Logistic-Regression/multiple_datasets_different_problems.png" alt="Plot showing how the decision boundaries during the training process.">
 
 <br>
 <em>Logistic regression applied to representative training sets of different classification problems.</em>
 </center>
+
+On the other hand, we could wonder what happens when we have representative datasets for the same classification problem. If we run logistic regression in each of these datasets, we expect to see that the estimated decision boundary changes at each time, but usually they all fluctuate around the optimal decision boundary. This can be seen in the figure below
+
+<center>
+<img src="/files/Figures/Logistic-Regression/multiple_datasets_same_problem.png" alt="Plot showing how the decision boundaries during the training process.">
+
+<br>
+<em>Logistic regression applied to representative training sets of different classification problems.</em>
+</center>
+
+Finally, it is important to mention that non-linear decision boundaries can be also be obtained if polynomial and interaction terms are used for the features. An example can be seen below. 
+
+###  Multinomial Classification
+
+A logistic regression classifier only works for binary classification problems. However, When $y$ may take more than two values, i.e., $K>2$, we can still use this method relying on multiple logistic regression classifiers. In particular, two different approaches exist to combine them: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO).
+
+While workarounds such as OvR/OvA and OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In addition, linear and quadratic discriminant analysis, and also K-nearest-neighbours, can be used instead.
