@@ -313,7 +313,17 @@ On the other hand, given training sets of different problems, the image below sh
 <em>Logistic regression applied to representative training sets of different classification problems.</em>
 </center>
 
-Finally, it is important to mention that we can also obtain non-linear decision boundaries relying on logistic regression. For this to be possible, polynomial and interaction terms among the different features need to be used. Examples of the performance of logistic regression in cases like this can be seen below.
+Finally, it is important to mention that we can also obtain non-linear decision boundaries relying on logistic regression. For this to be possible, polynomial and interaction terms among the different features need to be used. 
+As a rule of thumb, a good approach is to set the largest polynomial order to a "high" value, e.g. 4 or 5, and apply regularization to avoid over-fitting.
+In addition, standardizing the features may help the algorithm to converge.
+An example of the performance of logistic regression in cases like this can be seen below.
+
+<center>
+<img src="/files/Figures/Logistic-Regression/add non_linear_decision_boundary.png" alt="Plot showing a non-linear decision boundary obtained with logistic regression.">
+
+<br>
+<em>Non-linear decision boundary.</em>
+</center>
 
 ###  Multinomial Classification
 
