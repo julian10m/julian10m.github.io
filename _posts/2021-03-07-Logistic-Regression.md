@@ -25,7 +25,7 @@ $$1 - \sigma(z) = \frac{1}{1+e^z} = \sigma(-z)$$
 which means that $1 - \sigma(z)$ is a mirrored copy of $\sigma(z)$.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/sigmoid.png" alt="Plot of sigmoid function $\sigma(z)$ and $1 - \sigma(z)$.">
+<img src="/files/Figures/Logistic-Regression/sigmoid.png" alt="Plot of sigmoid function $\sigma(z)$ and $1 - \sigma(z)$.">
 
 <br>
 <em>Sigmoid function $\sigma(z)$ and $1 - \sigma(z)$.</em>
@@ -44,7 +44,7 @@ $$\Longrightarrow \sigma'(z)= \sigma(z)\left(1 - \sigma(z)\right) \label{derivat
 Since $\sigma(z)$ and $1- \sigma(z)$ are always positive, so is $\sigma'(z)$, and thus $\sigma(z)$ is a monotonically increasing function. While the maximum of $\sigma'(z)$ is placed in $z=0$, as the module of $z$ increases, $\sigma'(z)$ approaches zero in a symmetrical way since $\sigma'(z) = \sigma'(-z)$, i.e. $\sigma'(z)$ is an even function.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/derivative_sigmoid.png" alt="Plot of the derivative of the sigmoid function $\sigma(z)$.">
+<img src="/files/Figures/Logistic-Regression/derivative_sigmoid.png" alt="Plot of the derivative of the sigmoid function $\sigma(z)$.">
 
 <br>
 <em>Plot of $\sigma'(z)$, the derivative of the sigmoid function $\sigma(z)$.</em>
@@ -90,7 +90,7 @@ Since $\sigma(z)$ equals $0.5$ only when $z$ is null, then we can re-write the l
  $$
 
  <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_zspace.png" alt="Plot of decision regions and boundary">
+<img src="/files/Figures/Logistic-Regression/decision_region_zspace.png" alt="Plot of decision regions and boundary">
 
 <br>
 <em>Decision regions and boundary. If $z \geq 0$ we decide $\hat{y}=1$, and $\hat{y}=0$ otherwise.</em>
@@ -137,7 +137,7 @@ To better understand the effect of the different values that $\mathbf{w}$ and $b
 We first focus on a 1-dimensional case, where similar to $b$, $\mathbf{x}$ and $\mathbf{w}$ are also scalars, denoted $x$ and $w$, respectively. For a fixed value of $b$, from left to right, the plots reveal that the larger $w$ is, the sharper the S-shape of the sigmoid function becomes. On the other hand, keeping $w$ constant, we can see that modifying $b$ only allows to shift the position where the transition from $0$ to $1$ begins, but does change the intrinsic shape of curve. The decision boundary moves around in each plot, but is placed in $-b/w$ in all cases. The samples such that $x < -b/w$ are labeled with $\hat{y} = 0$, and the remaining ones with $\hat{y} = 1$.
 
  <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace.png" alt="Plot of decision regions and boundary as a function of x in a 1-dimensional case">
+<img src="/files/Figures/Logistic-Regression/decision_region_xspace.png" alt="Plot of decision regions and boundary as a function of x in a 1-dimensional case">
 
 <br>
 <em>Decision regions and boundary for different values of $w$ and $b$ as function of $x$ when $N=1$.</em>
@@ -146,7 +146,7 @@ We first focus on a 1-dimensional case, where similar to $b$, $\mathbf{x}$ and $
 On the other hand, in a 2-dimensional case, we have $\sigma(x_1 w_1 + x_2 w_2 + b)$. As before, increasing values of $w_1$ and $w_2$ lead to shaper transitions from $0$ to $1$, and changing the value of $b$ simply allows to place the same surface in different locations. Complementary to the 1-dimensional case, we see that the ratio $w_1/w_2$ allows to tune the rotation of the 3D-sigmoid-like surface. The decision boundary lies in $x_2 = -x_1 w_1 / w_2 - b/w_2$ for all cases, and is more clearly shown on the left panels.
 
  <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/decision_region_logistic_xspace_3d.png" alt="Plot of decision regions and boundary as a function of x in a 2-dimensional case">
+<img src="/files/Figures/Logistic-Regression/decision_region_xspace_3d.png" alt="Plot of decision regions and boundary as a function of x in a 2-dimensional case">
 
 <br>
 <em>Decision regions and boundary as function of $x_1$ and $x_2$ when $N = 2$.</em>
@@ -198,7 +198,7 @@ $$c\left( y^{(i)}, \hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right) =
 For example, when $y^{(i)} = 1$, if $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 1$, then the cost contributed by sample $(\mathbf{x}^{(i)}, y^{(i)})$ is 0. However, on the opposite extreme, if $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b) = 0$, then the cost would become infinite. For intermediate values, the logarithm in the expression leads to penalize more "worse" decisions, e.g., for $y^{(i)} = 1$, the smaller $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is, the much larger $\log\left(\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)\right)$ will be.  In addition, analyzing the expression, we see that the cost for $y^{(i)} = 0$ is a shifted mirrored copy of that for $y^{(i)} = 1$: the curve is identical, but rather penalizing more severely the more that $\hat{p_1}(\mathbf{x}^{(i)}, \mathbf{w}, b)$ is closer to $1$.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/cost_function_logistic.png" alt="Plot of cost function when y = 1 and y = 0">
+<img src="/files/Figures/Logistic-Regression/cost_function.png" alt="Plot of cost function when y = 1 and y = 0">
 
 <br>
 <em>Cost function composition.</em>
@@ -267,7 +267,7 @@ Unfortunately, setting these equations to zero results into what are called tran
 During the training, the values of $\mathbf{w}$ and $b$ will be iteratively updated, hence modifying the positioning of the hyperplane that serves as decision boundary for the classification problem. Hopefully, at the end of the process, the hyperplane will end up "well" located, i.e., for most training samples, the estimations and classifications the algorithm performs will be reasonably good. An example can be seen below.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/logistic_regression_convergence_steps.png" alt="Plot showing how the decision boundaries during the training process.">
+<img src="/files/Figures/Logistic-Regression/convergence_steps.png" alt="Plot showing how the decision boundaries during the training process.">
 
 <br>
 <em>Update of decision regions during the training process. The values of $\mathbf{w}$ and $b$ change as the optimization algorithm is run. As a consequence, for different number of iterations, different decision boundaries are found. Towards the beginning, the changes are visually larger, contrasting with the end of the process, where the boundary does not change much. The optimal decision boundary serves as reference, and is only known since the data was synthetically generated.</em>
@@ -276,7 +276,7 @@ During the training, the values of $\mathbf{w}$ and $b$ will be iteratively upda
 A complementary view, highlighting the changes in the decision boundary for larger number of iterations, is shown below.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/logistic_regression_convergence_all_in_one.png" alt="Illustration emphasizing that the decision boundary changes even when the number of iterations is already large.">
+<img src="/files/Figures/Logistic-Regression/convergence_all_in_one.png" alt="Illustration emphasizing that the decision boundary changes even when the number of iterations is already large.">
 
 <br>
 <em>Decision boundary as a function of the number of iterations. We can see that despite the changes towards the end of the training process seem negligible, the algorithm is still able to better approach the optimal decision boundary.</em>
@@ -285,7 +285,7 @@ A complementary view, highlighting the changes in the decision boundary for larg
 Finally, the figure below shows the 3D sigmoid-function resulting at the end of the decision process, overlaying the samples such that the z-axis represents the corresponding label for each of them.
 
 <center>
-<img src="/files/Figures/Logistic-Softmax-Regression/3d_convergence_plot.png" alt="Plot showing the resulting 3D sigmoid function.">
+<img src="/files/Figures/Logistic-Regression/3d_convergence.png" alt="Plot showing the resulting 3D sigmoid function.">
 
 <br>
 <em>Fitted 3D sigmoid-like function.</em>
@@ -293,16 +293,9 @@ Finally, the figure below shows the 3D sigmoid-function resulting at the end of 
 
 ## Logistic Regression in Action
 
-We have analyzed logistic regression in detail; now it is time to see how it performs on different examples. Given training sets of different problems, the image below shows the decision boundaries that logistic regression finds for each case. As we can see, the performance for each problem is rather reasonable.
+We have analyzed logistic regression in detail; now it is time to see how it performs on different examples. 
 
-<center>
-<img src="/files/Figures/Logistic-Regression/multiple_datasets_different_problems.png" alt="Plot showing how the decision boundaries during the training process.">
-
-<br>
-<em>Logistic regression applied to representative training sets of different classification problems.</em>
-</center>
-
-On the other hand, we could wonder what happens when we have representative datasets for the same classification problem. If we run logistic regression in each of these datasets, we expect to see that the estimated decision boundary changes at each time, but usually they all fluctuate around the optimal decision boundary. This can be seen in the figure below
+First, we could wonder what happens when we have representative datasets for the same classification problem. If instead of aggregating them, we run logistic regression in each of these datasets, we expect to see that the estimated decision boundary changes at each time. However, all decision boundaries will be found to fluctuate around the optimal decision boundary. This can be seen in the figure below.
 
 <center>
 <img src="/files/Figures/Logistic-Regression/multiple_datasets_same_problem.png" alt="Plot showing how the decision boundaries during the training process.">
@@ -311,10 +304,19 @@ On the other hand, we could wonder what happens when we have representative data
 <em>Logistic regression applied to representative training sets of different classification problems.</em>
 </center>
 
-Finally, it is important to mention that non-linear decision boundaries can be also be obtained if polynomial and interaction terms are used for the features. An example can be seen below. 
+On the other hand, given training sets of different problems, the image below shows the decision boundaries that logistic regression finds for each case. As we can see, the performance for each problem is rather reasonable.
+
+<center>
+<img src="/files/Figures/Logistic-Regression/multiple_datasets_different_problems.png" alt="Plot showing how the decision boundaries during the training process.">
+
+<br>
+<em>Logistic regression applied to representative training sets of different classification problems.</em>
+</center>
+
+Finally, it is important to mention that we can also obtain non-linear decision boundaries relying on logistic regression. For this to be possible, polynomial and interaction terms among the different features need to be used. Examples of the performance of logistic regression in cases like this can be seen below.
 
 ###  Multinomial Classification
 
-A logistic regression classifier only works for binary classification problems. However, When $y$ may take more than two values, i.e., $K>2$, we can still use this method relying on multiple logistic regression classifiers. In particular, two different approaches exist to combine them: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO).
+A logistic regression classifier only works for binary classification problems. However, multiple of these classifiers can be used to handle cases where $y$ may take more than two values, i.e., $K>2$. In particular, two different approaches exist to combine binary classifiers: one-vs-the-rest (OvR), also called one-vs-all (OvA), and one-vs-one (OvO).
 
 While workarounds such as OvR/OvA and OvO allow to use logistic regression for multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In addition, linear and quadratic discriminant analysis, and also K-nearest-neighbours, can be used instead.
