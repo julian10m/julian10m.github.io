@@ -319,7 +319,7 @@ In addition, standardizing the features may help the algorithm to converge.
 An example of the performance of logistic regression in cases like this can be seen below.
 
 <center>
-<img src="/files/Figures/Logistic-Regression/add non_linear_decision_boundary.png" alt="Plot showing a non-linear decision boundary obtained with logistic regression.">
+<img src="/files/Figures/Logistic-Regression/non_linear_decision_boundary.png" alt="Plot showing a non-linear decision boundary obtained with logistic regression.">
 
 <br>
 <em>Non-linear decision boundary.</em>
