@@ -322,7 +322,7 @@ An example of the performance of logistic regression in cases like this can be s
 <img src="/files/Figures/Logistic-Regression/non_linear_decision_boundary.png" alt="Plot showing a non-linear decision boundary obtained with logistic regression.">
 
 <br>
-<em>Non-linear decision boundary.</em>
+<em>Estimated (red) and optimal (black) non-linear decision boundaries.</em>
 </center>
 
 ###  Multinomial Classification
