@@ -134,7 +134,7 @@ Analyzing this expression, we can see that there exists a decision boundary in $
 
 To better understand the effect of the different values that $\mathbf{w}$ and $b$ mat take, we can plot the sigmoid function against $\mathbf{x}$ instead of $z$, as we previously did.
 
-We first focus on a case such that $N=1$. In these scenarios, similar to $b$, $\mathbf{x}$ and $\mathbf{w}$ are also scalars, and thus respectively denoted $x$ and $w$. In the figure below, for a fixed value of $b$, from left to right, the plots reveal that the larger $w$ is, the sharper the S-shape of the sigmoid function becomes. In other words, $w$ allows to tune the steepness of the resulting function. On the other hand, keeping $w$ constant, we can see that modifying $b$ only shifts the position where the transition from $0$ to $1$ begins, i.e. the exact location where the threshold of 0.5 occurs changes, but the intrinsic shape of curve does not. Focusing on the decision boundaries, we can see that all sigmoid functions reach 0.5 when $x$ equals $-b/w$. Hence, for a fixed $w$, the influence of $b$ is larger the smaller $w$ is.
+We first focus on a case such that $N=1$. In these scenarios, $\mathbf{x}$ and $\mathbf{w}$ are, similar to $b$, scalars and thus respectively denoted $x$ and $w$. In the figure below, for a fixed value of $b$, from left to right, the plots reveal that the larger $w$ is, the sharper the S-shape of the sigmoid function becomes. In other words, $w$ allows to tune the steepness of the resulting function. On the other hand, keeping $w$ constant, we can see that modifying $b$ only shifts the position where the transition from $0$ to $1$ begins, i.e. the exact location where the threshold of 0.5 occurs changes, but the intrinsic shape of curve does not. Focusing on the decision boundaries, we can see that all sigmoid functions reach 0.5 when $x$ equals $-b/w$. Hence, for a fixed $w$, the influence of $b$ is larger the smaller $w$ is.
 For the samples such that $x < -b/w$, we have $\hat{y} = 0$, and for the remaining ones $\hat{y} = 1$.
 
  <center>
@@ -144,7 +144,7 @@ For the samples such that $x < -b/w$, we have $\hat{y} = 0$, and for the remaini
 <em>Decision regions and boundary for different values of $w$ and $b$ as function of $x$ when $N=1$.</em>
 </center>
 
-On the other hand, in a 2-dimensional case, we have $\sigma(x_1 w_1 + x_2 w_2 + b)$. As before, increasing values of $w_1$ and $w_2$ lead to shaper transitions from $0$ to $1$, and changing the value of $b$ simply allows to place the same surface in different locations. Complementary to the 1-dimensional case, we see that the ratio $w_1/w_2$ allows to tune the rotation of the 3D-sigmoid-like surface. The decision boundary lies in $x_2 = -x_1 w_1 / w_2 - b/w_2$ for all cases, and is more clearly shown on the left panels.
+On the other hand, when $N=2$, we have a sigmoid function of the type $\sigma(x_1 w_1 + x_2 w_2 + b)$. As before, the figure below reveals that increasing values of $w_1$ and $w_2$ lead to shaper transitions from $0$ to $1$, and changing the value of $b$ simply allows to place the 3D sigmoid function in different locations. Complementary to the 1-dimensional case, we see that the ratio $w_1/w_2$ allows to tune the rotation of the sigmoid surface. The decision boundary lies in $x_2 = -x_1 w_1 / w_2 - b/w_2$ for all cases, and can be more clearly seen on the left panels.
 
  <center>
 <img src="/files/Figures/Logistic-Regression/decision_region_xspace_3d.png" alt="Plot of decision regions and boundary as a function of x in a 2-dimensional case">
