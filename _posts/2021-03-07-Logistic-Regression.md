@@ -219,7 +219,8 @@ To derive these calculations, first note that
 
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{\partial J(X, \mathbf{w}, b)}{\partial z} \frac{\partial z}{\partial w_j}$$
 
-where it is trivial to see that $\frac{\partial z}{\partial w_j} = x_j^{(i)}$, and hence we only need to find $\frac{\partial J(X, \mathbf{w}, b)}{\partial z}$. In particular, since 
+where it is trivial to see that $\frac{\partial z}{\partial w_j} = x_j^{(i)}$.
+Hence, we only need to find $\frac{\partial J(X, \mathbf{w}, b)}{\partial z}$. In particular, since 
 
 $$\frac{\partial \log(\sigma(z))}{\partial z} = \frac{\sigma'(z)}{\sigma(z)}$$
 
@@ -281,13 +282,13 @@ A complementary view, highlighting the changes in the decision boundary for larg
 <em>Decision boundary as a function of the number of iterations. We can see that despite the changes towards the end of the training process seem negligible, the algorithm is still able to better approach the optimal decision boundary.</em>
 </center>
 
-Finally, the figure below shows the 3D sigmoid-function resulting at the end of the decision process, overlaying the samples such that the z-axis represents the corresponding label for each of them.
+Finally, the figure below shows the 3D sigmoid function resulting at the end of the decision process. In addition, the plot includes the training samples where the z-axis represents the corresponding label for each of them.
 
 <center>
 <img src="/files/Figures/Logistic-Regression/3d_convergence.png" alt="Plot showing the resulting 3D sigmoid function.">
 
 <br>
-<em>Fitted 3D sigmoid-like function.</em>
+<em>Fitted 3D sigmoid function.</em>
 </center>
 
 ## Logistic Regression in Action
