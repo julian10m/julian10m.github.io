@@ -226,17 +226,15 @@ $$\frac{\partial \log(\sigma(z))}{\partial z} = \frac{\sigma'(z)}{\sigma(z)}$$
 
 $$\frac{\partial \log(1 - \sigma(z))}{\partial z} = -\frac{\sigma'(z)}{1 - \sigma(z)}$$
 
-we can use the results of Eq. (\ref{derivative1}) and (\ref{derivative2}) to solve each of these calculations. By further applying some algebra, it is simple to show that
+we can use the results of Eq. (\ref{derivative1}) and (\ref{derivative2}) to solve each of these calculations. We can proceed in a similar way to find the derivative with respect to $b$, just noticing that $\frac{\partial z}{\partial b} = 1$. By further applying some algebra, it is simple to show that
 
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial w_j} = \frac{1}{m} \sum_{i=1}^m x_j^{(i)}\left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdw-LR}
 $$
 
-Proceeding in a similar way, considering that $\frac{\partial z}{\partial b} = 1$, we can also find that
-
 $$\frac{\partial J(X, \mathbf{w}, b)}{\partial b} = \frac{1}{m} \sum_{i=1}^m \left(\sigma(\mathbf{w}^\intercal \mathbf{x}^{(i)} + b) - y^{(i)}\right) \label{dJdb-LR}
 $$
 
-Eq. (\ref{dJdw-LR}) and (\ref{dJdb-LR}) can be conveniently expressed in a vectorized way, relying on matrix notation. Defining 
+Eq. (\ref{dJdw-LR}) and (\ref{dJdb-LR}) can be conveniently expressed in a vectorized way, relying on matrix notation 
 
 $$\mathbf{X}^\intercal = \begin{bmatrix}
 1 & 1 & \cdots & 1 \\
@@ -255,8 +253,6 @@ y^{(2)} \\
 y^{(m)} \\
 \end{bmatrix}
 $$
-
-we can then write 
 
 $$J(\mathbf{X}, \Theta) = -\frac{1}{m}\Big(\mathbf{y}^\intercal \log\left(\sigma(\mathbf{X} \Theta)\right)+ (1 - \mathbf{y})^\intercal \log\left(1 - \sigma(\mathbf{X} \Theta)\right)\Big)$$
 
