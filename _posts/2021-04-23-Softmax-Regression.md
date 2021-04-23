@@ -3,7 +3,7 @@ layout: post
 title: Softmax Regression
 ---
 
-Softmax regression is a supervised machine learning algorithm used in classification tasks where a target variable $y$ may take $K>2$ values, and we are interested in labeling an observation composed of $N$ features/predictors. While workarounds such as OvR and OvO allow to use binary classifiers (e.g. logistic regression) in multinomial classification tasks, softmax regression is a method specifically conceived for this purpose. In particular, softmax regression jointly tunes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ that are used to estimate one a posteriori probability per class.
+Softmax regression is a supervised machine learning algorithm used in classification tasks where a target variable $y$ may take $K$ values, and we are interested in labeling an observation composed of $N$ features/predictors. While workarounds such as OvR and OvO allow to use binary classifiers (e.g. logistic regression) in multinomial classification tasks, softmax regression is a method specifically conceived for this purpose, i.e. cases where $K>2$. In particular, softmax regression jointly tunes $K$ weighting vectors $\\{\mathbf{w_1}, \mathbf{w_2}, \ldots, \mathbf{w_K}\\}$ and intercepts $\\{b_1, b_2, \ldots, b_K\\}$ that are used to estimate one a posteriori probability per class.
 
 ## Softmax Function
 
