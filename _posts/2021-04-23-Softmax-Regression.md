@@ -20,7 +20,7 @@ where each $\psi_k:  \mathbb{R}^K \to (0, 1)$ is a scalar function
 
 $$\psi_k(z_1, z_2, \ldots, z_K) = \frac{e^{z_k}}{\sum_{l=1}^K e^{z_l}} \label{psi_component}$$ 
 
-According to this definition, we can see that the denominator acts as a normalization factor, ensuring that $0 <  \psi_k(z_1, z_2, \ldots, z_K) < 1$ for all components. Moreover, we can see that $\sum_{k=1}^K \psi_k(z_1, z_2, \ldots, z_K)  = 1$. These two characteristics of the softmax function allow to use it to express the probability distribution of $y~|~\mathbf{x}$ across the $K$ classes. 
+According to this definition, we can see that the denominator acts as a normalization factor, ensuring that $0 <  \psi_k(z_1, z_2, \ldots, z_K) < 1$ for all components. Moreover, we can see that $\sum_{k=1}^K \psi_k(z_1, z_2, \ldots, z_K) = 1$. These two characteristics of the softmax function allow to use it to express the probability distribution of $y$ given $\mathbf{x}$ across the $K$ classes. 
 
 
 In addition, note that when $K=2$, evaluating for $z_1 = 0$ and $z_2= z$, we have
