@@ -34,6 +34,7 @@ $$\Psi(0, z) = \begin{bmatrix}
 \sigma(z) 
 \end{bmatrix}
 $$
+
 reason for which the softmax function is considered to be a generalization of the sigmoid function.
 
 ### Why the name "softmax"?
@@ -54,6 +55,7 @@ $$\frac{\partial \operatorname{LSE}(z_1, z_2, \ldots, z_K)}{\partial z_k} =  \ps
 
 $$\Longrightarrow\Psi(z_1, z_2, \ldots, z_K) = \nabla\operatorname{LSE}(z_1, z_2, \ldots, z_K)$$
 
+thus providing another interpretation of the softmax function.
 
 ### Partial derivatives
 
@@ -148,11 +150,11 @@ Relying on a labeled one-hot encoded training set of $m$ i.i.d. samples $X = \le
 
 $$P\left(\mathbf{y}^{(i)} \;\vert\; \mathbf{x}^{(i)}\right) = \prod_{k=1}^K \left(p_k(\mathbf{x}^{(i)})\right)^{y_k^{(i)}}$$
 
-Recalling that we are estimating $p_k(\mathbf{x}^{(i)})$ as $\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b}) = \psi_k\left(\mathbf{W}^\intercal \mathbf{x} + \mathbf{b}\right)$,  and considering the cost function $J(X, \mathbf{W}, \mathbf{b})$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then we have
+Recalling that we are estimating $p_k(\mathbf{x}^{(i)})$ as $\hat{p_k}(\mathbf{x}^{(i)}, \mathbf{W}, \mathbf{b}) = \psi_k\left(\mathbf{W}^\intercal \mathbf{x}^{(i)} + \mathbf{b}\right)$, and considering the cost function $J(X, \mathbf{W}, \mathbf{b})$ as the negative version of the log-likelihood averaged over the $m$ samples of the dataset, then we have
 
-$$J(X, \mathbf{W}, \mathbf{b}) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\psi_k\left(\mathbf{W}^\intercal \mathbf{x} + \mathbf{b}\right)\right) $$
+$$J(X, \mathbf{W}, \mathbf{b}) = -\frac{1}{m}\sum_{i = 1}^m \sum_{k=1}^K y_k^{(i)} \log\left(\psi_k\left(\mathbf{W}^\intercal \mathbf{x}^{(i)} + \mathbf{b}\right)\right) $$
 
-which again resembles the cross-entropy function, this time comparing $\mathbf{y}$ with $\left. \Psi(\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}$.
+which, similar to what happens with logistic regression, resembles the cross-entropy function, this time evaluated comparing $\mathbf{y}$ with $\left. \Psi(\mathbf{z})\right\rvert_{\mathbf{z} = \mathbf{W}^\intercal \mathbf{x} + \mathbf{b}}$.
 
 ## Optimizing the parameters
 
@@ -160,8 +162,8 @@ To find the optimal value of $\mathbf{W}$ and $\mathbf{b}$, we need to minimize 
 
 $$
 \begin{align}
-\frac{\partial J(X, \mathbf{W}, \mathbf{b})}{\partial \mathbf{w_k}} &= \frac{1}{m} \sum_{i=1}^m \mathbf{x}^{(i)}\left(\psi_k\left(\mathbf{W}^\intercal \mathbf{x} + \mathbf{b}\right) - y_k^{(i)}\right) \label{dJdwk-SM}\\
-\frac{\partial J(X, \mathbf{W}, \mathbf{b})}{\partial b_k} &= \frac{1}{m} \sum_{i=1}^m \left(\psi_k\left(\mathbf{W}^\intercal \mathbf{x} + \mathbf{b}\right) - y_k^{(i)}\right) \label{dJdbk-SM}
+\frac{\partial J(X, \mathbf{W}, \mathbf{b})}{\partial \mathbf{w_k}} &= \frac{1}{m} \sum_{i=1}^m \mathbf{x}^{(i)}\left(\psi_k\left(\mathbf{W}^\intercal \mathbf{x}^{(i)} + \mathbf{b}\right) - y_k^{(i)}\right) \label{dJdwk-SM}\\
+\frac{\partial J(X, \mathbf{W}, \mathbf{b})}{\partial b_k} &= \frac{1}{m} \sum_{i=1}^m \left(\psi_k\left(\mathbf{W}^\intercal \mathbf{x}^{(i)} + \mathbf{b}\right) - y_k^{(i)}\right) \label{dJdbk-SM}
 \end{align}
 $$
 
