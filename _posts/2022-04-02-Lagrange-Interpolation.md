@@ -51,7 +51,7 @@ Lagrange proposed that $p(x)$ could be written as the sum of $n + 1$ functions, 
 
 $$p(x) = \sum_{i=1}^n \alpha_i \phi_i(x)$$
 
-and then proved that 
+and proved that, to pass through the required $n + 1$ points, then
 
 $$\alpha_i = y_i$$
 
