@@ -17,7 +17,7 @@ $$
 \begin{align}
 p(x_0) &= a_0 + a_1 x_0 + a_2 x^2_0 + \ldots + a_n x^n_0 = y_0 \\
 p(x_1) &= a_0 + a_1 x_1 + a_2 x^2_1 + \ldots + a_n x^n_1 = y_1\\
-&\vdotswithin{=}  \notag \\
+&\;\;\vdots \notag \\
 p(x_n) &= a_0 + a_1 x_n + a_2 x^2_n + \ldots + a_n x^n_n = y_n\\
 \end{align}
 $$
