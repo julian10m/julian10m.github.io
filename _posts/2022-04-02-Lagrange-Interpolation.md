@@ -47,6 +47,8 @@ $$
 
 End of story? Well, not really! Finding $\mathbf{X}^{-1}$ is an $O(n^3)$ operation, so good luck with that as soon as $n$ increases. Fortunately, Lagrange came up with a very neat solution to this problem.
 
-Lagrange proposed that $p(x)$ could be written as the sum of $n + 1$ functions:
+Lagrange proposed that $p(x)$ could be written as the sum of $n + 1$ functions, i.e., $p(x) = \sum_{i=1}^n \alpha_i \phi_i(x)$, and then actually found their expressions: the coefficients had to be $\alpha_i = y_i$ and $\phi_i(x) = \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$.
 
-$$p(x) = \sum_{i=1}^n \alpha_i \phi_i(x) = \sum_{i=1}^n y_i \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
+His idea was very clever because for any $\phi_i(x)$, it holds both that $\phi_i(x_i) = y_i$ and that $\forall j \neq i, \, \phi_i(x_j) = 0$. This means that at the x-coordinates of any of the $n + 1$ points that $p(x)$ had to cross, one of the functions composing $p(x)$ evaluated exactly to the y-coordinate of the point in question, and the other $n$ where null.
+
+$$p(x) = \sum_{i=1}^n y_i \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
