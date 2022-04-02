@@ -69,8 +69,10 @@ but based on our previous analysis, we now that this ends up reducing to
 
 $$p(x_0) = \alpha_0$$
 
-Since $p(x_0) = 0$, then $\alpha_0 = 0$. If there are still doubts, you can replicate this analysis for the remaining $n$ x-values, and finally convince yourself that Lagrange's solution is indeed a base the $n + 1$ polynomium space. Simply beautiful, isn't it?
+Since $p(x_0) = 0$, then $\alpha_0 = 0$. If you are still hesitating, I invite you to replicate this analysis for the remaining $n$ values. At this point, voila, we have provedd that Lagrange's solution is indeed a base of the $n + 1$ polynomium space. His solution is simply beautiful, isn't it?
 
-The last point I want to address is how to implement Lagrange's interpolation. To reason about this, let's first write down the final expression of $p(x)$:
+Now that we know many things about Lagrange's interpolation, the last point I want to address is how to implement it efficiently in code. To reason about this, let's first write down the final expression of $p(x)$:
 
 $$p(x) = \sum_{i=0}^n y_i \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
+
+And I will continue writing soon...
