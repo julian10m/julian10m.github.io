@@ -11,7 +11,7 @@ $$p(x) = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n$$
 
 In particular, the objective is to find the values of the coefficients $\left\\{a_0, a_1, \ldots, a_n\right\\}$ for which $p(x)$ traverses the $n +1$ points that were given.
 
-Well, we have $n + 1$ points which chan be turned into $n + 1$ equations, so then we can find the $n + 1$ coefficients solving the system of equations:
+Hmm...we know that the $n + 1$ points are traversed by $p(x)$, hence we can turn this information into $n + 1$ equations. This is exactly what we need to when we need to univoquely determine $n + 1$ coefficients. The problem then becomes solving the system of equations:
 
 $$
 \begin{align}
@@ -44,3 +44,9 @@ y_1 \\
 y_n \\
 \end{bmatrix}
 $$
+
+End of story? Well, not really! Finding $\mathbf{X}^{-1}$ is an $O(n^3)$ operation, so good luck with that as soon as $n$ increases. Fortunately, Lagrange came up with a very neat solution to this problem.
+
+Lagrange proposed that $p(x)$ could be written as the sum of $n + 1$ functions:
+
+$$p(x) = \sum_{i=1}^n \alpha_i \phi_i(x) = \sum_{i=1}^n y_i \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
