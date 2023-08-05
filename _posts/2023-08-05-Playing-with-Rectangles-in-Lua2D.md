@@ -82,11 +82,9 @@ According to the superposition theorem, the combined effect of the displacement 
 | $p_3$     | $x(t) + r \cdot \cos\left(\beta(t) + \pi + \alpha\right)$ | $y(t) + r \cdot \sin\left(\beta(t) + \pi + \alpha\right)$ |
 | $p_4$     | $x(t) + r \cdot \cos\left(\beta(t) - \alpha\right)$    | $y(t) + r \cdot \sin\left(\beta(t) -\alpha\right)$    |
 
-While the formulas in the table are true in general, maybe they feel too abstract. Let's analyze a practical scenario.
-
 ### Case of study: URM + UCM 
 
-To better understand our result, we can focus on the case of the combination of a uniform rectilinear motion (URM) with a uniform circular motion (UCM). This is in fact what I ended up implementing, thus from here the special interest.
+An interesting case of study is when we the rectangles follows both a uniform rectilinear motion (URM) and a uniform circular motion (UCM). At this point, I must admit that calling this "an interesting case" might be a biased opinion: this scenerario is particularly appeling for me because it is the one I implementing in my code.
 
 With an URM, the rectangles moves with a constant velocity $\mathbf{v} = (v_x, v_y)$. If in addition $x_0$ and $y_0$ represent the initial position (which could be different than the origin then) of the rectangle, we can then write the center position over time as 
 
