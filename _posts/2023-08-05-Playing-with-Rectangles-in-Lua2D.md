@@ -52,7 +52,7 @@ While this is ok as it is, as we saw before, we can also write the cartesian coo
   
 ### Moving rectangles: rotation and displacement
 
-In this section, we are interested in analyzing the position of non-static rectangles over time. Indeed, if the rectangle moves, how should we update the previous table to account for that? Furthermore, what happens if besides displacing, the rengtangle is also rotating? To solve this, we can rely on the superposition theorem and analyse each of the effects separately. 
+In this section, we are interested in analyzing the position of non-static rectangles over time. Indeed, if the rectangle moves, how should we update the previous table to account for that? Furthermore, what happens if besides displacing, the rengtangle is also rotating? 
 
 Focusing on the displacement, it is simple to see that the corners move as much as the center does, i.e., the relative position of the corners with respect to the origin does not change. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, then we just need to add these shifts to our formulas:
 
@@ -73,7 +73,7 @@ On the other hand, if the centered rectangle just rotates, the relative position
 | $p_3$     | $r \cdot \cos\left(\beta(t) + \pi + \alpha\right)$ | $r \cdot \sin\left(\beta(t) + \pi + \alpha\right)$ |
 | $p_4$     | $r \cdot \cos\left(\beta(t) - \alpha\right)$    | $r \cdot \sin\left(\beta(t) -\alpha\right)$    |
 
-According to the superposition theorem, the combined effect of the displacement and the rotation can be simply expressed as the the sum of each separete effect, hence we can write:
+Finally, to answer the questions, we can rely on the superposition theorem. According to this principle, the combined effect of the displacement and the rotation can be simply expressed as the sum of their separate effects, hence we can write:
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
