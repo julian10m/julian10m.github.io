@@ -66,16 +66,12 @@ p4 &= \left(x(t) + r * \cos(-\alpha); y(t) + r * \sin(-\alpha)\right)
 $$
 -->
 
-<div style="text-align: center;">
-    <table margin="0 auto">
 | Point | x-coordinate                 | y-coordinate                 |
 |-------|-----------------------------|-----------------------------|
 | p1    | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
 | p2    | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
 | p3    | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
 | p4    | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
-    </table>
-</div>
 
 with a velocity $\mathbf{v(t)} = (v_x(t), v_y(t))
 
