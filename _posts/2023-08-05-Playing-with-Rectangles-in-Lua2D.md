@@ -21,8 +21,8 @@ If instead we are interested in the conversion on the opposite direction, applyi
 
 $$
 \begin{align}
-r = \sqrt{x^2 + y^2} \\
-\theta = \arctan(\frac{y}{x})
+r &= \sqrt{x^2 + y^2} \\
+\theta &= \arctan(\frac{y}{x})
 \end{align}
 $$
 
@@ -30,7 +30,7 @@ In practice, it is actually quite convenient to have both systems, since some pr
 
 ### Centered rectangles
 
-A rectangle is formed by the intersection of 2 pairs of parallel lines forming a 90 degree angle between each pair. The corners of the rectangle are located where the lines intersect. If we center the rectangle on the origin, and consider the rectangle has a width $w$ and a height $h$, we can write the position of its corners as:
+A rectangle is formed by the intersection of 2 pairs of parallel lines forming an angle of 90 degrees between each pair. The corners of the rectangle are located where the lines intersect. If we center the rectangle on the origin, and consider the rectangle has a width $w$ and a height $h$, we can write the position of its corners as:
 
 $$
 \begin{align}
@@ -41,20 +41,7 @@ p_4 &= \left(\frac{w}{2}  ; -\frac{h}{2}\right)
 \end{align}
 $$
 
-Knowing the corners of the rectangle is useful because they help us delimit the rectangle. While this is true, we should not forget that if we look at them separately, they are merely points in a plane. As such, we can use what we learned before to describe their position, i.e., use polar coordinates instead of cartesian. For this, we simply need to describe their radius $r$ and rotation angle. 
-
-By simple inspecttion, we can see that $r$ must equal half of the diagonal of the rectangle, i.e. $r = \frac{1}{2} \sqrt{(w^2 + h^2)}$. On the other hand, we can see that for the 4 points, there is a fixed angle $\alpha = \arctan(\frac{y}{x})$ that can be used to describe the angle of each point. Taking this into account, we can describe the position of the corners of the rectangle as 
-
-<!---
-$$
-\begin{align}
-p_1 &= \left(r \cdot cos(\alpha); r \cdot \sin(\alpha)\right) \\
-p_2 &= \left(r \cdot \cos(\pi - \alpha); r \cdot \sin(\pi - \alpha)\right) \\
-p_3 &= \left(r \cdot \cos(\pi + \alpha); r \cdot \sin(\pi + \alpha)\right) \\
-p_4 &= \left(r \cdot \cos(-\alpha); r \cdot \sin(-\alpha)\right)
-\end{align}
-$$
--->
+While this is ok as it is, as we saw before, we can also write the cartesian coordinates as a function of the polar coordinates. By simple symmetry, we can see that all corners are located at the same distance $r$ from the origin. Moreover, $r$ is half of the diagonal of the rectangle, i.e. $r = \frac{1}{2} \sqrt{(w^2 + h^2)}$. On the other hand, we can see that for the 4 points, there is a fixed angle $\alpha = \arctan(\frac{y}{x})$ that can be used to describe the angle at which we can them. Taking this into account, and abandoning the math notation to ease readability, the next table describes another way in which we can describe the position of the corners of the rectangle:
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
@@ -62,27 +49,14 @@ $$
 | $p_2$    | $r \cdot \cos(\pi - \alpha)$ | $r \cdot \sin(\pi - \alpha)$ |
 | $p_3$    | $r \cdot \cos(\pi + \alpha)$ | $r \cdot \sin(\pi + \alpha)$ |
 | $p_4$    | $r \cdot \cos(-\alpha)$    | $r \cdot \sin(-\alpha)$    |
-
-PS: I love math notation, but it was becoming quite dense to read, so I switched to the use of tables :) 
-
+  
 ### Moving rectangles: rotation and displacement
 
-How does everything change if the rectangle is no longer static? What if besides displacing, the rengtangle is also rotating? Sounds tough, right? But hey, don't worry...step by step!
+In this section, we are interested in analyzing the position of non-static rectangles over time. Indeed, if the rectangle moves, how should we update the previous table to account for that? Furthermore, what happens if besides displacing, the rengtangle is also rotating? To solve this, we can rely on the superposition theorem and analyse each of the effects separately. 
 
-To solve this we can rely on the superposition theorem and analyse each of the effects separately. Let's first focus on the displacement speed, since it might be the easiest to understand. If our rectangle moves in any direction with any given velocity, as long as we are able to express how the position changes over time, we can easily incorporate this in our formulas. Since the relative position of the corners with respect to the origin does not change, then their position at any moment must be that as if the rectangle was centered, plus the shift we have made to the center. On the other hand, if the rectangle is centered and only rotates, then the relative distance to the center is fixed for each point; the only thing that varies is the relative angle for each point.
+Focusing on the displacement, it is simple to see that the corners move as much as the center does, i.e., the relative position of the corners with respect to the origin does not change. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, then we just need to add these shifts to our formulas. On the other hand, if the centered rectangle rotates, the relative position of the corners with respect to the origin or its center changes: the distance is fixed, but the relative angle of each point changes. In fact, the relative angles change as much as the rotation angle of the rectangle over time, denoted $\beta(t)$, dictates.
 
-Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, and $\beta(t)$ be the rotation angle in time. Taking advantage of the polar coordinates, it is actually not that hard to incorporate both effects on our original formula
-
-<!---
-$$
-\begin{align}
-p_1 &= \left(x(t) + r \cdot cos(\alpha); y(t) + r \cdot \sin(\alpha)\right)\\
-p_2 &= \left(x(t) + r \cdot \cos(\pi - \alpha); y(t) + r \cdot \sin(\pi - \alpha)\right) \\
-p_3 &= \left(x(t) + r \cdot \cos(\pi + \alpha); y(t) + r \cdot \sin(\pi + \alpha)\right) \\
-p_4 &= \left(x(t) + r \cdot \cos(-\alpha); y(t) + r \cdot \sin(-\alpha)\right)
-\end{align}
-$$
--->
+Taking these considerations into account, we can update our formulas as follows:
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
