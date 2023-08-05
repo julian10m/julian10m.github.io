@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Lagrange Interpolation
-publish: false
+publish: true
 ---
 
 ### Cartesian and polar coordinates
@@ -49,7 +49,37 @@ p4 &= \left(r * \cos(-\alpha); r * \sin(-\alpha)\right)
 \end{align}
 $$
 
-### Rotating and displaced rectangles
+### Moving rectangles: rotation and displacement
+
+How does everything change if the rectangle is no longer static? What if besides displacing, the rengtangle is also rotating? Sounds tough, right? But hey, don't worry...to solve this we can rely on the superposition theorem and analyse each of the effects separately.
+
+Let's first focus on the displacement speed, since it might be the easiest to understand. If our rectangle moves in any direction with any given velocity, as long as we are able to express how the position changes over time, we can easily incorporate this in our formulas. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, then we can write
+
+<!---
+$$
+\begin{align}
+p1 &= \left(x(t) + r * cos(\alpha); y(t) + r * \sin(\alpha)\right)\\
+p2 &= \left(x(t) + r * \cos(\pi - \alpha); y(t) + r * \sin(\pi - \alpha)\right) \\
+p3 &= \left(x(t) + r * \cos(\pi + \alpha); y(t) + r * \sin(\pi + \alpha)\right) \\
+p4 &= \left(x(t) + r * \cos(-\alpha); y(t) + r * \sin(-\alpha)\right)
+\end{align}
+$$
+-->
+
+| Point | x-coordinate                 | y-coordinate                 |
+|-------|-----------------------------|-----------------------------|
+| p1    | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
+| p2    | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
+| p3    | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
+| p4    | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
+
+
+with a velocity $\mathbf{v(t)} = (v_x(t), v_y(t))
+
+follows a uniform rectilinear motion, i.e., moves with a constant velocity $\mathbf{v} = (v_x, v_y)$
+
+Well, thanks to our polar coordinates, it is actually not that hard! We can update our previous formula as:
+
 
 It all starts with a simple question: given $n + 1$ points $\left\\{p_0, p_1, \ldots, p_j, \ldots,  p_n\right\\}$ where $p_j = (x_j, y_j)$, how can we find the **unique** polnoymium of degree $n$ that traverses such points?
 
