@@ -4,6 +4,21 @@ title: Lagrange Interpolation
 publish: false
 ---
 
+A point in a plane can be described by its coordinates with respect to the origin, e.g. $p = (x, y)$. But how does $x$ and $y$ change in we rotate the point? 
+
+Well, first we need to note that in those cases what prevails is the distance $r$ between the origin and the point such that $r = \sqrt{x^2 + y^2}$. As we rotate the point, we can see that the trajectory that $p$ follows is that of the circumference of a circle with radius $r$. We can also keep track of the rotation angle $\theta$, which we can measure between $p$ and the x-axis.
+
+Ok, but we wanted to know the values of $x$ and $y$ for any rotation angle! Sure thing, this is where geometry comes in place. Indistinctly of the exact value of $\theta$, we should note that $x$, $y$ and $r$ actually form an orthogonal rectangle. In this triangle, the 90 degrees angle always  appears between $x$ and $y$. According to trigonometry, we know that it must then hold that:
+
+$$
+\begin{align}
+x &= r * \cos(\theta) \\
+y &= r * \sin(\theta) \\
+\end{align}
+$$
+
+
+
 It all starts with a simple question: given $n + 1$ points $\left\\{p_0, p_1, \ldots, p_j, \ldots,  p_n\right\\}$ where $p_j = (x_j, y_j)$, how can we find the **unique** polnoymium of degree $n$ that traverses such points?
 
 Let's begin easy: "polnoymium of degree $n$" means that we are looking for a function $p(x)$ of the type:
