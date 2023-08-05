@@ -105,7 +105,7 @@ On the other hand, for an UCM, we have a rotation velocity that has a constant m
 
 $$\beta(t) = w \cdot t + \beta_0$$
 
-We could take the new formulas and replace them in the previous table for completeness. However, it does not add much. 
+We could take the new formulas and replace them in the previous table for completeness. However we will not do it since in practice it is easier to separetely calculate $x(t)$, $y(t)$ and $\beta(t)$, and then plug their values into the formulas.
 
 <!---
 We can use these formulas on our previous table. Replacing, we have
