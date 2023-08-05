@@ -86,7 +86,7 @@ Finally, to answer the questions, we can rely on the superposition theorem. Acco
 
 An interesting case of study is when we the rectangles follows both a uniform rectilinear motion (URM) and a uniform circular motion (UCM). At this point, I must admit that calling this "an interesting case" might be a biased opinion: this scenerario is particularly appeling for me because it is the one I implemented in my code.
 
-With an URM, the rectangles moves with a constant velocity $\mathbf{v} = (v_x, v_y)$. If in addition $x_0$ and $y_0$ represent the initial position (which could be different than the origin then) of the rectangle, we can then write the center position over time as 
+With an URM, the rectangles moves with a constant velocity $v_x$ and $v_y$ on the x-axis and y-axis, respectively. If in addition $x_0$ and $y_0$ represent the initial position (which could be different than the origin then) of rectangle, we can then write the center position over time as 
 
 $$
 \begin{align}
@@ -95,7 +95,7 @@ y(t) &= v_y \cdot t + y_0
 \end{align}
 $$
 
-On the other hand, for an UCM, we have a rotation velocity that has a constant modulus $w$. Considering $\beta_0$ represents the initial rotation angle of the rectangle, we have
+On the other hand, for an UCM, we have a rotation velocity that has a constant modulus $w$. Considering an initial rotation angle of the rectangle, denoted $\beta_0$, we have:
 
 $$\beta(t) = w \cdot t + \beta_0$$
 
