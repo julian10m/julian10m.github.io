@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Having some fun wiht rectangles and Lua2D
+title: Playing with rectangles and Lua2D
 publish: true
 ---
 
