@@ -4,9 +4,13 @@ title: Lagrange Interpolation
 publish: false
 ---
 
-A point in a plane can be described by its coordinates with respect to the origin, e.g. $p = (x, y)$. But how does $x$ and $y$ change in we rotate the point? 
+### Cartesian and polar coordinates
 
-Well, first we need to note that in those cases what prevails is the distance $r$ between the origin and the point such that $r = \sqrt{x^2 + y^2}$. As we rotate the point, we can see that the trajectory that $p$ follows is that of the circumference of a circle with radius $r$. We can also keep track of the rotation angle $\theta$, which we can measure between $p$ and the x-axis.
+A point in a plane can be described by its coordinates with respect to the origin, e.g. $p = (x, y)$. 
+
+But how do $x$ and $y$ change if we rotate the point with respect to the origin? 
+
+Well, first we need to note that in those cases what prevails is the distance $r$ between the origin and the point such that $r = \sqrt{x^2 + y^2}$. We can also keep track of the rotation angle $\theta$, which we can measure between $p$ and the x-axis. As we rotate the point, we can see that the trajectory that $p$ follows is that of the circumference of a circle with radius $r$.
 
 Ok, but we wanted to know the values of $x$ and $y$ for any rotation angle! Sure thing, this is where geometry comes in place. Indistinctly of the exact value of $\theta$, we should note that $x$, $y$ and $r$ actually form an orthogonal rectangle. In this triangle, the 90 degrees angle always  appears between $x$ and $y$. According to trigonometry, we know that it must then hold that:
 
@@ -17,13 +21,41 @@ y &= r * \sin(\theta) \\
 \end{align}
 $$
 
+Hence, as we can see, we can characterize a point by either its coordinates $x$ and $y$, or by its radius $r$ and rotation angle $\theta$.
 
+### Centered rectangles
+
+A rectangle if formed by the intersection of 2 pairs of parallel lines forming a 90 degree angle between themselves. The formed rectangle ends up having a width $w$ and some height $h$, and has its 4 corners located in the places where the lines intersect. If we center the rectangle on the origin, then the position of its corners can be described as
+
+$$
+\begin{align}
+p1 &= \left(\frac{w}{2} ; \frac{h}{2}\right) \\
+p2 &= \left(-\frac{w}{2} ; \frac{h}{2}\right) \\
+p3 &= \left(-\frac{w}{2} ; -\frac{h}{2}\right) \\
+p4 &= \left(\frac{w}{2}  ; -\frac{h}{2}\right)
+\end{align}
+$$
+
+Knowing the corners of the rectangle is useful because they help us delimit the rectangle. While this is true, we should not forget that if we look at them separately, they are merely points in a plane. As such, we can use what we learned before to describe their position, i.e., use polar coordinates instead of cartesian. For this, we simply need to describe their radius $r$ and rotation angle. 
+
+By simple inspecttion, we can see that $r$ must equal half of the diagonal of the rectangle, i.e. $r = \frac{1}{2} \sqrt{(w^2 + h^2)}$. On the other hand, we can see that for the 4 points, there is a fixed angle $\alpha = \arctan(\frac{y}{x})$ that can be used to describe the angle of each point. Taking this into account, we can describe the position of the corners of the rectangle as 
+
+$$
+\begin{align}
+p1 &= \left(r * cos(\alpha); r * \sin(\alpha)\right) \\
+p2 &= \left(r * \cos(\pi - \alpha); r * \sin(\pi - \alpha)\right) \\
+p3 &= \left(r * \cos(\pi + \alpha); r * \sin(\pi + \alpha)\right) \\
+p4 &= \left(r * \cos(-\alpha); r * \sin(-\alpha)\right)
+\end{align}
+$$
+
+### Rotating and displaced rectangles
 
 It all starts with a simple question: given $n + 1$ points $\left\\{p_0, p_1, \ldots, p_j, \ldots,  p_n\right\\}$ where $p_j = (x_j, y_j)$, how can we find the **unique** polnoymium of degree $n$ that traverses such points?
 
 Let's begin easy: "polnoymium of degree $n$" means that we are looking for a function $p(x)$ of the type:
 
-$$p(x) = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n$$
+$$p(x) = a_0 + a_1 ( a_2 x^2 + \ldots + a_n x^n$$
 
 In particular, the objective is to find the values of the coefficients $\left\\{a_0, a_1, \ldots, a_n\right\\}$ for which $p(x)$ traverses the $n +1$ points that were given.
 
