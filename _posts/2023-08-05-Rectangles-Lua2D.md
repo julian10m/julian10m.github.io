@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lagrange Interpolation
+title: Having some fun wiht rectangles and Lua2D
 publish: true
 ---
 
