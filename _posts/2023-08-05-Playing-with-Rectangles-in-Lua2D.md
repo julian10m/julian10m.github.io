@@ -54,16 +54,33 @@ While this is ok as it is, as we saw before, we can also write the cartesian coo
 
 In this section, we are interested in analyzing the position of non-static rectangles over time. Indeed, if the rectangle moves, how should we update the previous table to account for that? Furthermore, what happens if besides displacing, the rengtangle is also rotating? To solve this, we can rely on the superposition theorem and analyse each of the effects separately. 
 
-Focusing on the displacement, it is simple to see that the corners move as much as the center does, i.e., the relative position of the corners with respect to the origin does not change. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, then we just need to add these shifts to our formulas. On the other hand, if the centered rectangle rotates, the relative position of the corners with respect to the origin or its center changes: the distance is fixed, but the relative angle of each point changes. In fact, the relative angles change as much as the rotation angle of the rectangle over time, denoted $\beta(t)$, dictates.
+Focusing on the displacement, it is simple to see that the corners move as much as the center does, i.e., the relative position of the corners with respect to the origin does not change. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, then we just need to add these shifts to our formulas:
 
-Taking these considerations into account, we can update our formulas as follows:
+| Point | x-coordinate                 | y-coordinate                 |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$     | $x(t) + r \cdot \cos\left(\alpha\right)$     | $y(t) + r \cdot \sin\left(\alpha\right)$     |
+| $p_2$     | $x(t) + r \cdot \cos\left(\pi - \alpha\right)$ | $y(t) + r \cdot \sin\left(\pi - \alpha\right)$ |
+| $p_3$     | $x(t) + r \cdot \cos\left(\pi + \alpha\right)$ | $y(t) + r \cdot \sin\left(\pi + \alpha\right)$ |
+| $p_4$     | $x(t) + r \cdot \cos\left(-\alpha\right)$    | $y(t) + r \cdot \sin\left(-\alpha\right)$    |
+
+
+On the other hand, if the centered rectangle just rotates, the relative position of the corners with respect to the origin or its center changes. While the distance is fixed, the relative angle of each point actually changes. In fact, the relative angles change as much as the rotation angle of the rectangle over time, denoted $\beta(t)$, dictates:
+
+| Point | x-coordinate                 | y-coordinate                 |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$     | $r \cdot \cos\left(\beta(t) + \alpha\right)$     | $r \cdot \sin\left(\beta(t) + \alpha\right)$     |
+| $p_2$     | $r \cdot \cos\left(\beta(t) + \pi - \alpha\right)$ | $r \cdot \sin\left(\beta(t) + \pi - \alpha\right)$ |
+| $p_3$     | $r \cdot \cos\left(\beta(t) + \pi + \alpha\right)$ | $r \cdot \sin\left(\beta(t) + \pi + \alpha\right)$ |
+| $p_4$     | $r \cdot \cos\left(\beta(t) - \alpha\right)$    | $r \cdot \sin\left(\beta(t) -\alpha\right)$    |
+
+According to the superposition theorem, the combined effect of the displacement and the rotation can be simply expressed as the the sum of each separete effect, hence we can write:
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
 | $p_1$     | $x(t) + r \cdot \cos\left(\beta(t) + \alpha\right)$     | $y(t) + r \cdot \sin\left(\beta(t) + \alpha\right)$     |
-| $p_2$     | $x(t) + r \cdot \cos\left(\pi + \beta(t) - \alpha\right)$ | $y(t) + r \cdot \sin\left(\pi + \beta(t) - \alpha\right)$ |
-| $p_3$     | $x(t) + r \cdot \cos\left(\pi + \beta(t) + \alpha\right)$ | $y(t) + r \cdot \sin\left(\pi + \beta(t) + \alpha\right)$ |
-| $p_4$     | $x(t) + r \cdot \cos\left(\beta(t) -\alpha\right)$    | $y(t) + r \cdot \sin\left(\beta(t) -\alpha\right)$    |
+| $p_2$     | $x(t) + r \cdot \cos\left(\beta(t) + \pi - \alpha\right)$ | $y(t) + r \cdot \sin\left(\beta(t) + \pi - \alpha\right)$ |
+| $p_3$     | $x(t) + r \cdot \cos\left(\beta(t) + \pi + \alpha\right)$ | $y(t) + r \cdot \sin\left(\beta(t) + \pi + \alpha\right)$ |
+| $p_4$     | $x(t) + r \cdot \cos\left(\beta(t) - \alpha\right)$    | $y(t) + r \cdot \sin\left(\beta(t) -\alpha\right)$    |
 
 While the formulas in the table are true in general, maybe they feel too abstract. Let's analyze a practical scenario.
 
