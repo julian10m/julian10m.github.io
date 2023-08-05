@@ -6,26 +6,31 @@ publish: true
 
 ### Cartesian and polar coordinates
 
-A point in a plane can be described by its relative position with respect to the origin, e.g. $p = (x, y)$. These are known as the **cartesian coordinates**.
+A point $p$ can be described by its cartesian coordinates, e.g., in 2D we may have $p = (x, y)$ where $x$ and $y$ represent the value on the x-axis and y-axis respectively. However, this is not the only option: we can also describe $p$ by its polar coordinates $(r, \theta)$, where $r$ is the distance between $p$ and the origin, and $\theta$ is the rotation angle of that point with respect to the x-axis. In this case $r$ is the measure on the radial coordinate and $\theta$ is the counterpart for the angular coordinate.
 
-But if we rotate the point with respect to the origin, how do $x$ and $y$ change? 
-
-Well, let's think about it. If the point is in $(x, y)$, then Pitagoras says that it must be at a distance $r = \sqrt{x^2 + y^2}$ from the origin. Now, does the distance change just for rotating the point? It could, but if we assume we rotate the point with respect to the origin, then $r$ prevails unchanged. Hence, the only thing we need to keep track of is the rotation angle $\theta$, which we can measure between $p$ and the x-axis. As we rotate the point, we can see that $p$ always stands in the circumference of a circle with radius $r$. The pair $(r, \theta)$ represents the **polar coordinates** of the point.
-
-Ok, but we wanted to know the values of $x$ and $y$ for any rotation angle! No problem, this is where geometry comes to the rescue. Indistinctly of the exact value of $\theta$, we should note that we can always form an orthogonal rectangle: $x$ and $y$ being the cathetus or legs, and $r$ the hypotenuse. In this triangle, a 90 degrees angle always appears between $x$ and $y$. According to the trigonometry laws, we know that it must then hold that:
+To convert from polar coordinates to cartesian coordinates, the trick is to note that the radial coordinate and the cartesian coordinates of $p$ for an orthogonal triangle. In this triangle, $x$ and $y$ are the cathetus or legs, and $r$ is the hypotenuse. In addition, the angle between $x$ and $r$ is exactly $\theta$. According to the trigonometry laws, then we can write:
 
 $$
 \begin{align}
 x &= r \cdot \cos(\theta) \\
-y &= r \cdot \sin(\theta) \\
+y &= r \cdot \sin(\theta)
 \end{align}
 $$
 
-Hence, as we can see, we can characterize a point by either its coordinates $x$ and $y$, or by its radius $r$ and rotation angle $\theta$. For completeness, if $x$ and $y$ were known, we could calculate the rotation angle as $\theta = \arctan(\frac{y}{x})$.
+If instead we are interested in the conversion on the opposite direction, applying some simple algebra we can prove that:
+
+$$
+\begin{align}
+r = \sqrt{x^2 + y^2} \\
+\theta = \arctan(\frac{y}{x})
+\end{align}
+$$
+
+In practice, it is actually quite convenient to have both systems, since some problems are easier to express in cartesian coordinates, and other in polar coordinates. For example, if we rotate the point $p$ with respect to the origin, we can deduct that $r$ actually remains constant, and that only $\theta$ varies. Indeed, as we rotate the point, $p$ moves along the circumference of a circle with radius $r$. While this analysis is enough to completely describe the new position of $p$, if we need to, we can do the math and find the new values of $x$ and $y$ relying on the conversions previously introduced.
 
 ### Centered rectangles
 
-A rectangle if formed by the intersection of 2 pairs of parallel lines forming a 90 degree angle between themselves. The formed rectangle ends up having a width $w$ and some height $h$, and has its 4 corners located in the places where the lines intersect. If we center the rectangle on the origin, then the position of its corners can be described as
+A rectangle is formed by the intersection of 2 pairs of parallel lines forming a 90 degree angle between each pair. The corners of the rectangle are located where the lines intersect. If we center the rectangle on the origin, and consider the rectangle has a width $w$ and a height $h$, we can write the position of its corners as:
 
 $$
 \begin{align}
