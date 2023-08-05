@@ -6,22 +6,22 @@ publish: true
 
 ### Cartesian and polar coordinates
 
-A point in a plane can be described by its coordinates with respect to the origin, e.g. $p = (x, y)$. 
+A point in a plane can be described by its relative position with respect to the origin, e.g. $p = (x, y)$. These are known as the **cartesian coordinates**.
 
-But how do $x$ and $y$ change if we rotate the point with respect to the origin? 
+But if we rotate the point with respect to the origin, how do $x$ and $y$ change? 
 
-Well, first we need to note that in those cases what prevails is the distance $r$ between the origin and the point such that $r = \sqrt{x^2 + y^2}$. We can also keep track of the rotation angle $\theta$, which we can measure between $p$ and the x-axis. As we rotate the point, we can see that the trajectory that $p$ follows is that of the circumference of a circle with radius $r$.
+Well, let's think about it. If the point is in $(x, y)$, then Pitagoras says that it must be at a distance $r = \sqrt{x^2 + y^2}$ from the origin. Now, does the distance change just for rotating the point? It could, but if we assume we rotate the point with respect to the origin, then $r$ prevails unchanged. Hence, the only thing we need to keep track of is the rotation angle $\theta$, which we can measure between $p$ and the x-axis. As we rotate the point, we can see that $p$ always stands in the circumference of a circle with radius $r$. The pair $(r, \theta)$ represents the **polar coordinates** of the point.
 
-Ok, but we wanted to know the values of $x$ and $y$ for any rotation angle! Sure thing, this is where geometry comes in place. Indistinctly of the exact value of $\theta$, we should note that $x$, $y$ and $r$ actually form an orthogonal rectangle. In this triangle, the 90 degrees angle always  appears between $x$ and $y$. According to trigonometry, we know that it must then hold that:
+Ok, but we wanted to know the values of $x$ and $y$ for any rotation angle! No problem, this is where geometry comes to the rescue. Indistinctly of the exact value of $\theta$, we should note that we can always form an orthogonal rectangle: $x$ and $y$ being the cathetus or legs, and $r$ the hypotenuse. In this triangle, a 90 degrees angle always appears between $x$ and $y$. According to the trigonometry laws, we know that it must then hold that:
 
 $$
 \begin{align}
-x &= r * \cos(\theta) \\
-y &= r * \sin(\theta) \\
+x &= r \cdot \cos(\theta) \\
+y &= r \cdot \sin(\theta) \\
 \end{align}
 $$
 
-Hence, as we can see, we can characterize a point by either its coordinates $x$ and $y$, or by its radius $r$ and rotation angle $\theta$.
+Hence, as we can see, we can characterize a point by either its coordinates $x$ and $y$, or by its radius $r$ and rotation angle $\theta$. For completeness, if $x$ and $y$ were known, we could calculate the rotation angle as $\theta = \arctan(\frac{y}{x})$.
 
 ### Centered rectangles
 
@@ -40,59 +40,85 @@ Knowing the corners of the rectangle is useful because they help us delimit the 
 
 By simple inspecttion, we can see that $r$ must equal half of the diagonal of the rectangle, i.e. $r = \frac{1}{2} \sqrt{(w^2 + h^2)}$. On the other hand, we can see that for the 4 points, there is a fixed angle $\alpha = \arctan(\frac{y}{x})$ that can be used to describe the angle of each point. Taking this into account, we can describe the position of the corners of the rectangle as 
 
-$$
-\begin{align}
-p_1 &= \left(r * cos(\alpha); r * \sin(\alpha)\right) \\
-p_2 &= \left(r * \cos(\pi - \alpha); r * \sin(\pi - \alpha)\right) \\
-p_3 &= \left(r * \cos(\pi + \alpha); r * \sin(\pi + \alpha)\right) \\
-p_4 &= \left(r * \cos(-\alpha); r * \sin(-\alpha)\right)
-\end{align}
-$$
-
-Despite I wish I could stick to the math notation, I think the notation is becoming quite dense, so I will switch to use tables instead
-
-| Point | x-coordinate                 | y-coordinate                 |
-|:-------:|:-----------------------------:|:-----------------------------:|
-| $p_1$    | $r \cos(\alpha)$     | $r \sin(\alpha)$     |
-| $p_2$    | $r \cos(\pi - \alpha)$ | $r \sin(\pi - \alpha)$ |
-| $p_3$    | $r \cos(\pi + \alpha)$ | $r \sin(\pi + \alpha)$ |
-| $p_4$    | $r \cos(-\alpha)$    | $r \sin(-\alpha)$    |
-
-### Moving rectangles: rotation and displacement
-
-How does everything change if the rectangle is no longer static? What if besides displacing, the rengtangle is also rotating? Sounds tough, right? But hey, don't worry...to solve this we can rely on the superposition theorem and analyse each of the effects separately.
-
-Let's first focus on the displacement speed, since it might be the easiest to understand. If our rectangle moves in any direction with any given velocity, as long as we are able to express how the position changes over time, we can easily incorporate this in our formulas. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, since the relative position of the corners with respect to the origin does not change, then we just need to add these values to their coordinates. 
-
 <!---
 $$
 \begin{align}
-p_1 &= \left(x(t) + r * cos(\alpha); y(t) + r * \sin(\alpha)\right)\\
-p_2 &= \left(x(t) + r * \cos(\pi - \alpha); y(t) + r * \sin(\pi - \alpha)\right) \\
-p_3 &= \left(x(t) + r * \cos(\pi + \alpha); y(t) + r * \sin(\pi + \alpha)\right) \\
-p_4 &= \left(x(t) + r * \cos(-\alpha); y(t) + r * \sin(-\alpha)\right)
+p_1 &= \left(r \cdot cos(\alpha); r \cdot \sin(\alpha)\right) \\
+p_2 &= \left(r \cdot \cos(\pi - \alpha); r \cdot \sin(\pi - \alpha)\right) \\
+p_3 &= \left(r \cdot \cos(\pi + \alpha); r \cdot \sin(\pi + \alpha)\right) \\
+p_4 &= \left(r \cdot \cos(-\alpha); r \cdot \sin(-\alpha)\right)
 \end{align}
 $$
 -->
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
-| $p_1$     | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
-| $p_2$     | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
-| $p_3$     | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
-| $p_4$     | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
+| $p_1$    | $r \cdot \cos(\alpha)$     | $r \cdot \sin(\alpha)$     |
+| $p_2$    | $r \cdot \cos(\pi - \alpha)$ | $r \cdot \sin(\pi - \alpha)$ |
+| $p_3$    | $r \cdot \cos(\pi + \alpha)$ | $r \cdot \sin(\pi + \alpha)$ |
+| $p_4$    | $r \cdot \cos(-\alpha)$    | $r \cdot \sin(-\alpha)$    |
 
-Since this might be too theoretical, let's assume the rectangle has a uniform rectilinear motion, i.e., it moves with a constant velocity $\mathbf{v} = (v_x, v_y)$. We can the write
+PS: I love math notation, but it was becoming quite dense to read, so I switched to the use of tables :) 
+
+### Moving rectangles: rotation and displacement
+
+How does everything change if the rectangle is no longer static? What if besides displacing, the rengtangle is also rotating? Sounds tough, right? But hey, don't worry...step by step!
+
+To solve this we can rely on the superposition theorem and analyse each of the effects separately. Let's first focus on the displacement speed, since it might be the easiest to understand. If our rectangle moves in any direction with any given velocity, as long as we are able to express how the position changes over time, we can easily incorporate this in our formulas. Since the relative position of the corners with respect to the origin does not change, then their position at any moment must be that as if the rectangle was centered, plus the shift we have made to the center. On the other hand, if the rectangle is centered and only rotates, then the relative distance to the center is fixed for each point; the only thing that varies is the relative angle for each point.
+
+Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, and $\beta(t)$ be the rotation angle in time. Taking advantage of the polar coordinates, it is actually not that hard to incorporate both effects on our original formula
+
+<!---
+$$
+\begin{align}
+p_1 &= \left(x(t) + r \cdot cos(\alpha); y(t) + r \cdot \sin(\alpha)\right)\\
+p_2 &= \left(x(t) + r \cdot \cos(\pi - \alpha); y(t) + r \cdot \sin(\pi - \alpha)\right) \\
+p_3 &= \left(x(t) + r \cdot \cos(\pi + \alpha); y(t) + r \cdot \sin(\pi + \alpha)\right) \\
+p_4 &= \left(x(t) + r \cdot \cos(-\alpha); y(t) + r \cdot \sin(-\alpha)\right)
+\end{align}
+$$
+-->
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
-| $p_1$     | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
-| $p_2$     | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
-| $p_3$     | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
-| $p_4$     | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
+| $p_1$     | $x(t) + r \cdot \cos\left(\beta(t) + \alpha\right)$     | $y(t) + r \cdot \sin\left(\beta(t) + \alpha\right)$     |
+| $p_2$     | $x(t) + r \cdot \cos\left(\pi + \beta(t) - \alpha\right)$ | $y(t) + r \cdot \sin\left(\pi + \beta(t) - \alpha\right)$ |
+| $p_3$     | $x(t) + r \cdot \cos\left(\pi + \beta(t) + \alpha\right)$ | $y(t) + r \cdot \sin\left(\pi + \beta(t) + \alpha\right)$ |
+| $p_4$     | $x(t) + r \cdot \cos\left(\beta(t) -\alpha\right)$    | $y(t) + r \cdot \sin\left(\beta(t) -\alpha\right)$    |
+
+While the formulas in the table are true in general, maybe they feel too abstract. Let's analyze a practical scenario.
+
+### Case of study: URM + UCM 
+
+To better understand our result, we can focus on the case of the combination of a uniform rectilinear motion (URM) with a uniform circular motion (UCM). This is in fact what I ended up implementing, thus from here the special interest.
+
+With an URM, the rectangles moves with a constant velocity $\mathbf{v} = (v_x, v_y)$. If in addition $x_0$ and $y_0$ represent the initial position (which could be different than the origin then) of the rectangle, we can then write the center position over time as 
+
+$$
+\begin{align}
+x(t) &= v_x \cdot t + x_0\\
+y(t) &= v_y \cdot t + y_0
+\end{align}
+$$
+
+On the other hand, for an UCM, we have a rotation velocity that has a constant modulus $w$. Considering $\beta_0$ represents the initial rotation angle of the rectangle, we have
+
+$$\beta(t) = w \cdot t + \beta_0$$
+
+We could take the new formulas and replace them in the previous table for completeness. However, it does not add much. 
+
+<!---
+We can use these formulas on our previous table. Replacing, we have
+
+| Point | x-coordinate                 | y-coordinate                 |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$     | $v_x \cdot t + r \cos(w \cdot t + \beta_0 + \alpha)$     | $v_y \cdot t + r \sin(w \cdot t + \beta_0 + \alpha)$     |
+| $p_2$     | $v_x \cdot t + r \cos(\pi + w \cdot t + \beta_0 - \alpha)$ | $v_y \cdot t + r \sin(\pi + w \cdot t + \beta_0 - \alpha)$ |
+| $p_3$     | $v_x \cdot t + r \cos(\pi + w \cdot t + \beta_0 + \alpha)$ | $v_y \cdot t + r \sin(\pi + w \cdot t + \beta_0 + \alpha)$ |
+| $p_4$     | $v_x \cdot t + r \cos(w \cdot t + \beta_0 -\alpha)$    | $v_y \cdot t + r \sin(w \cdot t + \beta_0 -\alpha)$    |
+-->
 
 
-Well, thanks to our polar coordinates, it is actually not that hard! We can update our previous formula as:
 
 
 It all starts with a simple question: given $n + 1$ points $\left\\{p_0, p_1, \ldots, p_j, \ldots,  p_n\right\\}$ where $p_j = (x_j, y_j)$, how can we find the **unique** polnoymium of degree $n$ that traverses such points?
