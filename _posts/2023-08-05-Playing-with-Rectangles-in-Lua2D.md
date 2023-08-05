@@ -29,10 +29,10 @@ A rectangle if formed by the intersection of 2 pairs of parallel lines forming a
 
 $$
 \begin{align}
-p1 &= \left(\frac{w}{2} ; \frac{h}{2}\right) \\
-p2 &= \left(-\frac{w}{2} ; \frac{h}{2}\right) \\
-p3 &= \left(-\frac{w}{2} ; -\frac{h}{2}\right) \\
-p4 &= \left(\frac{w}{2}  ; -\frac{h}{2}\right)
+p_1 &= \left(\frac{w}{2} ; \frac{h}{2}\right) \\
+p_2 &= \left(-\frac{w}{2} ; \frac{h}{2}\right) \\
+p_3 &= \left(-\frac{w}{2} ; -\frac{h}{2}\right) \\
+p_4 &= \left(\frac{w}{2}  ; -\frac{h}{2}\right)
 \end{align}
 $$
 
@@ -42,40 +42,55 @@ By simple inspecttion, we can see that $r$ must equal half of the diagonal of th
 
 $$
 \begin{align}
-p1 &= \left(r * cos(\alpha); r * \sin(\alpha)\right) \\
-p2 &= \left(r * \cos(\pi - \alpha); r * \sin(\pi - \alpha)\right) \\
-p3 &= \left(r * \cos(\pi + \alpha); r * \sin(\pi + \alpha)\right) \\
-p4 &= \left(r * \cos(-\alpha); r * \sin(-\alpha)\right)
+p_1 &= \left(r * cos(\alpha); r * \sin(\alpha)\right) \\
+p_2 &= \left(r * \cos(\pi - \alpha); r * \sin(\pi - \alpha)\right) \\
+p_3 &= \left(r * \cos(\pi + \alpha); r * \sin(\pi + \alpha)\right) \\
+p_4 &= \left(r * \cos(-\alpha); r * \sin(-\alpha)\right)
 \end{align}
 $$
+
+Despite I wish I could stick to the math notation, I think the notation is becoming quite dense, so I will switch to use tables instead
+
+| Point | x-coordinate                 | y-coordinate                 |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$    | $r \cos(\alpha)$     | $r \sin(\alpha)$     |
+| $p_2$    | $r \cos(\pi - \alpha)$ | $r \sin(\pi - \alpha)$ |
+| $p_3$    | $r \cos(\pi + \alpha)$ | $r \sin(\pi + \alpha)$ |
+| $p_4$    | $r \cos(-\alpha)$    | $r \sin(-\alpha)$    |
 
 ### Moving rectangles: rotation and displacement
 
 How does everything change if the rectangle is no longer static? What if besides displacing, the rengtangle is also rotating? Sounds tough, right? But hey, don't worry...to solve this we can rely on the superposition theorem and analyse each of the effects separately.
 
-Let's first focus on the displacement speed, since it might be the easiest to understand. If our rectangle moves in any direction with any given velocity, as long as we are able to express how the position changes over time, we can easily incorporate this in our formulas. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, then we can write
+Let's first focus on the displacement speed, since it might be the easiest to understand. If our rectangle moves in any direction with any given velocity, as long as we are able to express how the position changes over time, we can easily incorporate this in our formulas. Let $x(t)$ and $y(t)$ denote the position of the center of the rectangle at each moment, since the relative position of the corners with respect to the origin does not change, then we just need to add these values to their coordinates. 
 
 <!---
 $$
 \begin{align}
-p1 &= \left(x(t) + r * cos(\alpha); y(t) + r * \sin(\alpha)\right)\\
-p2 &= \left(x(t) + r * \cos(\pi - \alpha); y(t) + r * \sin(\pi - \alpha)\right) \\
-p3 &= \left(x(t) + r * \cos(\pi + \alpha); y(t) + r * \sin(\pi + \alpha)\right) \\
-p4 &= \left(x(t) + r * \cos(-\alpha); y(t) + r * \sin(-\alpha)\right)
+p_1 &= \left(x(t) + r * cos(\alpha); y(t) + r * \sin(\alpha)\right)\\
+p_2 &= \left(x(t) + r * \cos(\pi - \alpha); y(t) + r * \sin(\pi - \alpha)\right) \\
+p_3 &= \left(x(t) + r * \cos(\pi + \alpha); y(t) + r * \sin(\pi + \alpha)\right) \\
+p_4 &= \left(x(t) + r * \cos(-\alpha); y(t) + r * \sin(-\alpha)\right)
 \end{align}
 $$
 -->
 
 | Point | x-coordinate                 | y-coordinate                 |
-|-------|-----------------------------|-----------------------------|
-| p1    | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
-| p2    | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
-| p3    | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
-| p4    | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$     | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
+| $p_2$     | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
+| $p_3$     | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
+| $p_4$     | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
 
-with a velocity $\mathbf{v(t)} = (v_x(t), v_y(t))
+Since this might be too theoretical, let's assume the rectangle has a uniform rectilinear motion, i.e., it moves with a constant velocity $\mathbf{v} = (v_x, v_y)$. We can the write
 
-follows a uniform rectilinear motion, i.e., moves with a constant velocity $\mathbf{v} = (v_x, v_y)$
+| Point | x-coordinate                 | y-coordinate                 |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$     | $x(t) + r \cos(\alpha)$     | $y(t) + r \sin(\alpha)$     |
+| $p_2$     | $x(t) + r \cos(\pi - \alpha)$ | $y(t) + r \sin(\pi - \alpha)$ |
+| $p_3$     | $x(t) + r \cos(\pi + \alpha)$ | $y(t) + r \sin(\pi + \alpha)$ |
+| $p_4$     | $x(t) + r \cos(-\alpha)$    | $y(t) + r \sin(-\alpha)$    |
+
 
 Well, thanks to our polar coordinates, it is actually not that hard! We can update our previous formula as:
 
