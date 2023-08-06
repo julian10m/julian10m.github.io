@@ -32,7 +32,7 @@ These formulas not only allow to pass from one notation to the other, but also a
 
 
 
-### Centered rectangles
+### Rectangles
 
 A rectangle is formed by the intersection of 2 pairs of parallel lines forming an angle of 90 degrees between each pair. The corners of the rectangle are located where the lines intersect. If we center the rectangle on the origin, and consider the rectangle has a width $w$ and a height $h$, we can write the position of its corners as:
 
