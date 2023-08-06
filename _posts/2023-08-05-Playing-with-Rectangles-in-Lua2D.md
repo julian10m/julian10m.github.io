@@ -10,7 +10,7 @@ We usually use cartesian coordinates to individualize points. For instance, when
 
 In practice, it is actually quite convenient to have both systems, since some problems are easier to express in cartesian coordinates, and other in polar coordinates. For example, if we rotate $p$ by $\Delta$ degrees with respect to the origin, we can trivially deduct that $r$ remains constant, but the angular coordinate becomes $\theta + \Delta$. As we vary $\Delta$, it is easy to see that $p$ moves along the circumference of a circle with radius $r$. While $(r, \theta + \Delta)$ fully describes the new position of $p$, one can still wonder how $x$ and $y$ changed, and for that we have conversion forumulas.
 
-To convert from polar to cartesian coordinates, we first need to note that the radial and the cartesian coordinates of any point form an orthogonal triangle. In the triangle that is formed for $p$, $x$ and $y$ are the cathetus or legs, and $r$ is the hypotenuse. In addition, the angle between $x$ and $r$ is exactly $\theta$. According to the trigonometry laws, we can then write:
+To convert from polar to cartesian coordinates, we first need to note that the radial and the cartesian coordinates of any point form an orthogonal triangle. For example, in the triangle related to $p$, $x$ and $y$ are the cathetus or legs, and $r$ is the hypotenuse. In addition, the angle between $x$ and $r$ is exactly $\theta$. According to the trigonometry laws, we can then write:
 
 $$
 \begin{align}
