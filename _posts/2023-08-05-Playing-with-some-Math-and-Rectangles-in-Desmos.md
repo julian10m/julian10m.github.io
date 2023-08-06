@@ -36,16 +36,14 @@ These formulas not only allow to pass from one notation to the other, but also a
 
 A rectangle is formed by the intersection of 2 pairs of parallel lines forming an angle of 90 degrees between each pair. The corners of the rectangle are located where the lines intersect. If we center the rectangle on the origin, and consider the rectangle has a width $w$ and a height $h$, we can write the position of its corners as:
 
-$$
-\begin{align}
-p_1 &= \left(\frac{w}{2} ; \frac{h}{2}\right) \\
-p_2 &= \left(-\frac{w}{2} ; \frac{h}{2}\right) \\
-p_3 &= \left(-\frac{w}{2} ; -\frac{h}{2}\right) \\
-p_4 &= \left(\frac{w}{2}  ; -\frac{h}{2}\right)
-\end{align}
-$$
+| Point | x-coordinate                 | y-coordinate                 |
+|:-------:|:-----------------------------:|:-----------------------------:|
+| $p_1$    | $w/2$     | $h/2$     |
+| $p_2$    | $- w/2$ | $h/2$ |
+| $p_3$    | $- w/2$ | $- h/2$ |
+| $p_4$    | $w/2$    | $- h/2$    |
 
-While this is ok as it is, as we saw before, we can also write the cartesian coordinates as a function of the polar coordinates. By simple symmetry, we can see that all corners are located at the same distance $r$ from the origin. Moreover, $r$ is half of the diagonal of the rectangle, i.e. $r = \frac{1}{2} \sqrt{(w^2 + h^2)}$. On the other hand, we can see that for the 4 points, there is a fixed angle $\alpha = \arctan(\frac{y}{x})$ that can be used to describe the angle at which we can them. Taking this into account, and abandoning the math notation to ease readability, the next table describes another way in which we can describe the position of the corners of the rectangle:
+While this is ok as it is, as we saw before, we can also write the cartesian coordinates as a function of the polar coordinates. By simple symmetry, we can see that all corners are located at the same distance $r$ from the origin. Moreover, $r$ is half of the diagonal of the rectangle, i.e. $r = \frac{1}{2} \sqrt{(w^2 + h^2)}$. On the other hand, we can see that for the 4 points, there is a fixed angle $\alpha = \arctan(\frac{y}{x})$ that can be used to describe the angle at which we can them. Taking this into account, we can also describe the position of the corners of the rectangle as:
 
 | Point | x-coordinate                 | y-coordinate                 |
 |:-------:|:-----------------------------:|:-----------------------------:|
