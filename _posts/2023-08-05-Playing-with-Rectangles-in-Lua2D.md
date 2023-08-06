@@ -6,7 +6,7 @@ publish: true
 
 ### Cartesian and polar coordinates
 
-We usually use cartesian coordinates to individualize points. For instance, when we write $p = (x, y)$, we express that to move from the origin to $p$, $x$ and $y$ are the distances to need to be traversed along the x-axis and y-axis, respectively. However, this is not the only option: we can also user polar coordinates, and write $p = (r, \theta)$. In this notation, we have both a radial and angular coordinate: $r$ is the distance between $p$ and the origin, and $\theta$ is the rotation angle of $p$ with respect to the x-axis. 
+We usually use cartesian coordinates to individualize points. For instance, when we write $p = (x, y)$, we express that to move from the origin to $p$, $x$ and $y$ are the distances that need to be traversed along the x-axis and y-axis, respectively. However, this is not the only option: we can also user polar coordinates, and write $p = (r, \theta)$. In this notation, we have both a radial and angular coordinate: $r$ is the distance between $p$ and the origin, and $\theta$ is the rotation angle of $p$ with respect to the x-axis. 
 
 In practice, it is actually quite convenient to have both systems, since some problems are easier to express in cartesian coordinates, and other in polar coordinates. For example, if we rotate $p$ by $\Delta$ degrees with respect to the origin, we can trivially deduct that $r$ remains constant, but the angular coordinate becomes $\theta + \Delta$. As we vary $\Delta$, it is easy to see that $p$ moves along the circumference of a circle with radius $r$. While $(r, \theta + \Delta)$ fully describes the new position of $p$, one can still wonder how $x$ and $y$ changed, and for that we have conversion forumulas.
 
