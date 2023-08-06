@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Playing with rectangles and Lua2D
+title: Playing with some math and rectangles in Desmos
 publish: true
 ---
 
