@@ -19,7 +19,7 @@ y &= r \cdot \sin(\theta)
 \end{align}
 $$
 
-If instead we knew $x$ and $y$, and would interested in finding $r$ and $\theta$, we can use the following formulas that can be derived with some basic algebra:
+If instead we knew $x$ and $y$, and would be interested in finding $r$ and $\theta$, we can use the following formulas that can be derived with some basic algebra:
 
 $$
 \begin{align}
