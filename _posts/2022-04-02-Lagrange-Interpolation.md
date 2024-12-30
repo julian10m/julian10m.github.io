@@ -93,8 +93,8 @@ $$\alpha_i = y_i$$
 $$\phi_i(x) = \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
 
 Analyzing the expressions, we see that $\forall j \neq i, \, \phi_i(x_j) = 0$.
-In addition, $\phi_i(x_i) = 1$ and as $alpha_i = y_i$, then $\alpha_i \phi_i(x) = y_i$.
-This way, for each point $p_k$, there is only $\alpha_k \phi_k(x)$ composing $P(x)$ that evaluated at $x_k$ returns $y_k$, while the other $n$ functions return nil.
+In addition, $\phi_i(x_i) = 1$ and as $\alpha_i = y_i$, then $\alpha_i \phi_i(x_i) = y_i$.
+This way, for each point $p_k$, out of all the functions composing $P(x)$, there is only $\alpha_k \phi_k(x)$ that evaluated at $x_k$ returns $y_k$, while the other $n$ functions are nil.
 I mean...what a beast, such a clever and elegant solution. 
 Chapeau! 
 
