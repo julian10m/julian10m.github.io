@@ -104,7 +104,7 @@ For example, if we were able to find some linear dependency among the $\phi_i(x)
 Well, dreaming is ok, but if that is how we come up with solutions, Lagrange clearly had very sweet dreams long ago: his solution actually conforms a basis for the space of polynomials of degree $n$ (note that this space is of dimension $n + 1$).
 In other words, by combining the $\phi_i(x)$ functions, not only we can produce all the polynomials of degree $n$, but also for each polynomial we can create, there is a unique combination of the $\phi_i(x)$ functions that produce them. 
 For example, another basis for the same sub-space is the one conformed by the functions $\left\\{1, t, t^2 \ldots, t^n\right\\}$. 
-I know, the canonical base looks so simple compared to Lagrange's functions...so are we sure that the very clever formulation of Lagrange is also a basis? Well, let's prove it to convince ourselves.
+I know, the canonical basis looks so simple compared to Lagrange's functions...so are we sure that the very clever formulation of Lagrange is also a basis? Well, let's prove it to convince ourselves.
 
 To verify that Lagrange's solution conforms a basis of the $n$-degree polynomials, we need to work with a linear combination of his functions
 
@@ -121,8 +121,9 @@ but based on our previous analysis, we know that this ends up reducing to
 
 $$L(x_0) = \beta_0 = 0$$
 
-We can iterate over the $n$ remaining $x_i$ values following a similar procedure to prove that $\beta_i = 0$ is required.
-And once this is done, voila, we have provedd that Lagrange's solution is indeed a base of the $n$ polynomium space. 
+We can iterate over the $n$ remaining $x_i$ values following a similar procedure to prove that in each step $i$, we need $\beta_i = 0$ to hold.
+And once this is done, we just need to prove the other direction of the implication, but the proof is trivial.
+Hence, voila, we have proved that Lagrange's solution is indeed a basis of the $n$ polynomium space,
 His solution is simply beautiful, isn't it?
 
 
