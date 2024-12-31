@@ -77,7 +77,7 @@ so that then we can describe our problem more compactly as
 
 $$\mathbf{X} \cdot \mathbf{a} = \mathbf{y}$$
 
-In particular, $\mathbf{X} \in \mathbb{R}^{n+1 \times n+1}$ is not just any other square matrix, it is actually known as the the Vandermonde matrix.
+In particular, $\mathbf{X} \in \mathbb{R}^{(n+1) \times (n+1)}$ is not just any other square matrix, it is actually known as the the Vandermonde matrix.
 
 ## A solution, but not THE solution
 
