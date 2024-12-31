@@ -12,7 +12,7 @@ Can we do that? That is, can we find a closed form to express such a function?
 And as Obama would have said many years ago, yes we can! 
 Given $n + 1$ points, there exists a polynomial of degree $n$ that meets this condition. 
 Not that I particularly wanted a polynomial, but I can settle with that. 
-The idea sounds more sexy the moment you are told that there is a *unique* polynomial of degree $n$ complying with such contraints.
+The idea sounds more sexy the moment you are told that there is a *unique* polynomial of degree $n$ complying with such constraints.
 
 Do you want to find it? I want. Let's go! 
 
@@ -32,7 +32,7 @@ Our problem, informally speaking, is finding the coefficients' values for which 
 
 
 And what can we do to find them? Well, the points need to be in the image of $P(x)$. 
-This means that for each point $p_j = (x_j, y_j)$ in the set, we know that $p(x_j) = y_j$ must hold.
+This means that for each point $(x_j, y_j)$ in the set, we know that $P(x_j) = y_j$ must hold.
 As we have $n + 1$ points, we can create a system of $n + 1$ equations.
 
 $$
@@ -45,6 +45,7 @@ P(x_n) &= a_0 + a_1 x_n + a_2 x^2_n + \ldots + a_n x^n_n = y_n\\
 $$
 
 To find the answer to our problem, we need to solve the system. 
+
 Things look good a priori, as in general we can only find the values of $n + 1$ unknowns (the coefficients) if we have the same number of equations.
 
 ## Bring on the matrices
@@ -76,26 +77,27 @@ so that then we can describe our problem more compactly as
 
 $$\mathbf{X} \cdot \mathbf{a} = \mathbf{y}$$
 
+In particular, $\mathbf{X} \in \mathbb{R}^{n+1 \times n+1}$ is not just any other square matrix, it is actually known as the the Vandermonde matrix.
 
 ## A solution, but not THE solution
 
-We can clearly see that the solution is
+Thanks to good old Algebra, after switching the notation, we see that in the end, the solution is to simply get
 
 $$\mathbf{a} = \mathbf{X}^{-1} \cdot \mathbf{y}$$
 
 End of story? Well...just hold on to your belts!  
 
 First, we should ask ourselves whether $\mathbf{X}^{-1}$ even exists. 
-It turns out that $\mathbf{X}$ is not just any matrix, it is actually known as the the Vandermonde matrix.
-There exists an inverse of this matrix as long as $\forall j \neq k,\; x_j \neq x_k$.
-For this to be true, there should not be two points requesting different values for the same domain value.
+As $\mathbf{X}$ is a square matrix, it could indeed be the case.
+In fact, I am sure there is a proof for this, but just looking at the expression, you can already tell that the inverse of this matrix exists as long as $\forall j \neq k,\; x_j \neq x_k$.
+In practicce, for this to be true, there should not be two points requesting different values for the same domain value.
 Indeed, for a function to be well-defined, there should be a unique image per domain element. 
 In addition, the $n + 1$ points given should be distinct.
 If say we repeated one, we would only have $n$ distinct equations.
 In this case, rather than a unique polynomial, the solution would consist of a sub-space of polynomials.
 
 Second, to compute $\mathbf{X}^{-1}$, how much computational power do we need?
-Without proof but without doubts, I'm sorry to break it to you, me and everyone else, but computing this matrix is an $O(n^3)$ operation...so as soon as $n$ becomes moderate, good luck with that! 
+Again without proof, but without doubts neither, I'm sorry to break it to you, me, and everyone else, but computing this matrix is an $O(n^3)$ operation...so as soon as $n$ becomes of a moderate value, good luck waiting for that to run! 
 Fortunately, Lagrange came to the rescue and saved us all.
 
 ## Lagrange Interpolation
