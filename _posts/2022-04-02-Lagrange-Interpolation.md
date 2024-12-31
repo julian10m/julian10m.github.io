@@ -115,6 +115,7 @@ $$\phi_i(x) = \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
 Analyzing the expressions, we see that $\forall j \neq i,\; \phi_i(x_j) = 0$.
 In addition, $\phi_i(x_i) = 1$ and as $\alpha_i = y_i$, then $\alpha_i \phi_i(x_i) = y_i$.
 This way, for each point $(x_k, y_k)$, out of all the functions composing $P(x)$, there is only $\alpha_k \phi_k(x)$ that evaluated at $x_k$ returns $y_k$, while the other $n$ functions are nil.
+
 I mean...what a beast, such a clever and elegant solution. 
 Chapeau! 
 
@@ -125,29 +126,27 @@ In short, the answer is no, but let's reason about it.
 For example, if we were able to find some linear dependency among the $\phi_i(x)$ functions, removing it we could maybe come up with another solution for $P(x)$, composing it with less than $n + 1$ functions.
 Well, dreaming is ok, but if that is how we come up with solutions, Lagrange clearly had very sweet dreams long ago: his solution actually conforms a basis for the space of polynomials of degree $n$ (note that this space is of dimension $n + 1$).
 
-The fact that the set of Lagrange's functions $\phi_i(x)$ conforms a basis means that, relying on them, not only we can produce all the polynomials of degree $n$, but also for each polynomial we can create, there is a unique combination of the $\phi_i(x)$ functions that produce them. 
-For example, another basis for the same sub-space is the one conformed by the functions $\left\\{1, t, t^2 \ldots, t^n\right\\}$. 
-I know, the canonical basis looks so simple compared to Lagrange's functions...so are we sure that the very clever formulation of Lagrange is also a basis? Well, let's prove it to convince ourselves.
+The fact that the set of Lagrange's functions $\phi_i(x)$ conforms a basis means that, relying these functions, not only we can produce all the polynomials of degree $n$, but also for each polynomial we can create, there is a unique combination of the $\phi_i(x)$ functions that produce them. 
+For example, another basis for the same sub-space is the one conformed by the functions $\left\\{1, x, x^2 \ldots, x^n\right\\}$. 
+I know, the canonical basis looks so clear and simple in comparison...are we sure that the very clever formulation of Lagrange is also a basis? Well, let's prove it to convince ourselves.
 
-To verify that Lagrange's solution conforms a basis of the $n$-degree polynomials, we need to work with a linear combination of his functions
+To verify that Lagrange's functions conform a basis of the $n$-degree polynomials, we need to work with a linear combination these functions
 
 $$L(x) = \beta_0 \phi_0(x) + \beta_1 \phi_1(x) + \ldots + \beta_n \phi_n(x)$$
 
-and confirm that $\forall x,\; L(x) = 0 \Leftrightarrow \forall i,\; \beta_i = 0$. 
+If we can show that $\forall x,\; L(x) = 0 \Leftrightarrow \forall i,\; \beta_i = 0$, then it is true.
 
-If this must hold for all $x$, then in particular it must hold for $\left\\{x_0, x_1, \ldots, x_n\right\\}$, the x-coordinates of the $n + 1$ points used to define $P(x)$ by combining the $\phi_i(x)$ functions.
+As the aforementioned condition must hold for all $x$, then in particular it must hold for $\left\\{x_0, x_1, \ldots, x_n\right\\}$, the x-coordinates of the $n + 1$ points used to define the $\phi_i(x)$ functions.
 Without loosing generality, taking $x_0$ as an example, we can compute
 
 $$L(x_0) = \beta_0 \phi_0(x_0) + \beta_1 \phi_1(x_0) + \ldots + \beta_n \phi_n(x_0) = 0$$
 
-but based on our previous analysis, we know that this ends up evaluating to 
-
-$$L(x_0) = \beta_0 = 0$$
-
+but based on our previous analysis, we know that this ends up evaluating to $L(x_0) = \beta_0 = 0$.
 We can iterate over the $n$ remaining $x_i$ values following a similar procedure to prove that in each step $i$, we need $\beta_i = 0$ to hold.
 And once this is done, we just need to prove the other direction of the implication, but the proof is trivial.
 Hence, voila, we have proved that Lagrange's solution is indeed a basis of the $n$ polynomial space.
-We need to agree that his solution is simply beautiful, isn't it?
+
+We need to agree that Lagrange's solution is simply beautiful, isn't it?
 
 ## Implementing Lagrange's interpolation
 
