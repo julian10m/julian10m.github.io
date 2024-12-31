@@ -91,7 +91,7 @@ $$\alpha_i = y_i$$
 
 $$\phi_i(x) = \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
 
-Analyzing the expressions, we see that $\forall j \neq i, \, \phi_i(x_j) = 0$.
+Analyzing the expressions, we see that $\forall j \neq i,\; \phi_i(x_j) = 0$.
 In addition, $\phi_i(x_i) = 1$ and as $\alpha_i = y_i$, then $\alpha_i \phi_i(x_i) = y_i$.
 This way, for each point $p_k$, out of all the functions composing $P(x)$, there is only $\alpha_k \phi_k(x)$ that evaluated at $x_k$ returns $y_k$, while the other $n$ functions are nil.
 I mean...what a beast, such a clever and elegant solution. 
@@ -110,7 +110,7 @@ To verify that Lagrange's solution conforms a basis of the $n$-degree polynomial
 
 $$L(x) = \beta_0 \phi_0(x) + \beta_1 \phi_1(x) + \ldots + \beta_n \phi_n(x)$$
 
-and confirm that $\forall x, \; L(x) = 0 \Leftrightarrow \forall i, \beta_i = 0$. 
+and confirm that $\forall x,\; L(x) = 0 \Leftrightarrow \forall i,\; \beta_i = 0$. 
 
 If this must hold for all $x$, then in particular it must hold for $\left\\{x_0, x_1, \ldots, x_n\right\\}$, the x-coordinates of the $n + 1$ points used to define $P(x)$ by combining the $\phi_i(x)$ functions.
 Without loosing generality, taking $x_0$ as an example, we can compute
