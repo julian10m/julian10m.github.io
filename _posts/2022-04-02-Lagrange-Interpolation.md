@@ -67,10 +67,9 @@ Written this way, we can clearly see that the solution is
 
 $$\mathbf{a} = \mathbf{X}^{-1} \cdot \mathbf{y}$$
 
-End of story? Well...this is just starting, so maybe grub a cup of coffee and hold on to your belts!  
+End of story? Well...just hold on to your belts!  
 
 First, we should ask ourselves whether $\mathbf{X}^{-1}$ even exists. 
-
 It turns out that $\mathbf{X}$ is not just any matrix, it is actually known as the the Vandermonde matrix.
 There exists an inverser for this matrix as long as $\forall j \neq k,\; x_j \neq x_k$.
 For this to be true, there should not be two points requesting different values for the same domain value.
@@ -84,7 +83,7 @@ Without proof but without doubts, I'm sorry to break it to you, me and everyone 
 
 Lagrange changed a little bit the way we were thinking about the problem, and proposed to think the polynomial $P(x)$ as the sum of $n + 1$ functions
 
-$$P(x) = \sum_{i=0}^{n} \alpha_i \phi_i(x)$$
+$$P(x) = \sum_{i=0}^{n} \alpha_i \phi_i(x) = \alpha_0 \phi_0(x) + \alpha_1 \phi_1(x) + \ldots + \alpha_n \phi_n(x)$$
 
 and then proved that the solution was to define
 
@@ -99,20 +98,36 @@ I mean...what a beast, such a clever and elegant solution.
 Chapeau! 
 
 A natural question that follows is whether we could not have found a more "compact" solution that the one that Lagrange proposed. 
-For example, we could try to look for some linear dependency among the $\phi_i(x)$ functions, remove it, and come up with a solution with less than $n + 1$ functions composing $P(x)$.
-Well, dreaming is ok, but if that is how we come up with solutions, Lagrange clearly also dreamt, and he did it before us: his solution actually conforms a base of the $n + 1$ polynomium space. We are more used to the canonical base of this space, which is composed of functions $\left\\{1, t, t^2 \ldots, t^n\right\\}$. The canonical base looks simple and harmless, are we sure that the very clever formulation of Lagrange is also a base? Well, let's prove it to convince ourselves.
+In short, the answer is no, but let's reason about it.
+For example, if we were able to find some linear dependency among the $\phi_i(x)$ functions, removing it we could maybe come up with another solution for $P(x)$, composing it with less than $n + 1$ functions.
 
-We can prove that Lagrange's solution conforms a base showing that the only way in which we the linear combination of the functions in his solution evaluate to zero for all $x$ is if and only if $\forall i, \alpha_i = 0$. If this must hold for any $x$, then in particular it must hold for all of the x-coordinates of the points that need to be traversed by $P(x)$, i.e., for the elements in $\left\\{x_0, x_1, \ldots, x_n\right\\}$ for which $P(x)$. Without loosing generality, taking $x_0$ as an example, we can compute: 
+Well, dreaming is ok, but if that is how we come up with solutions, Lagrange clearly had very sweet dreams long ago: his solution actually conforms a basis for the space of polynomials of degree $n$ (note that this space is of dimension $n + 1$).
+In other words, by combining the $\phi_i(x)$ functions, not only we can produce all the polynomials of degree $n$, but also for each polynomial we can create, there is a unique combination of the $\phi_i(x)$ functions that produce them. 
+For example, another basis for the same sub-space is the one conformed by the functions $\left\\{1, t, t^2 \ldots, t^n\right\\}$. 
+I know, the canonical base looks so simple compared to Lagrange's functions...so are we sure that the very clever formulation of Lagrange is also a basis? Well, let's prove it to convince ourselves.
 
-$$P(x_0) = \alpha_0 \phi_0(x_0) + \alpha_1 \phi_1(x_0) + \ldots + \alpha_n \phi_n(x_0)$$
+To verify that Lagrange's solution conforms a basis of the $n$-degree polynomials, we need to work with a linear combination of his functions
 
-but based on our previous analysis, we now that this ends up reducing to
+$$L(x) = \beta_0 \phi_0(x) + \beta_1 \phi_1(x) + \ldots + \beta_n \phi_n(x)$$
 
-$$P(x_0) = \alpha_0$$
+and confirm that $\forall x, \; L(x) = 0 \Leftrightarrow \forall i, \beta_i = 0$. 
 
-Since $P(x_0) = 0$, then $\alpha_0 = 0$. If you are still hesitating, I invite you to replicate this analysis for the remaining $n$ values. At this point, voila, we have provedd that Lagrange's solution is indeed a base of the $n + 1$ polynomium space. His solution is simply beautiful, isn't it?
+If this must hold for all $x$, then in particular it must hold for $\left\\{x_0, x_1, \ldots, x_n\right\\}$, the x-coordinates of the $n + 1$ points used to define $P(x)$ by combining the $\phi_i(x)$ functions.
+Without loosing generality, taking $x_0$ as an example, we can compute
 
-Now that we know many things about Lagrange's interpolation, the last point I want to address is how to implement it efficiently in code. To reason about this, let's first write down the final expression of $P(x)$:
+$$L(x_0) = \beta_0 \phi_0(x_0) + \beta_1 \phi_1(x_0) + \ldots + \beta_n \phi_n(x_0) = 0$$
+
+but based on our previous analysis, we know that this ends up reducing to
+
+$$L(x_0) = \beta_0 = 0$$
+
+We can iterate over the $n$ remaining $x_i$ values following a similar procedure to prove that $\beta_i = 0$ is required.
+And once this is done, voila, we have provedd that Lagrange's solution is indeed a base of the $n$ polynomium space. 
+His solution is simply beautiful, isn't it?
+
+
+Now that we know many things about Lagrange's interpolation, the last point I want to address is how to implement it efficiently in code. 
+To reason about this, let's first write down the final expression of $P(x)$:
 
 $$P(x) = \sum_{i=0}^n y_i \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
 
