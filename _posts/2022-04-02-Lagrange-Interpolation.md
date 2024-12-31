@@ -90,11 +90,11 @@ End of story? Well...just hold on to your belts!
 First, we should ask ourselves whether $\mathbf{X}^{-1}$ even exists. 
 As $\mathbf{X}$ is a square matrix, it could indeed be the case.
 In fact, I am sure there is a proof for this, but just looking at the expression, you can already tell that the inverse of this matrix exists as long as $\forall j \neq k,\; x_j \neq x_k$.
-In practicce, for this to be true, there should not be two points requesting different values for the same domain value.
-Indeed, for a function to be well-defined, there should be a unique image per domain element. 
-In addition, the $n + 1$ points given should be distinct.
-If say we repeated one, we would only have $n$ distinct equations.
-In this case, rather than a unique polynomial, the solution would consist of a sub-space of polynomials.
+In practice, for this to be true, there should not be two points requesting some image for the same domain value, the $n + 1$ points given should be distinct.
+Say we had $(x_p, y_a)$ and $(x_p, y_b)$ in our set of points. 
+If $y_a \neq y_b$, then the problem would be messed up from scratch: a well-defined function can only have a unique image per domain element. 
+If instead $y_a = y_b$, then we would have a repeated point in our set, and we would only have be able to construct $n$ linearly independent equations.
+In this case, rather than a unique polynomial of degree $n$, the solution would consist of a sub-space of polynomials.
 
 Second, to compute $\mathbf{X}^{-1}$, how much computational power do we need?
 Again without proof, but without doubts neither, I'm sorry to break it to you, me, and everyone else, but computing this matrix is an $O(n^3)$ operation...so as soon as $n$ becomes of a moderate value, good luck waiting for that to run! 
@@ -114,7 +114,7 @@ $$\phi_i(x) = \frac{\prod_{j \neq i}x - x_j}{\prod_{j \neq i}x_i - x_j}$$
 
 Analyzing the expressions, we see that $\forall j \neq i,\; \phi_i(x_j) = 0$.
 In addition, $\phi_i(x_i) = 1$ and as $\alpha_i = y_i$, then $\alpha_i \phi_i(x_i) = y_i$.
-This way, for each point $p_k$, out of all the functions composing $P(x)$, there is only $\alpha_k \phi_k(x)$ that evaluated at $x_k$ returns $y_k$, while the other $n$ functions are nil.
+This way, for each point $(x_k, y_k)$, out of all the functions composing $P(x)$, there is only $\alpha_k \phi_k(x)$ that evaluated at $x_k$ returns $y_k$, while the other $n$ functions are nil.
 I mean...what a beast, such a clever and elegant solution. 
 Chapeau! 
 
