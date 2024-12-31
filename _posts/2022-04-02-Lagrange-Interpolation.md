@@ -12,7 +12,7 @@ Can we do that? That is, can we find a closed form to express such a function?
 And as Obama would have said many years ago, yes we can! 
 Given $n + 1$ points, there exists a polynomial of degree $n$ that meets this condition. 
 Not that I particularly wanted a polynomial, but I can settle with that. 
-The idea sounds more sexy the moment you are told that there is a unique polynomial of degree $n$ complying with such contraints.
+The idea sounds more sexy the moment you are told that there is a *unique* polynomial of degree $n$ complying with such contraints.
 
 Do you want to find it? I want. Let's go! 
 
