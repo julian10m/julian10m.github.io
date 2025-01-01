@@ -90,14 +90,15 @@ End of story? Well...just hold on to your belts!
 First, we should ask ourselves whether $\mathbf{X}^{-1}$ even exists. 
 As $\mathbf{X}$ is a square matrix, it could indeed be the case.
 In fact, I am sure there is a proof for this, but just looking at the expression, you can already tell that the inverse of this matrix exists as long as $\forall j \neq k,\; x_j \neq x_k$.
-In practice, for this to be true, there should not be two points requesting some image for the same domain value, the $n + 1$ points given should be distinct.
+That is, there should not be two points requesting some image for the same domain value.
 Say we had $(x_p, y_a)$ and $(x_p, y_b)$ in our set of points. 
 If $y_a \neq y_b$, then the problem would be messed up from scratch: a well-defined function can only have a unique image per domain element. 
-If instead $y_a = y_b$, then we would have a repeated point in our set, and we would only have be able to construct $n$ linearly independent equations.
+If instead $y_a = y_b$, then we would have a point that repeats in our set, and we would only have be able to construct $n$ linearly independent equations.
 In this case, rather than a unique polynomial of degree $n$, the solution would consist of a sub-space of polynomials.
 
 Second, to compute $\mathbf{X}^{-1}$, how much computational power do we need?
 Again without proof, but without doubts neither, I'm sorry to break it to you, me, and everyone else, but computing this matrix is an $O(n^3)$ operation...so as soon as $n$ becomes of a moderate value, good luck waiting for that to run! 
+
 Fortunately, Lagrange came to the rescue and saved us all.
 
 ## Lagrange Interpolation
