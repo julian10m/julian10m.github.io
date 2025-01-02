@@ -24,7 +24,10 @@ $$P(x) = \sum_{k = 0}^{n} a_k x^k = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n$$
 
 The set $\left\\{a_0, a_1, \ldots, a_n\right\\}$ are the coefficients of the polynomial. 
 As the values of these coefficients change, we obtain a different polynomial each time.
+
 If we plot $P(x)$, the exact shape of the curve we obtain depends on the coefficients of the polynomial.
+
+![Polynomials](https://github.com/julian10m/Numerical-Analysis/blob/main/polynomials.png){: .mx-auto.d-block :}
 
 ## The problem statement
 
