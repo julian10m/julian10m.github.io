@@ -29,6 +29,14 @@ If we plot $P(x)$, the exact shape of the curve we obtain depends on the coeffic
 
 ![Polynomials](https://github.com/julian10m/Numerical-Analysis/blob/main/polynomials.png){: .mx-auto.d-block :}
 
+<center>
+<img src="https://github.com/julian10m/Numerical-Analysis/blob/main/polynomials.png" alt="Polynomials of $x$">
+
+<br>
+<em>Polynomials of $x$.</em>
+</center>
+
+
 ## The problem statement
 
 Our problem, informally speaking, is finding the coefficients' values for which the graph of $P(x)$ indeed traverses the requested $n + 1$ points.
